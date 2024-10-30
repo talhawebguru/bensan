@@ -11,7 +11,7 @@ module.exports = {
       'secondary': '#F7F9FC',
       'secondary-primary': '#005559',
       'grey': '#6C757D',
-      'border-color': '#0405053D',
+      'border-color': '#040505',
       'hr-line': '#E0E3E3',
       'white-card-border':'#E9ECEF',
       'white': '#FFFFFF',

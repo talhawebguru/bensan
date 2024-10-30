@@ -1,6 +1,7 @@
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/common/Footer";
+import Header from "./components/common/Header";
 
 const openSans = Open_Sans({
   family: "Open Sans",
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${openSans.variable} antialiased`}
       >
+        <Header/>
         {children}
         <Footer/>
       </body>
