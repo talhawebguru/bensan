@@ -16,6 +16,7 @@ module.exports = {
       'white-card-border':'#E9ECEF',
       'white': '#FFFFFF',
       'light-black': '#222823',
+      'nav-color':"#1f1f1f",
       'black': '#000000',
     },
     fontFamily: {

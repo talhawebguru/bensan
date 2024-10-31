@@ -26,14 +26,14 @@ const Header = () => {
     <>
       <Marquee
         autoFill
-        className="bg-secondary-primary flex items-center  py-[7px] text-white text-xl font-normal font-primary leading-[30px] "
+        className="bg-secondary-primary flex items-center py-[5px] text-white text-xl font-normal font-primary leading-[30px] "
       >
         <div className="w-[7px] h-[7px] bg-white rounded-full mr-6 ml-6" />
         <p>Get 20% off on www.Jurhy.com</p>
       </Marquee>
       {/* Navbar start Here */}
 
-      <header className="xl:px-[90px] sm:px-10 xs:px-5 xl:pt-6 bg-white">
+      <header className="xl:px-[90px] sm:px-10 xs:px-5 xl:pt-[19px] lg:pt-2.5  bg-white">
         <div className="2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
           <div className="lg:flex hidden items-center justify-start">
             <div className="flex items-center gap-5">
@@ -51,13 +51,14 @@ const Header = () => {
               />
             </div>
           </div>
-          <nav className="flex items-center justify-between mt-3 py-6 bg-white rounded-xl">
+          <hr  className="mt-5 mb-1 border border-black/10 hidden lg:block"/>
+          <nav className="flex items-center justify-between  bg-white rounded-xl">
             <ul className="lg:flex items-center gap-11 hidden">
               <li>
                 <Link
                   href="/about"
                   aria-label="About"
-                  className="text-light-black text-lg font-semibold font-primary capitalize"
+                  className="text-nav-color text-[13px] font-semibold font-primary capitalize"
                 >
                   About
                 </Link>
@@ -66,7 +67,7 @@ const Header = () => {
                 <Link
                   href="/product"
                   aria-label="Product"
-                  className="text-light-black text-lg font-semibold font-primary capitalize"
+                  className="text-nav-color text-[13px] font-semibold font-primary capitalize"
                 >
                   Product
                 </Link>
@@ -75,7 +76,7 @@ const Header = () => {
                 <Link
                   href="#"
                   aria-label="Home"
-                  className="text-light-black text-lg font-semibold font-primary capitalize"
+                  className="text-nav-color text-[13px] font-semibold font-primary capitalize"
                 >
                   Who We Serve
                 </Link>
@@ -84,7 +85,7 @@ const Header = () => {
                 <Link
                   href="/contact"
                   aria-label="Contact"
-                  className="text-light-black text-lg font-semibold font-primary capitalize"
+                  className="text-nav-color text-[13px] font-semibold font-primary capitalize"
                 >
                   Contact
                 </Link>
@@ -96,7 +97,7 @@ const Header = () => {
                 alt="Bensan Logo"
                 aria-label="Bensan Logo"
                 priority
-                className="lg:mr-14"
+                className="lg:mr-6"
               />
             </Link>
             <div className="relative lg:flex hidden items-center">
