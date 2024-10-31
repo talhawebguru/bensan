@@ -7,9 +7,9 @@ module.exports = {
   ],
   theme: {
     colors: {
-      'primary': '#EEFCFB',
+      'primary': '#FDF9FB',
       'secondary': '#F7F9FC',
-      'secondary-primary': '#005559',
+      'secondary-primary': '#A8366F',
       'grey': '#6C757D',
       'border-color': '#040505',
       'hr-line': '#E0E3E3',
@@ -20,7 +20,7 @@ module.exports = {
     },
     fontFamily: {
       primary: ['var(--font-open-sans)', 'sans-serif'],
-      secondary: ['var(--font-inter)', 'sans-serif'],
+      secondary: ['var(--font-syne)', 'sans-serif'],
       arial: ['Arial', 'sans-serif'],
     },
 

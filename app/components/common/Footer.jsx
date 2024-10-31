@@ -11,20 +11,20 @@ import ContactInfo from "./ContactInfo";
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary xl:px-[90px] xl:pt-10">
+    <footer className="bg-secondary xl:px-[90px] sm:px-10 xs:px-5 sm:pt-12 xs:pt-10">
       <div className="2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
-        <div className="grid grid-cols-12">
-          <div className="col-span-5 flex flex-col gap-6">
+        <div className="grid md:grid-cols-12 grid-cols-1 xs:gap-12 sm:gap-14">
+          <div className="xl:col-span-5 md:col-span-6  flex flex-col gap-6">
             <Image
               src={Logo}
               alt="Bensan Logo"
               aria-label="Bensan Logo"
               priority
             />
-            <p className="text-light-black text-lg font-semibold font-primary">
+            <p className="text-light-black text-lg font-semibold font-primary w-auto">
               Get all the latest information on your email
             </p>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <input
                 type="email"
                 className="w-[281px] h-12 px-4 py-3.5 rounded-xl border border-border-color/25 text-light-black text-sm font-normal font-primary leading-tight"
@@ -45,11 +45,11 @@ const Footer = () => {
               <SocialMedia icon={<FaLinkedin size={24} />} />
             </div>
           </div>
-          <div className="col-span-2 flex flex-col gap-4">
+          <div className="xl:col-span-2 md:col-span-6 flex flex-col gap-4">
             <h2 className="text-[#222823] text-lg font-semibold font-primary capitalize">
               Quick Links
             </h2>
-            <ul className="flex flex-col gap-[18px]">
+            <ul className="inline-flex flex-col gap-[18px]">
               <li className="text-grey text-base font-normal font-primary">
                 Home
               </li>
@@ -64,7 +64,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="col-span-2 flex flex-col gap-4">
+          <div className="xl:col-span-2 md:col-span-6  flex flex-col gap-4">
             <h2 className="text-[#222823] text-lg font-semibold font-primary capitalize">
               Support
             </h2>
@@ -83,7 +83,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="col-span-2 flex flex-col gap-4">
+          <div className="xl:col-span-3 md:col-span-6  flex flex-col gap-4">
             <h2 className="text-[#222823] text-lg font-semibold font-primary capitalize">
               Contact Info
             </h2>

@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    @keyframes marquee {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+    .animate-marquee {
+      display: inline-flex;
+      animation: marquee 10s linear infinite;
+    }
+  }
+
+
+.animationMove{
+    animation: moveIn 0.5s ease-in-out ;
+  }
+  @keyframes moveOut {
+    from{translate: 0px 0px;}
+    to{translate: 0px -1000px;}
+    
+  }
+  .animationMoveOut{
+    animation: moveOut 0.5s ease-in ;
+  }

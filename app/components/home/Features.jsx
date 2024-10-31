@@ -7,8 +7,8 @@ import FeaturesBox from './FeaturesBox';
 
 const Features = () => {
   return (
-    <section className='2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 xl:px-[90px] mt-16'>
-      <div className='flex gap-16'>
+    <section className='2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 xl:px-[90px] sm:px-10 xs:px-5 mt-16'>
+      <div className='grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-16'>
         <FeaturesBox 
           icon={InnovationIcon} 
           title="Innovation" 
