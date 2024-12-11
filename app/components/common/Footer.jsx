@@ -91,9 +91,12 @@ const Footer = () => {
               <ContactInfo
                 icon={<FaLocationDot />}
                 info="Safecare Medical Industries KHIA-8-18 Abu Dhabi UAE"
+                className={"text-grey"}
               />
-              <ContactInfo icon={<IoCall />} info="+97125067333 " />
-              <ContactInfo icon={<IoMailSharp />} info="info@bensano.com " />
+              <ContactInfo icon={<IoCall />} info="+97125067333 " className={"text-grey"}
+              />
+              <ContactInfo icon={<IoMailSharp />} info="info@bensano.com " className={"text-grey"}
+ />
             </div>
           </div>
         </div>
