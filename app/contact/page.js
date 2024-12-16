@@ -60,7 +60,7 @@ const page = () => {
               </div>
             </div>
             <div className="lg:col-span-9 col-span-12 xl:ml-20">
-              <h2 className="text-center text-[#222823] text-2xl font-semibold font-['Open Sans'] capitalize">
+              <h2 className="text-center text-[#222823] text-2xl font-semibold font-primary capitalize">
                 Send us your query anytime!
               </h2>
               <form action="" className="grid grid-cols-1 sm:grid-cols-2 xl:px-20 lg:px-10 sm:px-5 gap-6 mt-10 ">
@@ -101,7 +101,7 @@ const page = () => {
                   placeholder="Message"
                 ></textarea>
                 <div className="w-[184px] sm:col-span-2 h-12 px-4 py-2.5 bg-[#a8366f] rounded-xl justify-center items-center gap-3 inline-flex">
-                  <div className="text-white text-lg font-semibold font-['Open Sans'] capitalize">
+                  <div className="text-white text-lg font-semibold font-primary capitalize">
                     Submit
                   </div>
                 </div>

@@ -33,7 +33,7 @@ const Header = () => {
       </Marquee>
       {/* Navbar start Here */}
 
-      <header className="xl:px-[90px] sm:px-10 xs:px-5 xl:pt-[19px] lg:pt-2.5  bg-white">
+      <header className="xl:px-[90px] sm:px-10 xs:px-5 xl:pt-[19px] lg:pt-2.5 bg-white">
         <div className="2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
           <div className="lg:flex hidden items-center justify-start">
             <div className="flex items-center gap-5">
@@ -69,7 +69,7 @@ const Header = () => {
                   aria-label="Product"
                   className="text-nav-color text-[13px] font-semibold font-primary capitalize"
                 >
-                  Product
+                  Products
                 </Link>
               </li>
               <li>

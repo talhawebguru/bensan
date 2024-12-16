@@ -13,7 +13,7 @@ const Page = () => {
           <PageNameBanner />
         </div> */}
         <div className="relative flex justify-center mt-16 md:mt-32">
-          <h2 className="w-full max-w-[923px] text-center px-4  text-[#222823] text-2xl md:text-4xl font-semibold font-['Open Sans'] capitalize">
+          <h2 className="w-full max-w-[923px] text-center px-4  text-[#222823] text-2xl md:text-4xl font-semibold font-primary capitalize">
             about
             <span className="block md:inline mx-3 text-[#a8366f] text-2xl md:text-4xl font-semibold font-primary capitalize">
               Safecare
@@ -35,7 +35,7 @@ const Page = () => {
               dimension to the medical industries all across the Middle East.
             </h2>
             <div className="w-full relative bg-[#f6ebf1] md:py-20 py-7 md:px-10 px-5 mt-3">
-              <h2 className=" text-[#6c757d] text-lg font-normal font-['Open Sans'] capitalize leading-[27px]">
+              <h2 className=" text-[#6c757d] text-lg font-normal font-primary capitalize leading-[27px]">
                 With a production area of 6000 square meters, we manufacture all
                 of our products in a controlled environment called clean room of
                 class 10000 (IS0 7) and 100000 (ISO 8). Patient-centric care is
@@ -72,9 +72,9 @@ const Page = () => {
           </div>
         </div>
         <div className="relative flex justify-center mt-16 md:mt-32">
-          <h2 className="w-full max-w-[923px] text-center px-4  text-[#222823] text-2xl md:text-4xl font-semibold font-['Open Sans'] capitalize">
+          <h2 className="w-full max-w-[923px] text-center px-4  text-[#222823] text-2xl md:text-4xl font-semibold font-primary capitalize">
             Building Safer
-            <span className="block md:inline mx-3 text-[#a8366f] text-2xl md:text-4xl font-semibold font-['Open Sans'] capitalize">
+            <span className="block md:inline mx-3 text-[#a8366f] text-2xl md:text-4xl font-semibold font-primary capitalize">
               Healthcare
             </span>
             Environments Together
