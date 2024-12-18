@@ -11,7 +11,7 @@ import ContactInfo from "./ContactInfo";
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary xl:px-[90px] sm:px-10 xs:px-5 sm:pt-12 xs:pt-10">
+    <footer className="bg-secondary mt-20 xl:px-[90px] sm:px-10 xs:px-5 sm:pt-12 xs:pt-10">
       <div className="2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
         <div className="grid md:grid-cols-12 grid-cols-1 xs:gap-12 sm:gap-14">
           <div className="xl:col-span-5 md:col-span-6  flex flex-col gap-6">

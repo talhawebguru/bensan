@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/thumbs";
 import { IoDownloadOutline } from "react-icons/io5";
 import { getProductBySlug } from "../../services/api";
+import RichTextRender from "../../components/product/RichTextRender";
 
 const Page = () => {
   const router = useRouter();
@@ -96,28 +97,40 @@ const Page = () => {
               ))}
             </Swiper>
           </div>
-          <div className="mt-32 lg:mt-0">
+          <div className="mt-32 lg:mt-0 min-h-[600px]">
             <h2 className="text-[#a8366f] text-lg font-semibold font-primary capitalize">
               {Name}
             </h2>
             <div className="text-[#6c757d] text-base font-normal font-primary capitalize leading-normal mt-8">
-              {Descripition.map((desc, index) => (
-                <p key={index}>{desc.children[0].text}</p>
-              ))}
+            <RichTextRender content={Descripition} />
             </div>
             <div className="flex flex-wrap justify-center gap-5 mt-3">
-              <a target="_blank" href={`${process.env.NEXT_PUBLIC_API_URL}${downloadCatalog.url}`} className="w-[164px] h-14 bg-[#a8366f] rounded-xl flex justify-center items-center gap-3" download>
-                <IoDownloadOutline className="relative text-white" size={24} />
-                <div className="text-white text-lg font-semibold font-primary capitalize">
-                  Catalog
-                </div>
-              </a>
-              <a target="_blank" href={`${process.env.NEXT_PUBLIC_API_URL}${downloadTDS.url}`} className="w-[164px] h-14 bg-[#124984] rounded-xl flex justify-center items-center gap-3" download>
-                <IoDownloadOutline className="relative text-white" size={24} />
-                <div className="text-white text-lg font-semibold font-primary capitalize">
-                  TDS
-                </div>
-              </a>
+              {downloadCatalog && (
+                <a
+                  target="_blank"
+                  href={`${process.env.NEXT_PUBLIC_API_URL}${downloadCatalog.url}`}
+                  className="w-[164px] h-14 bg-[#a8366f] rounded-xl flex justify-center items-center gap-3"
+                  download
+                >
+                  <IoDownloadOutline className="relative text-white" size={24} />
+                  <div className="text-white text-lg font-semibold font-primary capitalize">
+                    Catalog
+                  </div>
+                </a>
+              )}
+              {downloadTDS && (
+                <a
+                  target="_blank"
+                  href={`${process.env.NEXT_PUBLIC_API_URL}${downloadTDS.url}`}
+                  className="w-[164px] h-14 bg-[#124984] rounded-xl flex justify-center items-center gap-3"
+                  download
+                >
+                  <IoDownloadOutline className="relative text-white" size={24} />
+                  <div className="text-white text-lg font-semibold font-primary capitalize">
+                    TDS
+                  </div>
+                </a>
+              )}
             </div>
           </div>
         </div>

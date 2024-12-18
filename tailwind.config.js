@@ -19,6 +19,7 @@ module.exports = {
       'light-black': '#222823',
       'nav-color':"#1f1f1f",
       'black': '#000000',
+      'border-divi-gray-300':"#9D9996",
     },
     fontFamily: {
       primary: ['var(--font-open-sans)', 'sans-serif'],
