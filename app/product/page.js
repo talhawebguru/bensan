@@ -7,6 +7,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { getProducts } from "../services/api";
 import CategoryList from "../components/product/CategoryList";
 import { FaArrowDown } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -76,22 +77,29 @@ const ProductsPage = () => {
                   </div>
                 ))
               : products.map((product) => (
-                  <Link key={product.id} href={`/product/${product.slug}`}>
-                    <div className="bg-white shadow border border-[#e9ecef] cursor-pointer">
-                      <Image
-                        className="w-full h-64 scale-1 hover:scale-110 object-contain"
-                        src={`${process.env.NEXT_PUBLIC_API_URL}${product.Image[0].url}`}
-                        alt={product.imageAltText || product.Name}
-                        width={256}
-                        height={256}
-                      />
-                      <div className="pt-4 pb-5">
-                        <h4 className="text-base font-semibold text-gray-500 text-center font-primary">
-                          {product.Name}
-                        </h4>
+                  <motion.div
+                    key={product.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <Link href={`/product/${product.slug}`}>
+                      <div className="bg-white shadow border border-[#e9ecef] cursor-pointer">
+                        <Image
+                          className="w-full h-64 scale-1 hover:scale-110 object-contain"
+                          src={`${process.env.NEXT_PUBLIC_API_URL}${product.Image[0].url}`}
+                          alt={product.imageAltText || product.Name}
+                          width={256}
+                          height={256}
+                        />
+                        <div className="pt-4 pb-5">
+                          <h4 className="text-base font-semibold text-gray-500 text-center font-primary">
+                            {product.Name}
+                          </h4>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
+                  </motion.div>
                 ))}
           </div>
         </div>

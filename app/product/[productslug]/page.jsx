@@ -9,6 +9,9 @@ import "swiper/css/thumbs";
 import { IoDownloadOutline } from "react-icons/io5";
 import { getProductBySlug } from "../../services/api";
 import RichTextRender from "../../components/product/RichTextRender";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { motion } from "framer-motion";
 
 const Page = () => {
   const router = useRouter();
@@ -17,6 +20,7 @@ const Page = () => {
   const [product, setProduct] = useState(null);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (productslug) {
@@ -26,6 +30,8 @@ const Page = () => {
           setProduct(data.data[0]);
         } catch (error) {
           console.error(`Error fetching product with slug ${productslug}:`, error);
+        } finally {
+          setLoading(false);
         }
       };
 
@@ -33,14 +39,35 @@ const Page = () => {
     }
   }, [productslug]);
 
-  if (!product) {
-    return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
+        <Skeleton height={40} width={300} className="my-10" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:px-[62px] px-5 py-10 bg-white rounded-xl shadow border border-[#e9ecef] mb-20">
+          <Skeleton height={450} />
+          <div className="mt-32 lg:mt-0 min-h-[600px]">
+            <Skeleton height={40} width={200} />
+            <div className="mt-8">
+              <Skeleton count={5} />
+            </div>
+            <div className="flex flex-wrap justify-center gap-5 mt-3">
+              <Skeleton height={56} width={164} />
+              <Skeleton height={56} width={164} />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const { Name, Descripition, Image: Images, downloadCatalog, downloadTDS } = product;
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="xl:px-[90px] sm:px-10 xs:px-5">
         <h2 className="py-10 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 text-[#6c757d] text-lg font-semibold font-primary capitalize">
           products / {Name}
@@ -102,7 +129,7 @@ const Page = () => {
               {Name}
             </h2>
             <div className="text-[#6c757d] text-base font-normal font-primary capitalize leading-normal mt-8">
-            <RichTextRender content={Descripition} />
+              <RichTextRender content={Descripition} />
             </div>
             <div className="flex flex-wrap justify-center gap-5 mt-3">
               {downloadCatalog && (
@@ -135,7 +162,7 @@ const Page = () => {
           </div>
         </div>
       </div>
-    </>
+    </motion.div>
   );
 };
 

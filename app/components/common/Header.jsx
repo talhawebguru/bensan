@@ -6,10 +6,9 @@ import InfoAction from "./InfoAction";
 import { IoCallOutline, IoMenu } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import { MdOutlineEmail } from "react-icons/md";
-import { FaSearch } from "react-icons/fa";
 import Link from "next/link";
-import Marquee from "react-fast-marquee";
 import { motion, AnimatePresence } from "framer-motion";
+import MarqueeSlider from "./MarqueeSlider";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false); // State to control mobile menu
@@ -24,13 +23,8 @@ const Header = () => {
 
   return (
     <>
-      <Marquee
-        autoFill
-        className="bg-secondary-primary flex items-center py-[5px] text-white text-xl font-normal font-primary leading-[30px] "
-      >
-        <div className="w-[7px] h-[7px] bg-white rounded-full mr-6 ml-6" />
-        <p>Get 20% off on www.Jurhy.com</p>
-      </Marquee>
+   {/* Marquee */}
+   <MarqueeSlider />
       {/* Navbar start Here */}
 
       <header className="xl:px-[90px] sm:px-10 xs:px-5 xl:pt-[19px] lg:pt-2.5 bg-white">
@@ -52,7 +46,7 @@ const Header = () => {
             </div>
           </div>
           <hr  className="mt-5 mb-1 border border-black/10 hidden lg:block"/>
-          <nav className="flex items-center justify-between  bg-white rounded-xl">
+          <nav className="grid grid-cols-2   bg-white rounded-xl">
             <ul className="lg:flex items-center gap-11 hidden">
               <li>
                 <Link
@@ -91,7 +85,7 @@ const Header = () => {
                 </Link>
               </li>
             </ul>
-            <Link href="/" aria-label="Bensan Logo">
+            <Link href="/" aria-label="Bensan Logo" className="-ml-16">
               <Image
                 src={Logo}
                 alt="Bensan Logo"
@@ -100,14 +94,6 @@ const Header = () => {
                 className="lg:mr-6"
               />
             </Link>
-            <div className="relative lg:flex hidden items-center">
-              <input
-                type="text"
-                className="h-9 text-[#b9b9b9] text-[13px] pl-9 font-normal font-primary capitalize bg-[#d9d9d9]/10 border border-black/10 xl:w-[320px]"
-                placeholder="Search Here"
-              />
-              <FaSearch className="absolute left-3" />
-            </div>
             <div className="lg:hidden">
               <button onClick={toggleMenu} className="">
                 {isOpen ? (

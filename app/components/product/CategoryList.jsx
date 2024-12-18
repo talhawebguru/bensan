@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { getCategories } from "../../services/api";
+import { motion } from "framer-motion";
 
 const CategoryList = ({ onCategorySelect, selectedCategory }) => {
   const [categories, setCategories] = useState([]);
@@ -39,10 +40,13 @@ const CategoryList = ({ onCategorySelect, selectedCategory }) => {
   return (
     <div className="pb-4 max-h-fit lg:pb-0">
       {categories.map((category) => (
-        <div
+        <motion.div
           className="flex gap-3 mx-4 mt-4 cursor-pointer"
           key={category.id}
           onClick={() => onCategorySelect(category.name)}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
         >
           <div
             className={`w-6 h-6 border ${
@@ -64,7 +68,7 @@ const CategoryList = ({ onCategorySelect, selectedCategory }) => {
               {category.name}
             </h2>
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );
