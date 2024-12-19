@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,6 +19,7 @@ const ProductsPage = () => {
       try {
         const data = await getProducts();
         setProducts(data.data);
+        setFilteredProducts(data.data);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -32,6 +34,14 @@ const ProductsPage = () => {
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
+    if (category === "All Products") {
+      setFilteredProducts(products);
+    } else {
+      const filtered = products.filter((product) =>
+        product.category?.name === category
+      );
+      setFilteredProducts(filtered);
+    }
   };
 
   return (
@@ -76,7 +86,7 @@ const ProductsPage = () => {
                     </div>
                   </div>
                 ))
-              : products.map((product) => (
+              : filteredProducts.map((product) => (
                   <motion.div
                     key={product.id}
                     initial={{ opacity: 0, y: 30 }}
