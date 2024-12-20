@@ -94,7 +94,7 @@ const ProductsPage = () => {
                     transition={{ duration: 0.4 }}
                   >
                     <Link href={`/product/${product.slug}`}>
-                      <div className="bg-white shadow border border-[#e9ecef] cursor-pointer">
+                      <div className="bg-white shadow border border-[#e9ecef] cursor-pointer w-full ">
                         <Image
                           className="w-full h-64 scale-1 hover:scale-110 object-contain"
                           src={`${process.env.NEXT_PUBLIC_API_URL}${product.Image[0].url}`}
