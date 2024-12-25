@@ -1,26 +1,30 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { getProducts } from "../services/api";
-import CategoryList from "../components/product/CategoryList";
+import { getProducts } from "../../services/api";
+import CategoryList from "../../components/product/CategoryList";
 import { FaArrowDown } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const ProductsPage = () => {
+const CategoryPage = ({ params }) => {
+  const router = useRouter();
+  const { category } = params;
+
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState("all-products");
+  const [selectedCategory, setSelectedCategory] = useState(category);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const data = await getProducts();
         setProducts(data.data);
-        setFilteredProducts(data.data);
+        handleCategorySelect(category, data.data);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -29,15 +33,15 @@ const ProductsPage = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [category]);
 
-  const handleCategorySelect = (category) => {
-    setSelectedCategory(category);
-    if (category === "all-products") {
-      setFilteredProducts(products);
+  const handleCategorySelect = (categorySlug, productsData = products) => {
+    setSelectedCategory(categorySlug);
+    if (categorySlug === "all-products") {
+      setFilteredProducts(productsData);
     } else {
-      const filtered = products.filter((product) =>
-        product.category?.slug === category
+      const filtered = productsData.filter((product) =>
+        product.category?.slug === categorySlug
       );
       setFilteredProducts(filtered);
     }
@@ -117,4 +121,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
+export default CategoryPage;

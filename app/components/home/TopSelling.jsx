@@ -15,7 +15,6 @@ const TopSelling = () => {
       try {
         const data = await getTopSellingProducts();
         const insideProducts = data.data.flatMap((product) => product.products);
-        console.log(insideProducts);
         setTopSellingProducts(insideProducts);
       } catch (error) {
         console.error("Error fetching top selling products:", error);

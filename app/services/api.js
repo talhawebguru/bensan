@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-  headers: {
-    'ngrok-skip-browser-warning': 'true'
-}
+//   headers: {
+//     'ngrok-skip-browser-warning': 'true'
+// }
 });
 
 export const getProducts = async () => {
@@ -29,7 +29,7 @@ export const getProductBySlug = async (slug) => {
 
 export const getCategories = async () => {
   try {
-    const response = await api.get('/api/categories?sort=id:desc');
+    const response = await api.get('/api/categories?sort=name:asc');
     return response.data;
   } catch (error) {
     console.error('Error fetching categories:', error);
