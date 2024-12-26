@@ -6,23 +6,24 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { getProducts } from "../services/api";
 import CategoryList from "../components/product/CategoryList";
-import { FaArrowDown } from "react-icons/fa";
+import { FaArrowDown, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { FaAngleLeft } from "react-icons/fa6";
-import { FaAngleRight } from "react-icons/fa6";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("all-products");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProducts = async (page = 1) => {
       try {
-        const data = await getProducts();
+        const data = await getProducts(page);
         setProducts(data.data);
         setFilteredProducts(data.data);
+        setTotalPages(data.meta.pagination.pageCount);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -30,8 +31,8 @@ const ProductsPage = () => {
       }
     };
 
-    fetchProducts();
-  }, []);
+    fetchProducts(currentPage);
+  }, [currentPage]);
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
@@ -43,6 +44,11 @@ const ProductsPage = () => {
       );
       setFilteredProducts(filtered);
     }
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -119,24 +125,36 @@ const ProductsPage = () => {
         </div>
       </div>
       {/* Pagination */}
-
       <div className="flex gap-2 justify-center lg:mt-16 mt-5 lg:mb-20 mb-5 ">
-        <div className="w-10 h-10 bg-white shadow flex justify-center items-center">
+        <div
+          className={`w-10 h-10 bg-white shadow flex justify-center items-center ${
+            currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
+          onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+        >
           <FaAngleLeft />
         </div>
-        <div className="w-10 h-10  shadow flex justify-center items-center bg-secondary-primary text-[white] text-base font-normal font-primary leading-normal">
-          1
-        </div>
-        <div className="w-10 h-10 bg-white shadow flex justify-center items-center text-[#554e49] text-base font-normal font-primary leading-normal">
-          2
-        </div>
-        <div className="w-10 h-10 bg-white shadow flex justify-center items-center text-[#554e49] text-base font-normal font-primary leading-normal">
-          3
-        </div>
-        <div className="w-10 h-10 bg-white shadow flex justify-center items-center text-[#554e49] text-base font-normal font-primary leading-normal">
-          4
-        </div>
-        <div className="w-10 h-10 bg-white shadow flex justify-center items-center">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <div
+            key={index}
+            className={`w-10 h-10 shadow flex justify-center items-center ${
+              currentPage === index + 1
+                ? "bg-secondary-primary text-white"
+                : "bg-white text-[#554e49]"
+            } cursor-pointer`}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </div>
+        ))}
+        <div
+          className={`w-10 h-10 bg-white shadow flex justify-center items-center ${
+            currentPage === totalPages ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
+          onClick={() =>
+            currentPage < totalPages && handlePageChange(currentPage + 1)
+          }
+        >
           <FaAngleRight />
         </div>
       </div>
