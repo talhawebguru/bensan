@@ -107,7 +107,7 @@ const CategoryPage = ({ params }) => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <Link href={`/product/${product.slug}`}>
+                    <Link href={`/category/${product.category.slug}/${product.slug}`}>
                       <div className="bg-white shadow border border-[#e9ecef] cursor-pointer w-full ">
                         <Image
                           className="w-full h-64 scale-1 hover:scale-110 object-contain"
