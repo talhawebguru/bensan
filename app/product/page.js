@@ -8,6 +8,8 @@ import { getProducts } from "../services/api";
 import CategoryList from "../components/product/CategoryList";
 import { FaArrowDown } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { FaAngleLeft } from "react-icons/fa6";
+import { FaAngleRight } from "react-icons/fa6";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -36,8 +38,8 @@ const ProductsPage = () => {
     if (category === "all-products") {
       setFilteredProducts(products);
     } else {
-      const filtered = products.filter((product) =>
-        product.category?.slug === category
+      const filtered = products.filter(
+        (product) => product.category?.slug === category
       );
       setFilteredProducts(filtered);
     }
@@ -78,7 +80,10 @@ const ProductsPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {loading
               ? [...Array(8)].map((_, index) => (
-                  <div key={index} className="bg-white w-[256px] shadow border border-[#e9ecef]">
+                  <div
+                    key={index}
+                    className="bg-white w-[256px] shadow border border-[#e9ecef]"
+                  >
                     <Skeleton height={256} width={256} />
                     <div className="pt-4 flex justify-center pb-5">
                       <Skeleton height={20} width={100} />
@@ -111,6 +116,28 @@ const ProductsPage = () => {
                   </motion.div>
                 ))}
           </div>
+        </div>
+      </div>
+      {/* Pagination */}
+
+      <div className="flex gap-2 justify-center lg:mt-16 mt-5 lg:mb-20 mb-5 ">
+        <div className="w-10 h-10 bg-white shadow flex justify-center items-center">
+          <FaAngleLeft />
+        </div>
+        <div className="w-10 h-10  shadow flex justify-center items-center bg-secondary-primary text-[white] text-base font-normal font-primary leading-normal">
+          1
+        </div>
+        <div className="w-10 h-10 bg-white shadow flex justify-center items-center text-[#554e49] text-base font-normal font-primary leading-normal">
+          2
+        </div>
+        <div className="w-10 h-10 bg-white shadow flex justify-center items-center text-[#554e49] text-base font-normal font-primary leading-normal">
+          3
+        </div>
+        <div className="w-10 h-10 bg-white shadow flex justify-center items-center text-[#554e49] text-base font-normal font-primary leading-normal">
+          4
+        </div>
+        <div className="w-10 h-10 bg-white shadow flex justify-center items-center">
+          <FaAngleRight />
         </div>
       </div>
     </>

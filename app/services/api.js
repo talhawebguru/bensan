@@ -7,9 +7,9 @@ const api = axios.create({
 // }
 });
 
-export const getProducts = async () => {
+export const getProducts = async (page = 1, pageSize = 25) => {
   try {
-    const response = await api.get('/api/products?populate=*');
+    const response = await api.get(`/api/products?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching products:', error);

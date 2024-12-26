@@ -3,6 +3,8 @@ import Image from "next/image";
 import Category1Img from "@/public/images/Category1.png";
 import Category2Img from "@/public/images/Category2.png";
 import Category3Img from "@/public/images/Category3.png";
+import Link from "next/link";
+
 
 const CategoriesSection = () => {
   return (
@@ -12,7 +14,7 @@ const CategoriesSection = () => {
           Categories
         </h2>
         <p className="text-grey text-lg font-semibold font-primary capitalize">
-          see all
+          <Link href={"/category/all-products"}>see all</Link>
         </p>
       </div>
       <div className="mt-10 grid lg:grid-cols-2 gap-7">
@@ -24,12 +26,14 @@ const CategoriesSection = () => {
             <h2 className="mt-4 text-light-black text-2xl font-semibold font-primary capitalize">
               surgical site preparation
             </h2>
-            <button
-              className="w-32 h-10 mt-6 text-white text-base font-semibold font-primary capitalize bg-secondary-primary rounded-xl justify-center items-center gap-3 flex"
-              aria-label="View more about surgical site preparation"
-            >
-              view more
-            </button>
+            <Link href={"/category/surgical-site-preparation"}>
+              <button
+                className="w-32 h-10 mt-6 text-white text-base font-semibold font-primary capitalize bg-secondary-primary rounded-xl justify-center items-center gap-3 flex"
+                aria-label="View more about surgical site preparation"
+              >
+                view more
+              </button>
+            </Link>
           </div>
           <div className="flex justify-end items-end">
             <Image
@@ -48,18 +52,17 @@ const CategoriesSection = () => {
               <h2 className="mt-4 text-light-black text-2xl font-semibold font-primary capitalize">
                 Skin & hands
               </h2>
-              <button
-                className="w-32 h-10 mt-6 text-white text-base font-semibold font-primary capitalize bg-secondary-primary rounded-xl justify-center items-center gap-3 flex"
-                aria-label="View more about skin & hands"
-              >
-                view more
-              </button>
+              <Link href={"/category/skin-and-hands"}>
+                <button
+                  className="w-32 h-10 mt-6 text-white text-base font-semibold font-primary capitalize bg-secondary-primary rounded-xl justify-center items-center gap-3 flex"
+                  aria-label="View more about skin & hands"
+                >
+                  view more
+                </button>
+              </Link>
             </div>
             <div className="flex justify-end items-end">
-              <Image
-                src={Category2Img}
-                alt="Skin & hands category"
-              />
+              <Image src={Category2Img} alt="Skin & hands category" />
             </div>
           </article>
           <article className="grid grid-cols-2 items-end bg-primary rounded-xl">
@@ -70,18 +73,17 @@ const CategoriesSection = () => {
               <h2 className="mt-4 text-light-black text-2xl font-semibold font-primary capitalize">
                 Dental Care
               </h2>
-              <button
-                className="mt-6 w-32 h-10 text-white text-base font-semibold font-primary capitalize bg-secondary-primary rounded-xl justify-center items-center gap-3 flex"
-                aria-label="View more about dental care"
-              >
-                view more
-              </button>
+              <Link href={"/category/dental"}>
+                <button
+                  className="mt-6 w-32 h-10 text-white text-base font-semibold font-primary capitalize bg-secondary-primary rounded-xl justify-center items-center gap-3 flex"
+                  aria-label="View more about dental care"
+                >
+                  view more
+                </button>
+              </Link>
             </div>
             <div className="flex justify-end items-end">
-              <Image
-                src={Category3Img}
-                alt="Dental care category"
-              />
+              <Image src={Category3Img} alt="Dental care category" />
             </div>
           </article>
         </div>
