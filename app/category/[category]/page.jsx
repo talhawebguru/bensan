@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { getProducts } from "../../services/api";
+import {getProducts, getProductsByCategory } from "../../../services/api";
 import CategoryList from "../../components/product/CategoryList";
 import { FaArrowDown, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { motion } from "framer-motion";
@@ -15,18 +15,20 @@ const CategoryPage = ({ params }) => {
   const { category } = params;
 
   const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState(category);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchProducts = async (page = 1) => {
       try {
-        const data = await getProducts(page);
+        let data;
+        if (category === "all-products") {
+          data = await getProducts(page);
+        } else {
+          data = await getProductsByCategory(category, page);
+        }
         setProducts(data.data);
-        handleCategorySelect(category, data.data);
         setTotalPages(data.meta.pagination.pageCount);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -37,18 +39,6 @@ const CategoryPage = ({ params }) => {
 
     fetchProducts(currentPage);
   }, [category, currentPage]);
-
-  const handleCategorySelect = (categorySlug, productsData = products) => {
-    setSelectedCategory(categorySlug);
-    if (categorySlug === "all-products") {
-      setFilteredProducts(productsData);
-    } else {
-      const filtered = productsData.filter((product) =>
-        product.category?.slug === categorySlug
-      );
-      setFilteredProducts(filtered);
-    }
-  };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -81,8 +71,8 @@ const CategoryPage = ({ params }) => {
             </div>
             <div className="w-full h-[0px] border border-[#eae9e8] mt-6"></div>
             <CategoryList
-              onCategorySelect={handleCategorySelect}
-              selectedCategory={selectedCategory}
+              onCategorySelect={(categorySlug) => router.push(`/category/${categorySlug}`)}
+              selectedCategory={category}
             />
           </div>
         </div>
@@ -100,7 +90,7 @@ const CategoryPage = ({ params }) => {
                     </div>
                   </div>
                 ))
-              : filteredProducts.map((product) => (
+              : products.map((product) => (
                   <motion.div
                     key={product.id}
                     initial={{ opacity: 0, y: 30 }}
@@ -129,39 +119,41 @@ const CategoryPage = ({ params }) => {
         </div>
       </div>
       {/* Pagination */}
-      <div className="flex gap-2 justify-center lg:mt-16 mt-5 lg:mb-20 mb-5 ">
-        <div
-          className={`w-10 h-10 bg-white shadow flex justify-center items-center ${
-            currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
-          }`}
-          onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
-        >
-          <FaAngleLeft />
-        </div>
-        {Array.from({ length: totalPages }, (_, index) => (
+      {totalPages > 1 && (
+        <div className="flex gap-2 justify-center lg:mt-16 mt-5 lg:mb-20 mb-5 ">
           <div
-            key={index}
-            className={`w-10 h-10 shadow flex justify-center items-center ${
-              currentPage === index + 1
-                ? "bg-secondary-primary text-white"
-                : "bg-white text-[#554e49]"
-            } cursor-pointer`}
-            onClick={() => handlePageChange(index + 1)}
+            className={`w-10 h-10 bg-white shadow flex justify-center items-center ${
+              currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
+            onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
           >
-            {index + 1}
+            <FaAngleLeft />
           </div>
-        ))}
-        <div
-          className={`w-10 h-10 bg-white shadow flex justify-center items-center ${
-            currentPage === totalPages ? "cursor-not-allowed" : "cursor-pointer"
-          }`}
-          onClick={() =>
-            currentPage < totalPages && handlePageChange(currentPage + 1)
-          }
-        >
-          <FaAngleRight />
+          {Array.from({ length: totalPages }, (_, index) => (
+            <div
+              key={index}
+              className={`w-10 h-10 shadow flex justify-center items-center ${
+                currentPage === index + 1
+                  ? "bg-secondary-primary text-white"
+                  : "bg-white text-[#554e49]"
+              } cursor-pointer`}
+              onClick={() => handlePageChange(index + 1)}
+            >
+              {index + 1}
+            </div>
+          ))}
+          <div
+            className={`w-10 h-10 bg-white shadow flex justify-center items-center ${
+              currentPage === totalPages ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
+            onClick={() =>
+              currentPage < totalPages && handlePageChange(currentPage + 1)
+            }
+          >
+            <FaAngleRight />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

@@ -17,6 +17,16 @@ export const getProducts = async (page = 1, pageSize = 25) => {
   }
 };
 
+export const getProductsByCategory = async (categorySlug, page = 1, pageSize = 25) => {
+    try {
+      const response = await api.get(`/api/products?populate=*&filters[category][slug][$eq]=${categorySlug}&pagination[page]=${page}&pagination[pageSize]=${pageSize}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching products for category ${categorySlug}:`, error);
+      throw error;
+    }
+  };
+
 export const getProductBySlug = async (slug) => {
   try {
     const response = await api.get(`/api/products?filters[slug][$eq]=${slug}&populate=*`);
