@@ -3,8 +3,10 @@ import axios from 'axios';
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
-    'ngrok-skip-browser-warning': 'true',
-}
+    'ngrok-skip-browser-warning': "true",
+    'User-Agent': 'CustomUserAgent/1.0',
+  },
+  
 });
 
 export const getProducts = async (page = 1, pageSize = 25) => {
