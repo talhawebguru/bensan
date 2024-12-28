@@ -8,6 +8,7 @@ import { FaLinkedin, FaLocationDot } from "react-icons/fa6";
 import { IoCall, IoMailSharp } from "react-icons/io5";
 import SocialMedia from "./SocialMedia";
 import ContactInfo from "./ContactInfo";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -51,13 +52,19 @@ const Footer = () => {
             </h2>
             <ul className="inline-flex flex-col gap-[18px]">
               <li className="text-grey text-base font-normal font-primary">
+                <Link href="/">
                 Home
+                </Link>
               </li>
               <li className="text-grey text-base font-normal font-primary">
+                <Link href="/about">
                 About
+                </Link>
               </li>
               <li className="text-grey text-base font-normal font-primary">
+                <Link href="/product">
                 Product
+                </Link>
               </li>
               <li className="text-grey text-base font-normal font-primary">
                 Resource Center
@@ -93,10 +100,16 @@ const Footer = () => {
                 info="Safecare Medical Industries KHIA-8-18 Abu Dhabi UAE"
                 className={"text-grey"}
               />
-              <ContactInfo icon={<IoCall />} info="+97125067333 " className={"text-grey"}
+              <ContactInfo
+                icon={<IoCall />}
+                info="+97125067333 "
+                className={"text-grey"}
               />
-              <ContactInfo icon={<IoMailSharp />} info="info@bensano.com " className={"text-grey"}
- />
+              <ContactInfo
+                icon={<IoMailSharp />}
+                info="info@bensano.com "
+                className={"text-grey"}
+              />
             </div>
           </div>
         </div>
