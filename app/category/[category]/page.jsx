@@ -45,6 +45,13 @@ const CategoryPage = ({ params }) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const truncateTitle = (title, maxLength) => {
+    if (title?.length > maxLength) {
+      return title.substring(0, maxLength) + "...";
+    }
+    return title;
+  };
+
   return (
     <>
       <hr className="border border-black/10 mt-1 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0" />
@@ -97,8 +104,8 @@ const CategoryPage = ({ params }) => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <Link href={`/category/${product.category.slug}/${product.slug}`}>
-                      <div className="bg-white shadow border border-[#e9ecef] cursor-pointer w-full ">
+                    <Link href={`/category/${category}/${product.slug}`}>
+                      <div className="bg-white shadow border border-[#e9ecef] cursor-pointer w-full h-full">
                         <Image
                           className="w-full h-64 scale-1 hover:scale-110 object-contain"
                           src={`${process.env.NEXT_PUBLIC_API_URL}${product.Image[0].url}`}
@@ -109,6 +116,9 @@ const CategoryPage = ({ params }) => {
                         <div className="pt-4 pb-5">
                           <h4 className="text-base font-semibold text-gray-500 text-center font-primary">
                             {product.Name}
+                          </h4>
+                          <h4 className="text-base font-normal text-gray-500 text-center font-primary">
+                            {truncateTitle(product?.title, 25)}
                           </h4>
                         </div>
                       </div>

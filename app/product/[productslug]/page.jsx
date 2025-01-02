@@ -12,7 +12,6 @@ import RichTextRender from "../../components/product/RichTextRender";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { motion } from "framer-motion";
-
 const Page = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -60,7 +59,7 @@ const Page = () => {
     );
   }
 
-  const { Name, Descripition, Image: Images, downloadCatalog, downloadTDS } = product;
+  const { Name, title, Descripition, Image: Images, downloadCatalog, downloadTDS } = product;
 
   return (
     <motion.div
@@ -128,6 +127,9 @@ const Page = () => {
             <h2 className="text-[#a8366f] text-lg font-semibold font-primary capitalize">
               {Name}
             </h2>
+            <h3 className="text-[#a8366f] mt-2 text-sm font-semibold font-primary capitalize">
+              {title}
+            </h3>
             <div className="text-[#6c757d] text-base font-normal font-primary capitalize leading-normal mt-8">
               <RichTextRender content={Descripition} />
             </div>

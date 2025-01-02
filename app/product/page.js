@@ -46,6 +46,12 @@ const ProductsPage = () => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+  const truncateTitle = (title, maxLength) => {
+    if (title?.length > maxLength) {
+      return title.substring(0, maxLength) + "...";
+    }
+    return title;
+  };
 
   return (
     <>
@@ -98,9 +104,10 @@ const ProductsPage = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
+                    className=""
                   >
                     <Link href={`/product/${product.slug}`}>
-                      <div className="bg-white shadow border border-[#e9ecef] cursor-pointer w-full ">
+                      <div className="bg-white shadow border border-[#e9ecef] cursor-pointer w-full h-full">
                         <Image
                           className="w-full h-64 scale-1 hover:scale-110 object-contain"
                           src={`${process.env.NEXT_PUBLIC_API_URL}${product.Image[0].url}`}
@@ -111,6 +118,9 @@ const ProductsPage = () => {
                         <div className="pt-4 pb-5">
                           <h4 className="text-base font-semibold text-gray-500 text-center font-primary">
                             {product.Name}
+                          </h4>
+                          <h4 className="text-base font-normal text-gray-500 text-center font-primary">
+                            {truncateTitle(product?.title, 25)}
                           </h4>
                         </div>
                       </div>
@@ -146,7 +156,9 @@ const ProductsPage = () => {
           ))}
           <div
             className={`w-10 h-10 bg-white shadow flex justify-center items-center ${
-              currentPage === totalPages ? "cursor-not-allowed" : "cursor-pointer"
+              currentPage === totalPages
+                ? "cursor-not-allowed"
+                : "cursor-pointer"
             }`}
             onClick={() =>
               currentPage < totalPages && handlePageChange(currentPage + 1)

@@ -59,7 +59,7 @@ const Page = ({ params }) => {
     );
   }
 
-  const { Name, Descripition, Image: Images, downloadCatalog, downloadTDS } = product;
+  const { Name, title, Descripition, Image: Images, downloadCatalog, downloadTDS } = product;
 
   return (
     <motion.div
@@ -127,7 +127,10 @@ const Page = ({ params }) => {
             <h2 className="text-[#a8366f] text-lg font-semibold font-primary capitalize">
               {Name}
             </h2>
-            <div className="text-[#6c757d] text-base font-normal font-primary capitalize leading-normal mt-8">
+            <h3 className="text-[#a8366f] mt-2 text-sm font-semibold font-primary capitalize">
+              {title}
+            </h3>
+            <div className="text-[#6c757d] text-base font-normal font-primary capitalize leading-normal mt-4">
               <RichTextRender content={Descripition} />
             </div>
             <div className="flex flex-wrap justify-center gap-5 mt-3">
