@@ -130,8 +130,8 @@ const CategoryPage = ({ params }) => {
                           <h4 className="text-base font-semibold text-gray-500 text-center font-primary">
                             {product.Name}
                           </h4>
-                          <h4 className="text-base font-normal text-gray-500 text-center font-primary">
-                            {truncateTitle(product?.title, 25)}
+                          <h4 className="text-xs font-normal text-gray-500 text-center font-primary">
+                            {truncateTitle(product?.title, 35)}
                           </h4>
                         </div>
                       </div>
