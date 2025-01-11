@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import {getProducts, getProductsByCategory } from "../../../services/api";
+import {getProducts, getProductsByCategory } from "@/app/services/api";
 import CategoryList from "../../components/product/CategoryList";
 import { FaArrowDown, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { motion } from "framer-motion";

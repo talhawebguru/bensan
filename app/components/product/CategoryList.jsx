@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { getCategories } from "../../services/api";
+import { getCategories } from "@/app/services/api";
 import { motion } from "framer-motion";
 
 const CategoryList = ({ onCategorySelect, selectedCategory }) => {
