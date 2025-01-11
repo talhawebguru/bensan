@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-//   headers: {
-//     'ngrok-skip-browser-warning': 'true'
-// }
+  headers: {
+    'ngrok-skip-browser-warning': 'true'
+}
 });
 
 export const getProducts = async (page = 1, pageSize = 25) => {
@@ -26,6 +26,17 @@ export const getProductBySlug = async (slug) => {
     throw error;
   }
 };
+
+
+export const getProductsByCategory = async (categorySlug, page = 1, pageSize = 25) => {
+    try {
+      const response = await api.get(`/api/products?populate=*&filters[categories][slug][$eq]=${categorySlug}&pagination[page]=${page}&pagination[pageSize]=${pageSize}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching products for category ${categorySlug}:`, error);
+      throw error;
+    }
+  };
 
 export const getCategories = async () => {
   try {
