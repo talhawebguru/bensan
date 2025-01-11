@@ -7,7 +7,7 @@ import Image from "next/image";
 import "swiper/css";
 import "swiper/css/thumbs";
 import { IoDownloadOutline } from "react-icons/io5";
-import { getProductBySlug } from "../../.";
+import { getProductBySlug } from "@/app/services/api";
 import RichTextRender from "../../../components/product/RichTextRender";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
