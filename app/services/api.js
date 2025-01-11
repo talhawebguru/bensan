@@ -4,12 +4,13 @@ const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     'ngrok-skip-browser-warning': 'true'
-}
+  }
 });
 
-export const getProducts = async (page = 1, pageSize = 25) => {
+export const getProducts = async (page = 1, pageSize = 25, searchQuery = '') => {
   try {
-    const response = await api.get(`/api/products?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`);
+    const searchFilter = searchQuery ? `&filters[Name][$containsi]=${searchQuery}` : '';
+    const response = await api.get(`/api/products?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}${searchFilter}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching products:', error);
@@ -27,16 +28,16 @@ export const getProductBySlug = async (slug) => {
   }
 };
 
-
-export const getProductsByCategory = async (categorySlug, page = 1, pageSize = 25) => {
-    try {
-      const response = await api.get(`/api/products?populate=*&filters[categories][slug][$eq]=${categorySlug}&pagination[page]=${page}&pagination[pageSize]=${pageSize}`);
-      return response.data;
-    } catch (error) {
-      console.error(`Error fetching products for category ${categorySlug}:`, error);
-      throw error;
-    }
-  };
+export const getProductsByCategory = async (categorySlug, page = 1, pageSize = 25, searchQuery = '') => {
+  try {
+    const searchFilter = searchQuery ? `&filters[Name][$containsi]=${searchQuery}` : '';
+    const response = await api.get(`/api/products?populate=*&filters[categories][slug][$eq]=${categorySlug}&pagination[page]=${page}&pagination[pageSize]=${pageSize}${searchFilter}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching products for category ${categorySlug}:`, error);
+    throw error;
+  }
+};
 
 export const getCategories = async () => {
   try {
@@ -49,22 +50,21 @@ export const getCategories = async () => {
 };
 
 export const getTopSellingProducts = async () => {
-  try{
+  try {
     const response = await api.get('/api/top-selling-products?populate[products][populate]=Image');
     return response.data;
-  }
-  catch(error){
+  } catch (error) {
     console.error('Error fetching top selling products:', error);
     throw error;
   }
-}
-export const getNewArrivalsProduct = async() =>{
-  try{
-    const response =  await api.get('/api/new-arrivals?populate[products][populate]=Image');
+};
+
+export const getNewArrivalsProduct = async () => {
+  try {
+    const response = await api.get('/api/new-arrivals?populate[products][populate]=Image');
     return response.data;
-  }
-  catch(error){
+  } catch (error) {
     console.error('Error fetching New Arrivals products:', error);
     throw error;
   }
-}
+};

@@ -15,13 +15,14 @@ const ProductsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all-products");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchProducts = async (page = 1) => {
       try {
         let data;
         if (selectedCategory === "all-products") {
-          data = await getProducts(page);
+          data = await getProducts(page, 25, searchQuery);
         } else {
           data = await getProductsByCategory(selectedCategory, page);
         }
@@ -35,7 +36,7 @@ const ProductsPage = () => {
     };
 
     fetchProducts(currentPage);
-  }, [selectedCategory, currentPage]);
+  }, [selectedCategory, currentPage, searchQuery]);
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
@@ -45,6 +46,15 @@ const ProductsPage = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+    setCurrentPage(1); // Reset to first page when search query changes
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault(); // Prevent default form submission
   };
   const truncateTitle = (title, maxLength) => {
     if (title?.length > maxLength) {
@@ -62,11 +72,13 @@ const ProductsPage = () => {
       <div className="flex gap-10 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
         <div className="flex gap-10">
           <div className="xl:w-[350px] pb-4 h-fit bg-white shadow">
-            <form className="flex mb-3">
+            <form className="flex mb-3" onSubmit={handleSearchSubmit}>
               <input
                 type="text"
-                className="w-full xl:w-[350px] outline-none h-14 px-[16px] py-4 bg-white shadow justify-start items-start gap-2.5 inline-flex text-[#bdbab8] text-[13px] font-normal font-primary leading-tight"
+                className="w-full xl:w-[350px] outline-none h-14 px-[16px] py-4 bg-white shadow justify-start items-start gap-2.5 inline-flex text-black text-[13px] font-normal font-primary leading-tight"
                 placeholder="Search"
+                value={searchQuery}
+                onChange={handleSearchChange}
               />
             </form>
             <div className="flex items-center content-center justify-between pt-6 mx-4">
