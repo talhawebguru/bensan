@@ -12,6 +12,7 @@ import RichTextRender from "../../components/product/RichTextRender";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { motion } from "framer-motion";
+import Head from "next/head";
 const Page = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -58,10 +59,20 @@ const Page = () => {
       </div>
     );
   }
-
-  const { Name, title, Descripition, Image: Images, downloadCatalog, downloadTDS } = product;
+  
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+  
+  const { Name, title, Descripition, Image: Images, downloadCatalog, downloadTDS, downloadSDS, metaTitle, metaDescripition  } = product;
 
   return (
+    <>
+    <Head>
+      <title>{metaTitle || "Empty" }</title>
+      <meta name="description" content={metaDescripition || "Empty"} />
+    </Head>
+    
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -160,11 +171,26 @@ const Page = () => {
                   </div>
                 </a>
               )}
+              {downloadSDS && (
+                <a
+                  target="_blank"
+                  href={`${process.env.NEXT_PUBLIC_API_URL}${downloadSDS.url}`}
+                  className="w-[164px] h-14 bg-[#124984] rounded-xl flex justify-center items-center gap-3"
+                  download
+                >
+                  <IoDownloadOutline className="relative text-white" size={24} />
+                  <div className="text-white text-lg font-semibold font-primary capitalize">
+                    SDS
+                  </div>
+                </a>
+              )}
             </div>
           </div>
         </div>
       </div>
     </motion.div>
+    </>
+
   );
 };
 
