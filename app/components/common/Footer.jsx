@@ -11,6 +11,8 @@ import ContactInfo from "./ContactInfo";
 import Link from "next/link";
 
 const Footer = () => {
+
+  const currentYear= new Date().getFullYear();
   return (
     <footer className="bg-secondary mt-20 xl:px-[90px] sm:px-10 xs:px-5 sm:pt-12 xs:pt-10">
       <div className="2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
@@ -115,7 +117,7 @@ const Footer = () => {
         </div>
         <div>
           <p className="text-grey text-sm font-normal font-primary text-center py-4 mt-16 border-t border-hr-line">
-            Copyright ©2023 Bensan | All rights reserved
+            Copyright ©{currentYear} Bensan | All rights reserved
           </p>
         </div>
       </div>
