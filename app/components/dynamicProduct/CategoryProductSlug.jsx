@@ -15,7 +15,6 @@ import { motion } from "framer-motion";
 
 const Page = ({ params }) => {
   const router = useRouter();
-  console.log(params , "paramm")
   const { category, productslug } = params;
   const [product, setProduct] = useState(null);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
