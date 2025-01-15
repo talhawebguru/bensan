@@ -69,7 +69,7 @@ const ProductsPage = () => {
       <h1 className="my-16 text-[#222823] text-4xl font-semibold font-['Open Sans'] capitalize  xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
         our Products
       </h1>
-      <div className="flex gap-10 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
+      <div className="flex flex-wrap sm:flex-nowrap  gap-10 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
         <div className="flex gap-10">
           <div className="xl:w-[350px] pb-4 h-fit bg-white shadow">
             <form className="flex mb-3" onSubmit={handleSearchSubmit}>

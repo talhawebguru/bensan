@@ -1,6 +1,7 @@
 import React from "react";
 import ProductSlug from "@/app/components/dynamicProduct/ProductSlug";
-import { getProductBySlug } from "@/app/services/api";
+import {getProducts, getProductBySlug } from "@/app/services/api";
+
 
 export async function generateMetadata({ params }) {
   const { productslug } = params;
@@ -23,6 +24,16 @@ export async function generateMetadata({ params }) {
     description: metaDescription,
   };
 }
+
+export async function getStaticPaths() {
+  const products = await getProducts();
+  const paths = products.map((product) => ({
+    params: { productSlug: product.slug },
+  }));
+
+  return { paths, fallback: false };
+}
+
 const page = () => {
   return (
     <>
