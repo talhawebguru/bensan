@@ -50,3 +50,11 @@
   width: 100%;
   height: fit-content;
 }
+.iiz div{
+  height: 500px !important;
+  object-fit: contain !important;
+}
+div .iiz__img{
+  height: 450px !important;
+  object-fit: contain !important;
+}

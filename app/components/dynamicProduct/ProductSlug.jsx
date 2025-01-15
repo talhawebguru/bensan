@@ -12,6 +12,12 @@ import RichTextRender from "../../components/product/RichTextRender";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { motion } from "framer-motion";
+// import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
+import InnerImageZoom from 'react-inner-image-zoom';
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css'
+
+
+
 
 const Page = () => {
   const router = useRouter();
@@ -77,7 +83,6 @@ const Page = () => {
           products / {Name}
         </h2>
       </div>
-
       <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:px-[62px] px-5 py-10 bg-white rounded-xl shadow border border-[#e9ecef] mb-20">
           <div className="h-[450px]">
@@ -89,14 +94,18 @@ const Page = () => {
               onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
             >
               {Images.map((img, index) => (
-                <SwiperSlide key={index}>
-                  <Image
+                <SwiperSlide key={index} className="flex justify-center items-center">
+                  <InnerImageZoom
                     src={`${process.env.NEXT_PUBLIC_API_URL}${img.url}`}
+                    zoomSrc={`${process.env.NEXT_PUBLIC_API_URL}${img.url}`}
                     alt={img.alternativeText || `Product image ${index + 1}`}
-                    className="object-contain h-full w-full"
-                    width={700}
-                    height={700}
+                    className="!object-contain"
+                    width={500}
+                    height={500}
+                    zoomType="hover"
+                    zoomPreload={true}
                   />
+
                 </SwiperSlide>
               ))}
             </Swiper>
