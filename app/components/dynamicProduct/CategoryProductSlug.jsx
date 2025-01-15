@@ -12,6 +12,8 @@ import RichTextRender from "@/app/components/product/RichTextRender";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { motion } from "framer-motion";
+import InnerImageZoom from "react-inner-image-zoom";
+import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 
 const Page = ({ params }) => {
   const router = useRouter();
@@ -28,7 +30,10 @@ const Page = ({ params }) => {
           const data = await getProductBySlug(productslug);
           setProduct(data.data[0]);
         } catch (error) {
-          console.error(`Error fetching product with slug ${productslug}:`, error);
+          console.error(
+            `Error fetching product with slug ${productslug}:`,
+            error
+          );
         } finally {
           setLoading(false);
         }
@@ -58,8 +63,15 @@ const Page = ({ params }) => {
       </div>
     );
   }
- 
-  const { Name, title, Descripition, Image: Images, downloadCatalog, downloadTDS } = product;
+
+  const {
+    Name,
+    title,
+    Descripition,
+    Image: Images,
+    downloadCatalog,
+    downloadTDS,
+  } = product;
 
   return (
     <motion.div
@@ -85,12 +97,15 @@ const Page = ({ params }) => {
             >
               {Images.map((img, index) => (
                 <SwiperSlide key={index}>
-                  <Image
+                  <InnerImageZoom
                     src={`${process.env.NEXT_PUBLIC_API_URL}${img.url}`}
+                    zoomSrc={`${process.env.NEXT_PUBLIC_API_URL}${img.url}`}
                     alt={img.alternativeText || `Product image ${index + 1}`}
-                    className="object-contain h-full w-full"
-                    width={700}
-                    height={700}
+                    className="!object-contain"
+                    width={500}
+                    height={500}
+                    zoomType="hover"
+                    zoomPreload={true}
                   />
                 </SwiperSlide>
               ))}
@@ -141,7 +156,10 @@ const Page = ({ params }) => {
                   className="w-[164px] h-14 bg-[#a8366f] rounded-xl flex justify-center items-center gap-3"
                   download
                 >
-                  <IoDownloadOutline className="relative text-white" size={24} />
+                  <IoDownloadOutline
+                    className="relative text-white"
+                    size={24}
+                  />
                   <div className="text-white text-lg font-semibold font-primary capitalize">
                     Catalog
                   </div>
@@ -154,7 +172,10 @@ const Page = ({ params }) => {
                   className="w-[164px] h-14 bg-[#124984] rounded-xl flex justify-center items-center gap-3"
                   download
                 >
-                  <IoDownloadOutline className="relative text-white" size={24} />
+                  <IoDownloadOutline
+                    className="relative text-white"
+                    size={24}
+                  />
                   <div className="text-white text-lg font-semibold font-primary capitalize">
                     TDS
                   </div>

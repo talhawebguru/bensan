@@ -58,3 +58,14 @@ div .iiz__img{
   height: 450px !important;
   object-fit: contain !important;
 }
+
+.iiz__hint{
+  position: absolute !important;
+  bottom: 80px !important;
+  right: 0 !important;
+  color: white !important;
+  background-color: whitesmoke !important;
+  font-size: 12px !important;
+  text-align: center !important;
+  padding: 10px !important;
+}
