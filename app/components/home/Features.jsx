@@ -12,22 +12,22 @@ const Features = () => {
         <FeaturesBox 
           icon={InnovationIcon} 
           title="Innovation" 
-          para="Lorem ipsum dolor sit amet consectetur. Et eget ultricies diam velit tellus orci." 
+          para="Developing advanced solutions that redefine healthcare practices for improved outcomes." 
         />
         <FeaturesBox 
           icon={EasyToUseIcon} 
           title="Ease of Use" 
-          para="Lorem ipsum dolor sit amet consectetur. Et eget ultricies diam velit tellus orci." 
+          para="Providing simple and effective tools designed for seamless healthcare workflows" 
         />
         <FeaturesBox 
           icon={SafetyIcon} 
           title="Safety and Compliance" 
-          para="Lorem ipsum dolor sit amet consectetur. Et eget ultricies diam velit tellus orci." 
+          para="Adhering to the highest safety standards and regulatory requirements to provide trusted solutions." 
         />
         <FeaturesBox 
           icon={SustainabilityIcon} 
           title="Sustainability" 
-          para="Lorem ipsum dolor sit amet consectetur. Et eget ultricies diam velit tellus orci." 
+          para="Committed to reducing environmental impact with eco-friendly innovations." 
         />
       </div>
     </section>

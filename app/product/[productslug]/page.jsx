@@ -25,14 +25,6 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export async function getStaticPaths() {
-  const products = await getProducts();
-  const paths = products.map((product) => ({
-    params: { productSlug: product.slug },
-  }));
-
-  return { paths, fallback: false };
-}
 
 const page = () => {
   return (

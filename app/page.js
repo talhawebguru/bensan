@@ -16,7 +16,6 @@ const Home = () => {
       <CategoriesSection/>
       <NewArrivals/>
       <CustomerSay/>
-
     </main>
     </>
   )
