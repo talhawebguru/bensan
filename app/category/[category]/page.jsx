@@ -63,6 +63,28 @@ const CategoryPage = ({ params }) => {
     return title;
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const productVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
     <>
       <hr className="border border-black/10 mt-1 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0" />
@@ -97,13 +119,15 @@ const CategoryPage = ({ params }) => {
           </div>
         </div>
         <div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <motion.div 
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {loading
               ? [...Array(8)].map((_, index) => (
-                  <div
-                    key={index}
-                    className="bg-white w-[256px] shadow border border-[#e9ecef]"
-                  >
+                  <div key={index} className="bg-white w-[256px] shadow border border-[#e9ecef]">
                     <Skeleton height={256} width={256} />
                     <div className="pt-4 flex justify-center pb-5">
                       <Skeleton height={20} width={100} />
@@ -113,11 +137,14 @@ const CategoryPage = ({ params }) => {
               : products.map((product) => (
                   <motion.div
                     key={product.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4 }}
+                    variants={productVariants}
+                    whileHover={{ 
+                      scale: 1.02,
+                      transition: { duration: 0.2 }
+                    }}
+                    className=""
                   >
-                    <Link href={`/category/${category}/${product.slug}`}>
+                    <Link href={`/product/${product.slug}`}>
                       <div className="bg-white shadow border border-[#e9ecef] cursor-pointer w-full h-full">
                         <Image
                           className="w-full h-64 scale-1 hover:scale-110 object-contain"
@@ -138,7 +165,7 @@ const CategoryPage = ({ params }) => {
                     </Link>
                   </motion.div>
                 ))}
-          </div>
+          </motion.div>
         </div>
       </div>
       {/* Pagination */}
