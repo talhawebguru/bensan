@@ -43,6 +43,30 @@ const Page = ({ params }) => {
     }
   }, [productslug]);
 
+  const pageVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        when: "beforeChildren",
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const contentVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
   if (loading) {
     return (
       <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
@@ -64,30 +88,32 @@ const Page = ({ params }) => {
     );
   }
 
-  const {
-    Name,
-    title,
-    Descripition,
-    Image: Images,
-    downloadCatalog,
-    downloadTDS,
-  } = product;
+  const { Name, title, Descripition, Image: Images, downloadCatalog, downloadTDS, downloadSDS } = product;
+
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      variants={pageVariants}
+      initial="hidden"
+      animate="visible"
     >
-      <div className="xl:px-[90px] sm:px-10 xs:px-5">
+      <motion.div 
+        variants={contentVariants}
+        className="xl:px-[90px] sm:px-10 xs:px-5"
+      >
         <h2 className="py-10 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 text-[#6c757d] text-lg font-semibold font-primary capitalize">
           products / {Name}
         </h2>
-      </div>
-
+      </motion.div>
       <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:px-[62px] px-5 py-10 bg-white rounded-xl shadow border border-[#e9ecef] mb-20">
-          <div className="h-[450px]">
+        <motion.div 
+          variants={contentVariants}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:px-[62px] px-5 py-10 bg-white rounded-xl shadow border border-[#e9ecef] mb-20"
+        >
+          <motion.div 
+            variants={contentVariants}
+            className="h-[450px]"
+          >
             <Swiper
               spaceBetween={10}
               thumbs={{ swiper: thumbsSwiper }}
@@ -96,10 +122,9 @@ const Page = ({ params }) => {
               onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
             >
               {Images.map((img, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide key={index} className="flex justify-center items-center">
                   <InnerImageZoom
                     src={`${process.env.NEXT_PUBLIC_API_URL}${img.url}`}
-                    zoomSrc={`${process.env.NEXT_PUBLIC_API_URL}${img.url}`}
                     alt={img.alternativeText || `Product image ${index + 1}`}
                     className="!object-contain"
                     width={500}
@@ -107,6 +132,7 @@ const Page = ({ params }) => {
                     zoomType="hover"
                     zoomPreload={true}
                   />
+
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -121,7 +147,7 @@ const Page = ({ params }) => {
               {Images.map((img, index) => (
                 <SwiperSlide
                   key={index}
-                  className={`cursor-pointer p-2.5 rounded-xl shadow border ${
+                  className={`cursor-pointer sm:p-2.5 rounded-xl shadow border ${
                     activeIndex === index
                       ? "bg-white border-[#e9ecef]"
                       : "!bg-[#e9ecef] border-[#e9ecef]"
@@ -137,53 +163,81 @@ const Page = ({ params }) => {
                 </SwiperSlide>
               ))}
             </Swiper>
-          </div>
-          <div className="mt-32 lg:mt-0 min-h-[600px]">
-            <h2 className="text-[#a8366f] text-lg font-semibold font-primary capitalize">
+          </motion.div>
+          <motion.div 
+            variants={contentVariants}
+            className="mt-32 lg:mt-0 min-h-[600px]"
+          >
+            <motion.h1 
+              variants={contentVariants}
+              className="text-[#a8366f] text-lg font-semibold font-primary capitalize"
+            >
               {Name}
-            </h2>
-            <h3 className="text-[#a8366f] mt-2 text-sm font-semibold font-primary capitalize">
+            </motion.h1>
+            <motion.h3 
+              variants={contentVariants}
+              className="text-[#a8366f] mt-2 text-sm font-semibold font-primary capitalize"
+            >
               {title}
-            </h3>
-            <div className="text-[#6c757d] text-base font-normal font-primary capitalize leading-normal mt-4">
+            </motion.h3>
+            <motion.div 
+              variants={contentVariants}
+              className="text-[#6c757d] text-base font-normal font-primary capitalize leading-normal mt-8"
+            >
               <RichTextRender content={Descripition} />
-            </div>
-            <div className="flex flex-wrap justify-center gap-5 mt-3">
+            </motion.div>
+            <motion.div 
+              variants={contentVariants}
+              className="flex flex-wrap justify-center gap-5 mt-8"
+            >
               {downloadCatalog && (
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   target="_blank"
                   href={`${process.env.NEXT_PUBLIC_API_URL}${downloadCatalog.url}`}
                   className="w-[164px] h-14 bg-[#a8366f] rounded-xl flex justify-center items-center gap-3"
                   download
                 >
-                  <IoDownloadOutline
-                    className="relative text-white"
-                    size={24}
-                  />
+                  <IoDownloadOutline className="relative text-white" size={24} />
                   <div className="text-white text-lg font-semibold font-primary capitalize">
                     Catalog
                   </div>
-                </a>
+                </motion.a>
               )}
               {downloadTDS && (
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   target="_blank"
                   href={`${process.env.NEXT_PUBLIC_API_URL}${downloadTDS.url}`}
                   className="w-[164px] h-14 bg-[#124984] rounded-xl flex justify-center items-center gap-3"
                   download
                 >
-                  <IoDownloadOutline
-                    className="relative text-white"
-                    size={24}
-                  />
+                  <IoDownloadOutline className="relative text-white" size={24} />
                   <div className="text-white text-lg font-semibold font-primary capitalize">
                     TDS
                   </div>
-                </a>
+                </motion.a>
               )}
-            </div>
-          </div>
-        </div>
+              {downloadSDS && (
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  target="_blank"
+                  href={`${process.env.NEXT_PUBLIC_API_URL}${downloadSDS.url}`}
+                  className="w-[164px] h-14 bg-[#124984] rounded-xl flex justify-center items-center gap-3"
+                  download
+                >
+                  <IoDownloadOutline className="relative text-white" size={24} />
+                  <div className="text-white text-lg font-semibold font-primary capitalize">
+                    SDS
+                  </div>
+                </motion.a>
+              )}
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </div>
     </motion.div>
   );

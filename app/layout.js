@@ -2,6 +2,8 @@ import { Open_Sans, Syne } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/common/Footer";
 import Header from "./components/common/Header";
+import { CategoryProvider } from './context/CategoryContext';
+
 
 const openSans = Open_Sans({
   family: "Open Sans",
@@ -28,7 +30,9 @@ export default function RootLayout({ children }) {
         className={`${openSans.variable} ${syne.variable} antialiased`}
       >
         <Header/>
-        {children}
+        <CategoryProvider>
+          {children}
+        </CategoryProvider>
         <Footer/>
       </body>
     </html>

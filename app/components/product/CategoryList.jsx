@@ -1,33 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { getCategories } from "@/app/services/api";
+import { useCategories } from "@/app/context/CategoryContext";
 import { motion } from "framer-motion";
 
 const CategoryList = ({ onCategorySelect, selectedCategory }) => {
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { categories, loading } = useCategories();
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const data = await getCategories();
-        setCategories(data.data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
   const handleCategoryClick = (category) => {
-    router.push(`/category/${category.slug}`);
+    router.push(`/category/${category.slug}`, { scroll: false });
     onCategorySelect(category.slug);
   };
 
@@ -75,15 +59,10 @@ const CategoryList = ({ onCategorySelect, selectedCategory }) => {
       animate="visible"
     >
       {categories.map((category) => (
-        <motion.div
+        <div
           className="flex gap-3 mx-4 mt-4 cursor-pointer"
           key={category.id}
           onClick={() => handleCategoryClick(category)}
-          variants={itemVariants}
-          whileHover={{ 
-            x: 8,
-            transition: { duration: 0.2 }
-          }}
         >
           <div
             className={`w-6 h-6 border ${
@@ -105,7 +84,7 @@ const CategoryList = ({ onCategorySelect, selectedCategory }) => {
               {category.name}
             </h2>
           </div>
-        </motion.div>
+        </div>
       ))}
     </motion.div>
   );

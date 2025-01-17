@@ -20,13 +20,13 @@ const CategoryPage = ({ params }) => {
   const [totalPages, setTotalPages] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
 
-
   useEffect(() => {
     const fetchProducts = async (page = 1) => {
+      setLoading(true); // Only set loading for products
       try {
         let data;
         if (category === "all-products") {
-          data = await getProducts(page , 25 , searchQuery);
+          data = await getProducts(page, 25, searchQuery);
         } else {
           data = await getProductsByCategory(category, page, 25, searchQuery);
         }
@@ -40,7 +40,7 @@ const CategoryPage = ({ params }) => {
     };
 
     fetchProducts(currentPage);
-  }, [category, currentPage , searchQuery]);
+  }, [category, currentPage, searchQuery]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

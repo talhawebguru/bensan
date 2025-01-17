@@ -172,12 +172,12 @@ const Page = () => {
             variants={contentVariants}
             className="mt-32 lg:mt-0 min-h-[600px]"
           >
-            <motion.h2 
+            <motion.h1 
               variants={contentVariants}
               className="text-[#a8366f] text-lg font-semibold font-primary capitalize"
             >
               {Name}
-            </motion.h2>
+            </motion.h1>
             <motion.h3 
               variants={contentVariants}
               className="text-[#a8366f] mt-2 text-sm font-semibold font-primary capitalize"
