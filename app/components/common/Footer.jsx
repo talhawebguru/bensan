@@ -9,15 +9,39 @@ import { IoCall, IoMailSharp } from "react-icons/io5";
 import SocialMedia from "./SocialMedia";
 import ContactInfo from "./ContactInfo";
 import Link from "next/link";
+import * as motion from "framer-motion/client"
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
 
-  const currentYear= new Date().getFullYear();
+  // Add animation variants
+  const fadeInUp = {
+    initial: { opacity: 0, y: 60 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, ease: "easeInOut" },
+  };
+
+  const staggerChildren = {
+    animate: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
   return (
     <footer className="bg-secondary mt-20 xl:px-[90px] sm:px-10 xs:px-5 sm:pt-12 xs:pt-10">
       <div className="2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
-        <div className="grid md:grid-cols-12 grid-cols-1 xs:gap-12 sm:gap-14">
-          <div className="xl:col-span-5 md:col-span-6  flex flex-col gap-6">
+        <motion.div 
+          variants={staggerChildren}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true , margin: "-100px" }}
+          className="grid md:grid-cols-12 grid-cols-1 xs:gap-12 sm:gap-14"
+        >
+          <motion.div 
+            variants={fadeInUp}
+            className="xl:col-span-5 md:col-span-6  flex flex-col gap-6">
             <Image
               src={Logo}
               alt="Bensan Logo"
@@ -47,8 +71,10 @@ const Footer = () => {
               <SocialMedia icon={<FaTwitter size={24} />} />
               <SocialMedia icon={<FaLinkedin size={24} />} />
             </div>
-          </div>
-          <div className="xl:col-span-2 md:col-span-6 flex flex-col gap-4">
+          </motion.div>
+          <motion.div 
+            variants={fadeInUp}
+            className="xl:col-span-2 md:col-span-6 flex flex-col gap-4">
             <h2 className="text-[#222823] text-lg font-semibold font-primary capitalize">
               Quick Links
             </h2>
@@ -72,8 +98,10 @@ const Footer = () => {
                 Resource Center
               </li>
             </ul>
-          </div>
-          <div className="xl:col-span-2 md:col-span-6  flex flex-col gap-4">
+          </motion.div>
+          <motion.div 
+            variants={fadeInUp}
+            className="xl:col-span-2 md:col-span-6  flex flex-col gap-4">
             <h2 className="text-[#222823] text-lg font-semibold font-primary capitalize">
               Support
             </h2>
@@ -91,8 +119,10 @@ const Footer = () => {
                 Cookie policy
               </li>
             </ul>
-          </div>
-          <div className="xl:col-span-3 md:col-span-6  flex flex-col gap-4">
+          </motion.div>
+          <motion.div 
+            variants={fadeInUp}
+             className="xl:col-span-3 md:col-span-6  flex flex-col gap-4">
             <h2 className="text-[#222823] text-lg font-semibold font-primary capitalize">
               Contact Info
             </h2>
@@ -113,13 +143,18 @@ const Footer = () => {
                 className={"text-grey"}
               />
             </div>
-          </div>
-        </div>
-        <div>
+          </motion.div>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.4 , duration: 0.6, ease: "easeInOut" }}
+          viewport={{ once: true }}
+          >
           <p className="text-grey text-sm font-normal font-primary text-center py-4 mt-16 border-t border-hr-line">
             Copyright ©{currentYear} Bensan | All rights reserved
           </p>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
