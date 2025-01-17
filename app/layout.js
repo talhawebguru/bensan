@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${openSans.variable} ${syne.variable} antialiased`}
+        className={`${openSans.variable} ${syne.variable} antialiased overflow-x-hidden`}
       >
         <Header/>
         <CategoryProvider>

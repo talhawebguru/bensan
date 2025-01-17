@@ -87,12 +87,12 @@ const CategoryPage = ({ params }) => {
 
   return (
     <>
-      <hr className="border border-black/10 mt-1 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0" />
+    <hr className="border border-black/10 mt-1 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0" />
       <h1 className="my-16 text-[#222823] text-4xl font-semibold font-['Open Sans'] capitalize  xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
         our Products
       </h1>
-      <div className="flex gap-10 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
-        <div className="flex gap-10">
+      <div className="flex flex-wrap justify-center md:justify-normal  md:flex-nowrap  gap-10 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 overflow-x-hidden">
+        <div className="flex justify-center md:justify-normal gap-10">
           <div className="xl:w-[350px] pb-4 h-fit bg-white shadow">
             <form className="flex mb-3" onSubmit={handleSearchSubmit}>
               <input
@@ -120,7 +120,7 @@ const CategoryPage = ({ params }) => {
         </div>
         <div>
           <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -194,7 +194,9 @@ const CategoryPage = ({ params }) => {
           ))}
           <div
             className={`w-10 h-10 bg-white shadow flex justify-center items-center ${
-              currentPage === totalPages ? "cursor-not-allowed" : "cursor-pointer"
+              currentPage === totalPages
+                ? "cursor-not-allowed"
+                : "cursor-pointer"
             }`}
             onClick={() =>
               currentPage < totalPages && handlePageChange(currentPage + 1)

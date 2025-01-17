@@ -29,7 +29,7 @@ const Page = () => {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
-          className="relative flex justify-center mt-16 md:mt-32">
+          className="relative flex justify-center mt-16 md:mt-32 overflow-x-hidden">
           <h2 className="w-full max-w-[923px] text-center px-4  text-[#222823] text-2xl md:text-4xl font-semibold font-primary capitalize">
             about
             <span className="block md:inline mx-3 text-[#a8366f] text-2xl md:text-4xl font-semibold font-primary capitalize">
@@ -49,7 +49,7 @@ const Page = () => {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, margin: "-130px" }}
-          className="lg:mt-28 mt-14 grid lg:grid-cols-2 grid-cols-1 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0  xl:pl-[90px] sm:px-10 xs:px-5">
+          className="lg:mt-28 mt-14 grid lg:grid-cols-2 grid-cols-1 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0  xl:pl-[90px] sm:px-10 xs:px-5 overflow-x-hidden">
           <motion.div variants={fadeInUp} className="2xl:max-w-[1440px]">
             <h2 className="text-[#222823] text-lg font-semibold font-primary capitalize leading-[27px] 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 ">
               Safecare Medical Industries was conceived and established in the
@@ -98,7 +98,7 @@ const Page = () => {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true , margin: "-130px" }}
-          className="relative flex justify-center mt-16 md:mt-32">
+          className="relative flex justify-center mt-16 md:mt-32 overflow-x-hidden">
           <h2 className="w-full max-w-[923px] text-center px-4  text-[#222823] text-2xl md:text-4xl font-semibold font-primary capitalize">
             Building Safer
             <span className="block md:inline mx-3 text-[#a8366f] text-2xl md:text-4xl font-semibold font-primary capitalize">
@@ -118,7 +118,7 @@ const Page = () => {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
-          className="lg:mt-28 mt-14 grid lg:grid-cols-3 grid-cols-1 gap-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0  xl:px-[90px] sm:px-10 xs:px-5 pb-40">
+          className="overflow-x-hidden lg:mt-28 mt-14 grid lg:grid-cols-3 grid-cols-1 gap-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0  xl:px-[90px] sm:px-10 xs:px-5 pb-40">
           <motion.div variants={fadeInUp}>
             <h2 className="text-[#222823] text-2xl font-semibold font-primary capitalize leading-9">
               <span className="text-[#a8366f] text-4xl font-semibold font-primary capitalize leading-[54px] mr-2 mt-10">

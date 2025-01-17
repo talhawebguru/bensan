@@ -28,7 +28,7 @@ const TopSelling = () => {
 
   return (
     <section>
-      <h2 className="text-center text-light-black text-4xl font-semibold font-primary capitalize mt-24">
+      <h2 className="text-center text-light-black text-4xl font-semibold font-primary capitalize mt-24 overflow-hidden">
         Top selling products
       </h2>
       <div className="2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 xl:px-[90px] sm:px-10 xs:px-5 mt-16">

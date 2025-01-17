@@ -11,7 +11,7 @@ import ContactInfo from "../components/common/ContactInfo";
 const page = () => {
   return (
     <>
-      <div className="relative">
+      <div className="relative overflow-x-hidden">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -27,7 +27,7 @@ const page = () => {
             Get In Touch With Us
           </motion.h2>
         </motion.div>
-        <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
+        <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 overflow-x-hidden">
           <motion.div 
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
