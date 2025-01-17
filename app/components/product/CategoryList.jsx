@@ -31,6 +31,29 @@ const CategoryList = ({ onCategorySelect, selectedCategory }) => {
     onCategorySelect(category.slug);
   };
 
+  const listVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut",
+      },
+    },
+  };
+
   if (loading) {
     return (
       <div className="pb-4 max-h-fit lg:pb-0">
@@ -45,15 +68,22 @@ const CategoryList = ({ onCategorySelect, selectedCategory }) => {
   }
 
   return (
-    <div className="pb-4 max-h-fit lg:pb-0">
+    <motion.div 
+      className="pb-4 max-h-fit lg:pb-0"
+      variants={listVariants}
+      initial="hidden"
+      animate="visible"
+    >
       {categories.map((category) => (
         <motion.div
           className="flex gap-3 mx-4 mt-4 cursor-pointer"
           key={category.id}
           onClick={() => handleCategoryClick(category)}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
+          variants={itemVariants}
+          whileHover={{ 
+            x: 8,
+            transition: { duration: 0.2 }
+          }}
         >
           <div
             className={`w-6 h-6 border ${
@@ -77,7 +107,7 @@ const CategoryList = ({ onCategorySelect, selectedCategory }) => {
           </div>
         </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 };
 
