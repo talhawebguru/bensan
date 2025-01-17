@@ -46,7 +46,7 @@ const Header = () => {
             </div>
           </div>
           <hr  className="mt-5 mb-1 border border-black/10 hidden lg:block"/>
-          <nav className="grid grid-cols-2   bg-white rounded-xl">
+          <nav className="flex justify-between items-center bg-white rounded-xl">
             <ul className="lg:flex items-center gap-11 hidden">
               <li>
                 <Link
@@ -85,15 +85,22 @@ const Header = () => {
                 </Link>
               </li>
             </ul>
-            <Link href="/" aria-label="Bensan Logo" className="-ml-16">
+            <Link href="/" aria-label="Bensan Logo" className="">
               <Image
                 src={Logo}
                 alt="Bensan Logo"
                 aria-label="Bensan Logo"
                 priority
-                className="lg:mr-6"
+                className="lg:mr-60"
               />
             </Link>
+            <Link
+                  href="/about"
+                  aria-label="About"
+                  className="text-nav-color text-[13px] font-semibold font-primary capitalize lg:flex items-center hidden"
+                >
+                  Resource Center
+                </Link>
             <div className="lg:hidden">
               <button onClick={toggleMenu} className="">
                 {isOpen ? (
