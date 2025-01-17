@@ -1,18 +1,35 @@
 import React from "react";
-import PageNameBanner from "../components/common/PageNameBanner";
 import doubleLine from "@/public/images/doubleLine.png";
 import Image from "next/image";
 import About1Img from "@/public/images/about1.png";
 import About2Img from "@/public/images/about2.png";
+import * as motion from "framer-motion/client"
 
 const Page = () => {
+  // Add animation variants
+  const fadeInUp = {
+    initial: { opacity: 0, y: 60 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 1.1 , delay: 0.4 },
+  };
+
+  const staggerChildren = {
+    animate: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
   return (
     <>
       <main>
-        {/* <div className="py-10 bg-secondary-secondary">
-          <PageNameBanner />
-        </div> */}
-        <div className="relative flex justify-center mt-16 md:mt-32">
+        <motion.div 
+          variants={fadeInUp}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          className="relative flex justify-center mt-16 md:mt-32">
           <h2 className="w-full max-w-[923px] text-center px-4  text-[#222823] text-2xl md:text-4xl font-semibold font-primary capitalize">
             about
             <span className="block md:inline mx-3 text-[#a8366f] text-2xl md:text-4xl font-semibold font-primary capitalize">
@@ -26,9 +43,14 @@ const Page = () => {
             aria-label="Double Line"
             className="absolute top-12 left-[45%] transform -translate-x-1/2"
           />
-        </div>
-        <div className="lg:mt-28 mt-14 grid lg:grid-cols-2 grid-cols-1 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0  xl:pl-[90px] sm:px-10 xs:px-5">
-          <div className="2xl:max-w-[1440px]">
+        </motion.div>
+        <motion.div 
+          variants={staggerChildren}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, margin: "-130px" }}
+          className="lg:mt-28 mt-14 grid lg:grid-cols-2 grid-cols-1 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0  xl:pl-[90px] sm:px-10 xs:px-5">
+          <motion.div variants={fadeInUp} className="2xl:max-w-[1440px]">
             <h2 className="text-[#222823] text-lg font-semibold font-primary capitalize leading-[27px] 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 ">
               Safecare Medical Industries was conceived and established in the
               year of 2016 by Bin Ali Group. The goal is to give a different
@@ -55,8 +77,8 @@ const Page = () => {
                 partners.
               </h2>
             </div>
-          </div>
-          <div className="h-full relative">
+          </motion.div>
+          <motion.div variants={fadeInUp} className="h-full relative">
             <Image
               src={About1Img}
               alt="about 1 image"
@@ -69,9 +91,14 @@ const Page = () => {
               Denfiz brands. Safecare operates subsidiaries operations across
               the UK, USA, Germany, and China.
             </div>
-          </div>
-        </div>
-        <div className="relative flex justify-center mt-16 md:mt-32">
+          </motion.div>
+        </motion.div>
+        <motion.div
+          variants={fadeInUp}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true , margin: "-130px" }}
+          className="relative flex justify-center mt-16 md:mt-32">
           <h2 className="w-full max-w-[923px] text-center px-4  text-[#222823] text-2xl md:text-4xl font-semibold font-primary capitalize">
             Building Safer
             <span className="block md:inline mx-3 text-[#a8366f] text-2xl md:text-4xl font-semibold font-primary capitalize">
@@ -83,11 +110,16 @@ const Page = () => {
             src={doubleLine}
             alt="doubleLine"
             aria-label="Double Line"
-            className="absolute top-12 left-[45%] transform -translate-x-1/2"
+            className="absolute top-12 left-[37%] transform -translate-x-1/2"
           />
-        </div>
-        <div className="lg:mt-28 mt-14 grid lg:grid-cols-3 grid-cols-1 gap-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0  xl:px-[90px] sm:px-10 xs:px-5 pb-40">
-          <div>
+        </motion.div>
+        <motion.div
+          variants={staggerChildren}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          className="lg:mt-28 mt-14 grid lg:grid-cols-3 grid-cols-1 gap-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0  xl:px-[90px] sm:px-10 xs:px-5 pb-40">
+          <motion.div variants={fadeInUp}>
             <h2 className="text-[#222823] text-2xl font-semibold font-primary capitalize leading-9">
               <span className="text-[#a8366f] text-4xl font-semibold font-primary capitalize leading-[54px] mr-2 mt-10">
                 Our mission
@@ -95,8 +127,8 @@ const Page = () => {
               is to transform our company into an admired, customer-friendly,
               and innovative medical solutions provider.
             </h2>
-          </div>
-          <div className="relative">
+          </motion.div>
+          <motion.div variants={fadeInUp} className="relative">
             <Image
               src={About2Img}
               alt="about 2 image"
@@ -104,16 +136,16 @@ const Page = () => {
             />
             <div className="w-[280px] h-[280px] bg-[#f6ebf1] rounded-full absolute -bottom-20 -z-10 -left-32 hidden lg:block" />
             <div className="w-[280px] h-[280px] bg-[#f6ebf1] rounded-full absolute -top-20 -z-10 -right-40 hidden lg:block" />
-          </div>
-          <div className="place-self-end mb-10 ml-4">
+          </motion.div>
+          <motion.div variants={fadeInUp} className="place-self-end mb-10 ml-4">
           <h2 className="text-[#222823] text-2xl font-semibold font-primary capitalize leading-9">
               <span className="text-[#a8366f] text-4xl font-semibold font-primary capitalize leading-[54px] mr-2">
               Safecare
               </span>
               Medical Industries exists to improve the quality of human life by providing affordable, reliable, and innovative products.
             </h2>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </main>
     </>
   );
