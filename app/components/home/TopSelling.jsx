@@ -4,6 +4,7 @@ import Image from "next/image";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { getTopSellingProducts } from "@/app/services/api";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
 const TopSelling = () => {
@@ -39,11 +40,15 @@ const TopSelling = () => {
                   <Skeleton width={150} height={24} className="mt-8" />
                 </div>
               ))
-            : topSellingProducts.map((product) => (
-              <Link href={`/product/${product.slug}`}>
-                <article
+            : topSellingProducts.map((product, index) => (
+              <Link href={`/product/${product.slug}`} key={product.id}>
+                <motion.article
                   className="bg-white py-10 px-6 rounded-xl shadow border border-white-card-border flex flex-col items-center"
-                  key={product.id}
+                  initial={{ opacity: 0, y: 100 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                  viewport={{margin: "-100px"}}
                 >
                   <Image
                     src={`${process.env.NEXT_PUBLIC_API_URL}${product.Image[0].url}`}
@@ -55,7 +60,7 @@ const TopSelling = () => {
                   <h3 className="mt-8 text-center text-light-black text-2xl font-semibold font-primary capitalize">
                     {product.Name}
                   </h3>
-                </article>
+                </motion.article>
                 </Link>
               ))}
         </div>

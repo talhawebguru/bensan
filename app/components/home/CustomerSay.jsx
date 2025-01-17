@@ -1,7 +1,4 @@
 import React from "react";
-import Image from "next/image";
-import Customer1Img from "@/public/images/Customer1.png";
-import CustomerArrow from "@/public/images/CustomerArrow.png";
 import CustomerSaySlider from "./CustomerSaySlider";
  
 const CustomerSay = () => {
