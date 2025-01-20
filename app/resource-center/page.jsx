@@ -5,12 +5,12 @@ import Image from "next/image";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { getProducts, getProductsByCategory } from "@/app/services/api.js";
-import CategoryList from "../components/product/CategoryList";
 import { FaArrowDown, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 import pdfIcon from "@/public/images/pdficon.png";
 import { LuDownload } from "react-icons/lu";
 import { FaFilePdf } from "react-icons/fa";
+import CategoryList from "../components/resource-center/CategoryList";
 
 const Page = () => {
   const [products, setProducts] = useState([]);
@@ -29,7 +29,7 @@ const Page = () => {
         if (selectedCategory === "all-products") {
           data = await getProducts(page, 25, searchQuery);
         } else {
-          data = await getProductsByCategory(selectedCategory, page);
+          data = await getProductsByCategory(selectedCategory, page , 25, searchQuery);
         }
         setProducts(data.data);
         setTotalPages(data.meta.pagination.pageCount);
@@ -62,12 +62,6 @@ const Page = () => {
     event.preventDefault(); // Prevent default form submission
   };
 
-  const truncateTitle = (title, maxLength) => {
-    if (title?.length > maxLength) {
-      return title.substring(0, maxLength) + "...";
-    }
-    return title;
-  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -137,13 +131,14 @@ const Page = () => {
               </div>
             </div>
             <div className="w-full h-[0px] border border-[#eae9e8] mt-6"></div>
+
             <CategoryList
               onCategorySelect={handleCategorySelect}
               selectedCategory={selectedCategory}
             />
           </div>
         </div>
-        <div>
+        <div className="w-full">
           <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 overflow-hidden"
             variants={containerVariants}
@@ -180,7 +175,9 @@ const Page = () => {
                         className="mt-3"
                       />
                       <div className="flex items-center justify-between w-full">
-                        <h2 className="">{product.Name}</h2>
+                        <h2 className="h-10 flex items-center justify-center">
+                          {product.Name}
+                        </h2>
                         <div className="relative">
                           <motion.button
                             className="download-button"
@@ -195,13 +192,13 @@ const Page = () => {
                           </motion.button>
                           {openMenuId === product.id && (
                             <motion.div
-                              className="download-menu absolute z-50 right-0 mt-2 w-48 bg-white border border-black/10 shadow-[-26px_50px_14.100000381469727px_0px_rgba(0,0,0,0.06)] rounded-md"
+                              className="download-menu absolute z-50 right-0 mt-2 w-48 py-1 bg-white border border-black/10 shadow-[-26px_50px_14.100000381469727px_0px_rgba(0,0,0,0.06)] rounded-md"
                               initial={{ opacity: 0, y: -10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.2 }}
                             >
                               <ul>
-                                {product.downloadTDS && (
+                                {product.downloadTDS ? (
                                   <a
                                     href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadTDS.url}`}
                                     rel="noopener noreferrer"
@@ -221,8 +218,20 @@ const Page = () => {
                                       <LuDownload />
                                     </li>
                                   </a>
+                                ) : (
+                                  <li className="px-4 py-2 flex items-center justify-between border-b border-[#dddddd] opacity-50">
+                                    <div className="flex items-center justify-center gap-2">
+                                      <FaFilePdf />
+                                      <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                        TDS
+                                      </p>
+                                    </div>
+                                    <p className="text-sm text-gray-500">
+                                      Not available
+                                    </p>
+                                  </li>
                                 )}
-                                {product.downloadSDS && (
+                                {product.downloadSDS ? (
                                   <a
                                     href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadSDS.url}`}
                                     rel="noopener noreferrer"
@@ -242,8 +251,20 @@ const Page = () => {
                                       <LuDownload />
                                     </li>
                                   </a>
+                                ) : (
+                                  <li className="px-4 py-2 flex items-center justify-between border-b border-[#dddddd] opacity-50">
+                                    <div className="flex items-center justify-center gap-2">
+                                      <FaFilePdf />
+                                      <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                        SDS
+                                      </p>
+                                    </div>
+                                    <p className="text-sm text-gray-500">
+                                      Not available
+                                    </p>
+                                  </li>
                                 )}
-                                {product.downloadCatalog && (
+                                {product.downloadCatalog ? (
                                   <a
                                     href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadCatalog.url}`}
                                     rel="noopener noreferrer"
@@ -253,7 +274,7 @@ const Page = () => {
                                       setOpenMenuId(null); // Close menu after clicking download
                                     }}
                                   >
-                                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between border-b border-[#dddddd]">
+                                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between">
                                       <div className="flex items-center justify-center gap-2">
                                         <FaFilePdf />
                                         <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
@@ -263,6 +284,18 @@ const Page = () => {
                                       <LuDownload />
                                     </li>
                                   </a>
+                                ) : (
+                                  <li className="px-4 py-2 flex items-center justify-between opacity-50">
+                                    <div className="flex items-center justify-center gap-2">
+                                      <FaFilePdf />
+                                      <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                        Catalog
+                                      </p>
+                                    </div>
+                                    <p className="text-sm text-gray-500">
+                                      Not available
+                                    </p>
+                                  </li>
                                 )}
                               </ul>
                             </motion.div>
