@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Skeleton from "react-loading-skeleton";
@@ -10,6 +10,7 @@ import { FaArrowDown, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 import pdfIcon from "@/public/images/pdficon.png";
 import { LuDownload } from "react-icons/lu";
+import { FaFilePdf } from "react-icons/fa";
 
 const Page = () => {
   const [products, setProducts] = useState([]);
@@ -18,6 +19,8 @@ const Page = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [openMenuId, setOpenMenuId] = useState(null);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     const fetchProducts = async (page = 1) => {
@@ -58,6 +61,7 @@ const Page = () => {
   const handleSearchSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission
   };
+
   const truncateTitle = (title, maxLength) => {
     if (title?.length > maxLength) {
       return title.substring(0, maxLength) + "...";
@@ -86,6 +90,25 @@ const Page = () => {
       },
     },
   };
+
+  const handleMenuToggle = (productId) => {
+    setOpenMenuId(openMenuId === productId ? null : productId);
+  };
+
+  useEffect(() => {
+    const handleGlobalClick = (e) => {
+      // Only close if clicking outside any download menu
+      if (
+        !e.target.closest(".download-menu") &&
+        !e.target.closest(".download-button")
+      ) {
+        setOpenMenuId(null);
+      }
+    };
+
+    document.addEventListener("click", handleGlobalClick);
+    return () => document.removeEventListener("click", handleGlobalClick);
+  }, []);
 
   return (
     <>
@@ -149,25 +172,6 @@ const Page = () => {
                     }}
                     className=""
                   >
-                    {/* <Link href={`/product/${product.slug}`}>
-                      <div className="bg-white shadow border border-[#e9ecef] cursor-pointer w-full h-full">
-                        <Image
-                          className="w-full h-64 scale-1 hover:scale-110 object-contain"
-                          src={`${process.env.NEXT_PUBLIC_API_URL}${product.Image[0].url}`}
-                          alt={product.imageAltText || product.Name}
-                          width={256}
-                          height={256}
-                        />
-                        <div className="pt-4 pb-5">
-                          <h4 className="text-base font-semibold text-gray-500 text-center font-primary">
-                            {product.Name}
-                          </h4>
-                          <h4 className="text-xs font-normal text-gray-500 text-center font-primary">
-                            {truncateTitle(product?.title, 35)}
-                          </h4>
-                        </div>
-                      </div>
-                    </Link> */}
                     <div className="px-6 py-8  bg-white shadow-lg flex flex-col items-center justify-center gap-11  border border-[#e9ecef] ">
                       <Image
                         src={pdfIcon}
@@ -177,12 +181,93 @@ const Page = () => {
                       />
                       <div className="flex items-center justify-between w-full">
                         <h2 className="">{product.Name}</h2>
-                        <motion.button
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                        >
-                          <LuDownload />
-                        </motion.button>
+                        <div className="relative">
+                          <motion.button
+                            className="download-button"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleMenuToggle(product.id);
+                            }}
+                          >
+                            <LuDownload />
+                          </motion.button>
+                          {openMenuId === product.id && (
+                            <motion.div
+                              className="download-menu absolute z-50 right-0 mt-2 w-48 bg-white border border-black/10 shadow-[-26px_50px_14.100000381469727px_0px_rgba(0,0,0,0.06)] rounded-md"
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <ul>
+                                {product.downloadTDS && (
+                                  <a
+                                    href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadTDS.url}`}
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setOpenMenuId(null); // Close menu after clicking download
+                                    }}
+                                  >
+                                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between border-b border-[#dddddd]">
+                                      <div className="flex items-center justify-center gap-2">
+                                        <FaFilePdf />
+                                        <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                          TDS
+                                        </p>
+                                      </div>
+                                      <LuDownload />
+                                    </li>
+                                  </a>
+                                )}
+                                {product.downloadSDS && (
+                                  <a
+                                    href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadSDS.url}`}
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setOpenMenuId(null); // Close menu after clicking download
+                                    }}
+                                  >
+                                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between border-b border-[#dddddd]">
+                                      <div className="flex items-center justify-center gap-2">
+                                        <FaFilePdf />
+                                        <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                          SDS
+                                        </p>
+                                      </div>
+                                      <LuDownload />
+                                    </li>
+                                  </a>
+                                )}
+                                {product.downloadCatalog && (
+                                  <a
+                                    href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadCatalog.url}`}
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setOpenMenuId(null); // Close menu after clicking download
+                                    }}
+                                  >
+                                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between border-b border-[#dddddd]">
+                                      <div className="flex items-center justify-center gap-2">
+                                        <FaFilePdf />
+                                        <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                          Catalog
+                                        </p>
+                                      </div>
+                                      <LuDownload />
+                                    </li>
+                                  </a>
+                                )}
+                              </ul>
+                            </motion.div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </motion.div>
