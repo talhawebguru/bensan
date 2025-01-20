@@ -68,14 +68,13 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="#"
-                  aria-label="Home"
+                  href="/who-we-serve"
+                  aria-label="who we serve"
                   className="text-nav-color text-[13px] font-semibold font-primary capitalize"
                 >
                   Who We Serve
                 </Link>
               </li>
-              <li></li>
             </ul>
             <Link href="/" aria-label="Bensan Logo" className="">
               <Image
@@ -83,7 +82,7 @@ const Header = () => {
                 alt="Bensan Logo"
                 aria-label="Bensan Logo"
                 priority
-                className="lg:mr-28"
+                className="lg:mr-16"
               />
             </Link>
             <ul className="items-center gap-11 hidden lg:flex">

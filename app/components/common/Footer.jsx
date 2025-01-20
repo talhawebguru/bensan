@@ -95,7 +95,9 @@ const Footer = () => {
                 </Link>
               </li>
               <li className="text-grey text-base font-normal font-primary">
-                Resource Center
+                <Link href="/resource-center">
+                 Resource Center
+                </Link>
               </li>
             </ul>
           </motion.div>
@@ -106,17 +108,22 @@ const Footer = () => {
               Support
             </h2>
             <ul className="flex flex-col gap-[18px]">
+           
               <li className="text-grey text-base font-normal font-primary">
-                FAQ
+               <Link href="/privacy-policy">
+               Privacy policy
+               </Link>
               </li>
+             
               <li className="text-grey text-base font-normal font-primary">
-                Privacy policy
-              </li>
-              <li className="text-grey text-base font-normal font-primary">
-                Help & support
-              </li>
-              <li className="text-grey text-base font-normal font-primary">
+                <Link href="/cookie-policy">
                 Cookie policy
+                </Link>
+              </li>
+              <li className="text-grey text-base font-normal font-primary">
+                <Link href="/contact">
+                Contact
+                </Link>
               </li>
             </ul>
           </motion.div>
