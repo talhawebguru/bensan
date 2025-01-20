@@ -23,8 +23,8 @@ const Header = () => {
 
   return (
     <>
-   {/* Marquee */}
-   <MarqueeSlider />
+      {/* Marquee */}
+      <MarqueeSlider />
       {/* Navbar start Here */}
 
       <header className="xl:px-[90px] sm:px-10 xs:px-5 xl:pt-[19px] lg:pt-2.5 bg-white">
@@ -45,7 +45,7 @@ const Header = () => {
               />
             </div>
           </div>
-          <hr  className="mt-5 mb-1 border border-black/10 hidden lg:block"/>
+          <hr className="mt-5 mb-1 border border-black/10 hidden lg:block" />
           <nav className="flex justify-between items-center bg-white rounded-xl">
             <ul className="lg:flex items-center gap-11 hidden">
               <li>
@@ -75,6 +75,27 @@ const Header = () => {
                   Who We Serve
                 </Link>
               </li>
+              <li></li>
+            </ul>
+            <Link href="/" aria-label="Bensan Logo" className="">
+              <Image
+                src={Logo}
+                alt="Bensan Logo"
+                aria-label="Bensan Logo"
+                priority
+                className="lg:mr-28"
+              />
+            </Link>
+            <ul className="items-center gap-11 hidden lg:flex">
+              <li>
+                <Link
+                  href="/resource-center"
+                  aria-label="Resource Center"
+                  className="text-nav-color text-[13px] font-semibold font-primary capitalize lg:flex items-center hidden"
+                >
+                  Resource Center
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/contact"
@@ -85,22 +106,7 @@ const Header = () => {
                 </Link>
               </li>
             </ul>
-            <Link href="/" aria-label="Bensan Logo" className="">
-              <Image
-                src={Logo}
-                alt="Bensan Logo"
-                aria-label="Bensan Logo"
-                priority
-                className="lg:mr-60"
-              />
-            </Link>
-            <Link
-                  href="/about"
-                  aria-label="About"
-                  className="text-nav-color text-[13px] font-semibold font-primary capitalize lg:flex items-center hidden"
-                >
-                  Resource Center
-                </Link>
+
             <div className="lg:hidden">
               <button onClick={toggleMenu} className="">
                 {isOpen ? (

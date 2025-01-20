@@ -5,7 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'b832-2-50-148-251.ngrok-free.app',
+        hostname: 'admin.bensano.com',
         port: '',
         pathname: '/**',
       },
