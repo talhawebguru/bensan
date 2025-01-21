@@ -68,3 +68,13 @@ export const getNewArrivalsProduct = async () => {
     throw error;
   }
 };
+
+export const sendEmail = async (formData) => {
+  try {
+    const response = await api.post('/api/contact/send-email', formData);
+    return response.data;
+  } catch (error) {
+    console.error('Error sending email:', error);
+    throw error;
+  }
+};
