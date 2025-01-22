@@ -8,8 +8,9 @@ export async function generateMetadata({ params }) {
   let metaTitle = "Default Title";
   let metaDescription = "Default description";
   let metaRobots = "index, follow";
-  let canonicalUrl = "https://bensan.com/product/" + productslug;
+  let canonicalUrl = "https://bensano.com/product/" + productslug;
   let defaultOgImage;
+  let imageAlt;
 
 
   try {
@@ -19,6 +20,7 @@ export async function generateMetadata({ params }) {
       metaTitle = product.metaTitle || metaTitle;
       metaDescription = product.metaDescripition || metaDescription;
       defaultOgImage = product.Image[0].url;
+      imageAlt = product.Name;
     }
   } catch (error) {
     console.error(`Error fetching product with slug ${productslug}:`, error);
@@ -43,7 +45,7 @@ export async function generateMetadata({ params }) {
           url: `https://admin.bensano.com${defaultOgImage}`, // Replace with your default OG image
           width: 1200,
           height: 630,
-          alt: metaTitle,
+          alt: imageAlt,
         },
       ],
     },
