@@ -46,16 +46,18 @@ const CustomerSaySlider = () => {
     return (
       <>
         <motion.div 
-          initial={{ opacity: 0.3, scale: 0.5 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{
             opacity: 1,
-            scale: 1,
+            y: 0,
             transition: {
-              opacity: { duration: 1, ease: "easeInOut" },
-              scale: { duration: 0.6, ease: "easeInOut" },
+              type: "spring",
+              duration: 1,
+              bounce: 0.4,
+              opacity: { duration: 1.2, delay: 0.8},
             },
           }}
-          viewport={{ margin: "-7%" }}
+          viewport={{ margin: "-5%" }}
           className="relative xl:px-[90px] lg:px-[40px] px-5 2xl:max-w-[1440px] 2xl:mx-auto"
         >
           <Swiper

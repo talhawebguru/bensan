@@ -18,7 +18,7 @@ const RichTextRender = ({ content }) => {
         return (
           <ul key={index}>
             {node.children.map((child, i) => (
-              <li className="list-disc mt-1" key={i}>{child.children.map(renderNode)}</li>
+              <li className="list-disc mt-1.5 ml-4" key={i}>{child.children.map(renderNode)}</li>
             ))}
           </ul>
         );

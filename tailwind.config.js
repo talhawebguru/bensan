@@ -20,6 +20,7 @@ module.exports = {
       'nav-color':"#1f1f1f",
       'black': '#000000',
       'border-divi-gray-300':"#9D9996",
+      'red-color':"#A8366F",
     },
     fontFamily: {
       primary: ['var(--font-open-sans)', 'sans-serif'],

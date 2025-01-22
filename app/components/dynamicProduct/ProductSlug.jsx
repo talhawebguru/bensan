@@ -14,6 +14,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { motion } from "framer-motion";
 import InnerImageZoom from 'react-inner-image-zoom';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css'
+import Popup from "./Popup";
 
 
 
@@ -26,6 +27,8 @@ const Page = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
 
   useEffect(() => {
     if (productslug) {
@@ -174,16 +177,16 @@ const Page = () => {
           >
             <motion.h1 
               variants={contentVariants}
-              className="text-[#a8366f] text-lg font-semibold font-primary capitalize"
+              className="text-[#a8366f] md:text-4xl text-2xl  font-semibold font-primary capitalize"
             >
               {Name}
             </motion.h1>
-            <motion.h3 
+            <motion.h2 
               variants={contentVariants}
-              className="text-[#a8366f] mt-2 text-sm font-semibold font-primary capitalize"
+              className="text-[#a8366f] mt-4 md:text-lg text-base font-semibold font-primary capitalize"
             >
               {title}
-            </motion.h3>
+            </motion.h2>
             <motion.div 
               variants={contentVariants}
               className="text-[#6c757d] text-base font-normal font-primary capitalize leading-normal mt-8"
@@ -240,9 +243,15 @@ const Page = () => {
                 </motion.a>
               )}
             </motion.div>
+            <div className="flex justify-center items-center">
+                  <button onClick={() => setIsPopupOpen(true)} className="w-[204px] h-14 rounded-xl bg-secondary-primary  text-white text-base font-normal font-arial mt-10 xs:mb-10">
+                Request for quote
+                </button>
+              </div>
           </motion.div>
         </motion.div>
       </div>
+      <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} productName={Name}/>
     </motion.div>
   );
 };

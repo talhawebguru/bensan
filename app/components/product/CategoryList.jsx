@@ -53,7 +53,7 @@ const CategoryList = ({ onCategorySelect, selectedCategory }) => {
 
   return (
     <motion.div 
-      className="pb-4 max-h-fit lg:pb-0"
+      className="pb-4 lg:pb-0"
       variants={listVariants}
       initial="hidden"
       animate="visible"

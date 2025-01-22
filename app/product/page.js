@@ -16,6 +16,7 @@ const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showCategories, setShowCategories] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async (page = 1) => {
@@ -85,15 +86,19 @@ const ProductsPage = () => {
     },
   };
 
+  const toggleCategories = () => {
+    setShowCategories(!showCategories);
+  };
+
   return (
     <>
       <hr className="border border-black/10 mt-1 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0" />
-      <h1 className="my-16 text-[#222823] text-4xl font-semibold font-['Open Sans'] capitalize  xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
+      <h1 className="md:my-16 my-10 text-[#222823] text-4xl font-semibold font-primary capitalize  xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
         our Products
       </h1>
-      <div className="flex flex-wrap justify-center md:justify-normal  md:flex-nowrap  gap-10 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 overflow-x-hidden">
-        <div className="flex justify-center md:justify-normal gap-10">
-          <div className="xl:w-[350px] pb-4 h-fit bg-white shadow">
+      <div className="flex flex-wrap justify-center md:justify-normal  md:flex-nowrap  gap-10 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 ">
+        <div className="flex justify-center md:justify-normal gap-10 w-full md:w-auto">
+          <div className="lg:w-[350px] md:w-[300px] pb-4 h-fit bg-white shadow w-full">
             <form className="flex mb-3" onSubmit={handleSearchSubmit}>
               <input
                 type="text"
@@ -103,24 +108,29 @@ const ProductsPage = () => {
                 onChange={handleSearchChange}
               />
             </form>
-            <div className="flex items-center content-center justify-between pt-6 mx-4">
+            <div 
+              className="flex items-center content-center justify-between pt-6 mx-4 cursor-pointer"
+              onClick={toggleCategories}
+            >
               <h2 className="text-divi-gray text-2xl font-normal font-nohemi leading-[28.80px]">
                 Categories
               </h2>
-              <div>
-                <FaArrowDown />
+              <div className="transition-transform duration-300">
+                {showCategories ? <FaArrowDown  /> : <FaArrowDown className="rotate-180"/>}
               </div>
             </div>
             <div className="w-full h-[0px] border border-[#eae9e8] mt-6"></div>
-            <CategoryList
-              onCategorySelect={handleCategorySelect}
-              selectedCategory={selectedCategory}
-            />
+            <div className={`transition-all duration-300 ${showCategories ? 'block' : 'hidden'}`}>
+              <CategoryList
+                onCategorySelect={handleCategorySelect}
+                selectedCategory={selectedCategory}
+              />
+            </div>
           </div>
         </div>
-        <div>
+        <div className="w-full">
           <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 overflow-hidden"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
