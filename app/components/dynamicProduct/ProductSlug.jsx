@@ -132,7 +132,8 @@ const Page = () => {
                 <SwiperSlide key={index} className="flex justify-center items-center">
                   <InnerImageZoom
                     src={`${process.env.NEXT_PUBLIC_API_URL}${img.url}`}
-                    alt={img.alternativeText || `Product image ${index + 1}`}
+                    alt={product.Name || `Product image ${index + 1}`}
+                    imgAttributes={{ alt: product.Name || `Product image ${index + 1}` } }
                     className="!object-contain"
                     width={500}
                     height={500}

@@ -78,3 +78,12 @@ export const sendEmail = async (formData) => {
     throw error;
   }
 };
+export const inquirySendEmail = async (formData) => {
+  try {
+    const response = await api.post('/api/inquiry/send-email', formData);
+    return response.data;
+  } catch (error) {
+    console.error('Error sending email:', error);
+    throw error;
+  }
+};
