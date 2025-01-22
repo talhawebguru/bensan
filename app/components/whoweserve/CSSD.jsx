@@ -42,7 +42,7 @@ const CSSD = () => {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true , amount: 0.5 }}
+        viewport={{ once: true , amount: 0.2 }}
       >
         <motion.div variants={itemVariants}>
           <Image 
@@ -51,7 +51,7 @@ const CSSD = () => {
             variants={imageVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true , amount: 0.5 }}
+            viewport={{ once: true , amount: 0.2 }}
           />
         </motion.div>
         <motion.div className="flex flex-col gap-10" variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true , amount: 0.5 }}>
@@ -69,13 +69,13 @@ const CSSD = () => {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true , amount: 0.5 }}
+        viewport={{ once: true , amount: 0.2 }}
       >
         <motion.div 
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true , amount: 0.5 }}
+          viewport={{ once: true , amount: 0.2 }}
           className="flex flex-col gap-7 px-8 py-11 sm:h-[260px] w-[380px] bg-white shadow-lg transition-all duration-700 hover:bg-[#A8366F] group border border-[#e9ecef] rounded-xl hover:scale-105"
         >
           <h2 className="text-[#222823] transition-colors duration-700 group-hover:text-white text-[22px] font-semibold font-primary capitalize leading-[33px]">
@@ -90,7 +90,7 @@ const CSSD = () => {
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true , amount: 0.5 }}
+          viewport={{ once: true , amount: 0.2 }}
           className="flex flex-col gap-7 px-8 py-11 sm:h-[260px] w-[380px] bg-white shadow-lg transition-all duration-700 hover:bg-[#A8366F] group border border-[#e9ecef] rounded-xl hover:scale-105"
         >
           <h2 className="text-[#222823] transition-colors duration-700 group-hover:text-white text-[22px] font-semibold font-primary capitalize leading-[33px]">
@@ -104,7 +104,7 @@ const CSSD = () => {
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true , amount: 0.5 }}
+          viewport={{ once: true , amount: 0.2 }}
           className="flex flex-col gap-7 px-8 py-11 sm:h-[260px] w-[380px] bg-white shadow-lg transition-all duration-700 hover:bg-[#A8366F] group border border-[#e9ecef] rounded-xl hover:scale-105"
         >
           <h2 className="text-[#222823] transition-colors duration-700 group-hover:text-white text-[22px] font-semibold font-primary capitalize leading-[33px]">
@@ -118,7 +118,7 @@ const CSSD = () => {
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true , amount: 0.5 }}
+          viewport={{ once: true , amount: 0.2 }}
           className="flex flex-col gap-7 px-8 py-11 sm:h-[260px] w-[380px] bg-white shadow-lg transition-all duration-700 hover:bg-[#A8366F] group border border-[#e9ecef] rounded-xl hover:scale-105"
         >
           <h2 className="text-[#222823] transition-colors duration-700 group-hover:text-white text-[22px] font-semibold font-primary capitalize leading-[33px]">
@@ -132,7 +132,7 @@ const CSSD = () => {
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true , amount: 0.5 }}
+          viewport={{ once: true , amount: 0.2 }}
           className="flex flex-col gap-7 px-8 py-11 sm:h-[260px] w-[380px] bg-white shadow-lg transition-all duration-700 hover:bg-[#A8366F] group border border-[#e9ecef] rounded-xl hover:scale-105"
         >
           <h2 className="text-[#222823] transition-colors duration-700 group-hover:text-white text-[22px] font-semibold font-primary capitalize leading-[33px]">

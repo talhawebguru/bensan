@@ -77,7 +77,7 @@ const CustomerSaySlider = () => {
                 <div className="grid grid-cols-12">
                   <div className="lg:col-span-5 col-span-12 relative place-items-start place-content-start">
                     <Image src={Customer1Img} alt="Customer1" className="place-self-start text-left" />
-                    <div className="absolute xl:w-[300px] left-[60%] bottom-20 translate-x-[-50%] translate-y-[50%] p-5 px-7 bg-white rounded-xl shadow flex-col justify-center items-center gap-2.5 flex">
+                    <div className="absolute xl:w-[300px] w-[280px] left-[60%]  bottom-20 translate-x-[-50%] translate-y-[50%] p-5 px-7 bg-white rounded-xl shadow flex-col justify-center items-center gap-2.5 flex">
                       <h2 className="text-light-black text-2xl font-semibold font-secondary">
                         {testimonial.name}
                       </h2>
@@ -87,10 +87,10 @@ const CustomerSaySlider = () => {
                     </div>
                   </div>
                   <div className="lg:col-span-7 col-span-12 place-content-start place-items-start">
-                    <h2 className="text-[#222823] text-4xl font-semibold font-primary leading-[66px] text-left">
+                    <h2 className="text-[#222823] text-2xl sm:text-4xl font-semibold font-primary leading-[66px] text-left">
                       What our Customers Say?
                     </h2>
-                    <p className="text-[#6c757d] text-2xl font-normal font-primary leading-9 text-left">
+                    <p className="text-[#6c757d] text-lg sm:text-2xl font-normal font-primary leading-9 text-left">
                       {testimonial.testimonial}
                     </p>
                   </div>
@@ -100,7 +100,7 @@ const CustomerSaySlider = () => {
           </Swiper>
 
           <div
-            className="w-[63px] hidden h-[63px] absolute right-20 bottom-0 z-20 sm:block"
+            className="w-[63px] hidden h-[63px] absolute right-20 lg:bottom-0 -bottom-20 z-20 sm:block"
             onClick={handlePrevSlide}
           >
             <div className="w-14 h-14 bg-secondary-primary flex items-center justify-center rounded-md shadow-lg hover:shadow-2xl cursor-pointer transition duration-300 group">
@@ -111,10 +111,10 @@ const CustomerSaySlider = () => {
             </div>
           </div>
           <div
-            className="w-[63px] h-[63px] absolute right-0 bottom-0 z-20 hidden sm:block"
+            className="w-[63px] h-[63px] absolute right-0 lg:bottom-0 -bottom-20 z-20 hidden sm:block"
             onClick={handleNextSlide}
           >
-            <div className="w-14 h-14 bg-secondary-primary flex items-center justify-center rounded-md shadow-lg hover:shadow-2xl cursor-pointertransition duration-300 group">
+            <div className="w-14 h-14 bg-secondary-primary flex items-center justify-center rounded-md shadow-lg hover:shadow-2xl cursor-pointer transition duration-300 group">
               <GoArrowLeft
                 className="text-white group-hover:text-white transition duration-300 -rotate-180"
                 size={22}

@@ -33,7 +33,7 @@ const Dental = () => {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.5 }}
+        viewport={{ once: true, amount: 0.2 }}
       >
         <Image
           src={dental}
@@ -46,7 +46,7 @@ const Dental = () => {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.5 }}
+        viewport={{ once: true, amount: 0.2 }}
       >
         <motion.h1
           variants={itemVariants}

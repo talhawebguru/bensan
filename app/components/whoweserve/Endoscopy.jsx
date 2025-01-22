@@ -41,7 +41,7 @@ const Endoscopy = () => {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true , amount: 0.5 }}
+        viewport={{ once: true , amount: 0.2 }}
       >
         <motion.div variants={itemVariants}>
           <Image 
@@ -50,11 +50,11 @@ const Endoscopy = () => {
             variants={imageVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true , amount: 0.5 }}
+            viewport={{ once: true , amount: 0.2 }}
           />
         </motion.div>
         <motion.div className="flex flex-col gap-10" variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true , amount: 0.5 }}>
-          <h2 className="text-[#222823] border-l-4 border-secondary-primary pl-2 text-4xl font-semibold font-primary capitalize">
+          <h2 className="text-[#222823] border-l-4 border-secondary-primary pl-2 text-2xl sm:text-4xl font-semibold font-primary capitalize">
           Endoscopy / Gastroenterology
           </h2>
           <p className="sm:w-[541px] text-[#222823] text-lg font-normal font-primary leading-[27px]">
