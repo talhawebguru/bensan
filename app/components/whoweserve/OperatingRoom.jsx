@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import whoWeServe from "@/public/images/whoweserve.png"
+import whoWeServeImg from "@/public/images/whoWeServeImg.png"
 import opr1 from "@/public/images/opr1.png"
 import opr2 from "@/public/images/opr2.png"
 import opr3 from "@/public/images/opr3.png"
@@ -29,10 +29,10 @@ const OperatingRoom = () => {
           transition={{ duration: 0.7 }}
         >
           <Image 
-            src={whoWeServe} 
+            src={whoWeServeImg} 
             alt="Operating Room Solutions" 
             className="w-full rounded-lg shadow-md"
-            priority
+            priority={true}
           />
         </motion.div>
 

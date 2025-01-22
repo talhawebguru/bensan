@@ -2,8 +2,6 @@ import React from "react";
 import * as motion from "framer-motion/client";
 import cssd1 from "@/public/images/cssd1.png";
 import Image from "next/image";
-import patient from "@/public/images/patient.png";
-import endoscopy from "@/public/images/endoscopy.png";
 
 const CSSD = () => {
   const containerVariants = {
@@ -143,14 +141,6 @@ const CSSD = () => {
           <p className="text-[#222823] transition-colors duration-700 group-hover:text-white text-lg font-normal font-primary leading-[27px]">
           We offer packaging and labeling products, including labels, tape, and bags, to keep your instruments organized.
           </p>
-        </motion.div>
-      </motion.div>
-      <motion.div className="flex flex-wrap justify-center items-center gap-10 mt-20 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
-        <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true , amount: 0.5 }}>
-            <Image src={patient} alt="patient" variants={imageVariants}  />
-        </motion.div>
-        <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true , amount: 0.5 }}>
-            <Image src={endoscopy} alt="endoscopy" variants={imageVariants} />
         </motion.div>
       </motion.div>
     </>

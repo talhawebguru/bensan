@@ -6,6 +6,7 @@ export async function generateMetadata({ params }) {
   const { productslug } = params;
   let metaTitle = "Default Title";
   let metaDescription = "Default description";
+  let metaRobots = "noindex, nofollow";
 
   try {
     const data = await getProductBySlug(productslug);
@@ -21,6 +22,7 @@ export async function generateMetadata({ params }) {
   return {
     title: metaTitle,
     description: metaDescription,
+    robots: metaRobots,
   };
 }
 const page = ({params}) => {
