@@ -80,7 +80,7 @@ const CategoryList = ({ onCategorySelect, selectedCategory }) => {
             ></div>
           </div>
           <div>
-            <h2 className="text-divi-gray-300 text-base font-normal font-primary leading-normal">
+            <h2 className="text-[#716b66] text-base font-normal font-primary leading-normal">
               {category.name}
             </h2>
           </div>
