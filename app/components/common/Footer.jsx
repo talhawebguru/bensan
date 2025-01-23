@@ -46,6 +46,7 @@ const Footer = () => {
               src={Logo}
               alt="Bensan Logo"
               aria-label="Bensan Logo"
+              title="Bensan Logo"
               priority
             />
             <p className="text-light-black text-lg font-semibold font-primary w-auto">

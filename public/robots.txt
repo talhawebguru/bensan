@@ -1,0 +1,24 @@
+User-agent: *
+# Block internal search results and query parameters
+Disallow: /category/search/
+Disallow: /category/*?q=
+Disallow: /*?page=
+Disallow: /search
+
+# Block non-essential areas
+Disallow: /admin/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /login/
+Disallow: /register/
+Disallow: /wishlist/
+Disallow: /account/
+Disallow: /api/
+
+# Allow essential pages
+Allow: /product/
+Allow: /category/
+Allow: /
+
+# Sitemap location
+Sitemap: https://bensano.com/sitemap.xml

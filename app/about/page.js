@@ -41,6 +41,7 @@ const Page = () => {
             src={doubleLine}
             alt="doubleLine"
             aria-label="Double Line"
+            title="Line"
             className="absolute top-12 left-[45%] transform -translate-x-1/2"
           />
         </motion.div>
@@ -81,7 +82,9 @@ const Page = () => {
           <motion.div variants={fadeInUp} className="h-full relative">
             <Image
               src={About1Img}
-              alt="about 1 image"
+              alt="Doctor Reading"
+              aria-label="Doctor Reading"
+              title="Doctor Reading Image"
               className="h-[100%] object-cover w-full"
             />
             <div className="lg:w-[419px] lg:h-[203px] p-6 bg-[#a8366f] rounded-xl absolute lg:left-[14%] lg:-bottom-14 bottom-0 text-center text-white text-base font-normal font-primary capitalize leading-normal">
@@ -110,6 +113,7 @@ const Page = () => {
             src={doubleLine}
             alt="doubleLine"
             aria-label="Double Line"
+            title="Line"
             className="absolute top-12 left-[37%] transform -translate-x-1/2"
           />
         </motion.div>
@@ -131,7 +135,9 @@ const Page = () => {
           <motion.div variants={fadeInUp} className="relative">
             <Image
               src={About2Img}
-              alt="about 2 image"
+              alt="about 2 Doctors"
+              aria-label="About 2 Doctor"
+              title="About 2 "
               className=" object-cover w-full"
             />
             <div className="w-[280px] h-[280px] bg-[#f6ebf1] rounded-full absolute -bottom-20 -z-10 -left-32 hidden lg:block" />

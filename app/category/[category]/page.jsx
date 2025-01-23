@@ -160,6 +160,8 @@ const CategoryPage = ({ params }) => {
                           className="w-full h-64 scale-1 hover:scale-110 object-contain"
                           src={`${process.env.NEXT_PUBLIC_API_URL}${product.Image[0].url}`}
                           alt={product.imageAltText || product.Name}
+                          aria-label={product.imageAltText || product.Name}
+                          title={product.imageAltText || product.Name}
                           width={256}
                           height={256}
                         />
