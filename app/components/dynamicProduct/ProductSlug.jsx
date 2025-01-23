@@ -163,7 +163,7 @@ const Page = () => {
                     imgAttributes={{
                       alt: product.Name || `Product image ${index + 1}`,
                     }}
-                    className="aspect-[1/1] flex justify-center items-center"
+                    className="sm:aspect-[1/1] flex justify-center items-center"
                     width={500}
                     height={550}
                     zoomType="hover"
@@ -213,7 +213,7 @@ const Page = () => {
             </motion.h3>
             <motion.h1
               variants={contentVariants}
-              className="text-black text-[32px] font-semibold font-primary capitalize mt-3"
+              className="text-black text-[32px] font-semibold font-primary capitalize "
             >
               {Name}
             </motion.h1>
@@ -240,119 +240,119 @@ const Page = () => {
                 Request for quote
               </button>
               <div className="relative">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleMenuToggle();
-                }}
-                className="download-button w-[129px] h-[38px] bg-[#e1e1e1] rounded justify-center items-center gap-3 inline-flex text-black text-base font-semibold font-primary capitalize"
-              >
-                <BsDownload /> Resource
-              </button>
-              {isMenuOpen && (
-                <motion.div
-                  className="download-menu absolute z-50 left-0 top-9 translate-x-[-50%] translate-y-[-50%] mt-2 w-48 py-1 bg-white border border-black/10 shadow-[-26px_50px_14.100000381469727px_0px_rgba(0,0,0,0.06)] rounded-md"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.2 }}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMenuToggle();
+                  }}
+                  className="download-button w-[129px] h-[38px] bg-[#e1e1e1] rounded justify-center items-center gap-3 inline-flex text-black text-base font-semibold font-primary capitalize"
                 >
-                  <ul>
-                    {product.downloadTDS ? (
-                      <a
-                        href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadTDS.url}`}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setIsMenuOpen(false); // Close menu after clicking download
-                        }}
-                      >
-                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between border-b border-[#dddddd]">
+                  <BsDownload /> Resource
+                </button>
+                {isMenuOpen && (
+                  <motion.div
+                    className="download-menu absolute z-50 left-0 top-9 translate-x-[-50%] translate-y-[-50%] mt-2 w-48 py-1 bg-white border border-black/10 shadow-[-26px_50px_14.100000381469727px_0px_rgba(0,0,0,0.06)] rounded-md"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ul>
+                      {product.downloadTDS ? (
+                        <a
+                          href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadTDS.url}`}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setIsMenuOpen(false); // Close menu after clicking download
+                          }}
+                        >
+                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between border-b border-[#dddddd]">
+                            <div className="flex items-center justify-center gap-2">
+                              <FaFilePdf />
+                              <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                TDS
+                              </p>
+                            </div>
+                            <LuDownload />
+                          </li>
+                        </a>
+                      ) : (
+                        <li className="px-4 py-2 flex items-center justify-between border-b border-[#dddddd] opacity-50">
                           <div className="flex items-center justify-center gap-2">
                             <FaFilePdf />
                             <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
                               TDS
                             </p>
                           </div>
-                          <LuDownload />
+                          <p className="text-sm text-gray-500">Not available</p>
                         </li>
-                      </a>
-                    ) : (
-                      <li className="px-4 py-2 flex items-center justify-between border-b border-[#dddddd] opacity-50">
-                        <div className="flex items-center justify-center gap-2">
-                          <FaFilePdf />
-                          <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
-                            TDS
-                          </p>
-                        </div>
-                        <p className="text-sm text-gray-500">Not available</p>
-                      </li>
-                    )}
-                    {product.downloadSDS ? (
-                      <a
-                        href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadSDS.url}`}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setIsMenuOpen(false); // Close menu after clicking download
-                        }}
-                      >
-                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between border-b border-[#dddddd]">
+                      )}
+                      {product.downloadSDS ? (
+                        <a
+                          href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadSDS.url}`}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setIsMenuOpen(false); // Close menu after clicking download
+                          }}
+                        >
+                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between border-b border-[#dddddd]">
+                            <div className="flex items-center justify-center gap-2">
+                              <FaFilePdf />
+                              <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                SDS
+                              </p>
+                            </div>
+                            <LuDownload />
+                          </li>
+                        </a>
+                      ) : (
+                        <li className="px-4 py-2 flex items-center justify-between border-b border-[#dddddd] opacity-50">
                           <div className="flex items-center justify-center gap-2">
                             <FaFilePdf />
                             <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
                               SDS
                             </p>
                           </div>
-                          <LuDownload />
+                          <p className="text-sm text-gray-500">Not available</p>
                         </li>
-                      </a>
-                    ) : (
-                      <li className="px-4 py-2 flex items-center justify-between border-b border-[#dddddd] opacity-50">
-                        <div className="flex items-center justify-center gap-2">
-                          <FaFilePdf />
-                          <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
-                            SDS
-                          </p>
-                        </div>
-                        <p className="text-sm text-gray-500">Not available</p>
-                      </li>
-                    )}
-                    {product.downloadCatalog ? (
-                      <a
-                        href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadCatalog.url}`}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setIsMenuOpen(false); // Close menu after clicking download
-                        }}
-                      >
-                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between">
+                      )}
+                      {product.downloadCatalog ? (
+                        <a
+                          href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadCatalog.url}`}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setIsMenuOpen(false); // Close menu after clicking download
+                          }}
+                        >
+                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between">
+                            <div className="flex items-center justify-center gap-2">
+                              <FaFilePdf />
+                              <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                Catalog
+                              </p>
+                            </div>
+                            <LuDownload />
+                          </li>
+                        </a>
+                      ) : (
+                        <li className="px-4 py-2 flex items-center justify-between opacity-50">
                           <div className="flex items-center justify-center gap-2">
                             <FaFilePdf />
                             <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
                               Catalog
                             </p>
                           </div>
-                          <LuDownload />
+                          <p className="text-sm text-gray-500">Not available</p>
                         </li>
-                      </a>
-                    ) : (
-                      <li className="px-4 py-2 flex items-center justify-between opacity-50">
-                        <div className="flex items-center justify-center gap-2">
-                          <FaFilePdf />
-                          <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
-                            Catalog
-                          </p>
-                        </div>
-                        <p className="text-sm text-gray-500">Not available</p>
-                      </li>
-                    )}
-                  </ul>
-                </motion.div>
-              )}
+                      )}
+                    </ul>
+                  </motion.div>
+                )}
               </div>
             </motion.div>
           </motion.div>
