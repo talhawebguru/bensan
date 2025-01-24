@@ -168,7 +168,7 @@ const ProductsPage = () => {
                             {product.Name}
                           </h4>
                           <h4 className="text-center text-[#6c757d] text-sm font-normal font-primary capitalize mt-2.5">
-                            {truncateTitle(product?.title, 35)}
+                            {truncateTitle(product?.title, 30)}
                           </h4>
                         </div>
                       </div>
