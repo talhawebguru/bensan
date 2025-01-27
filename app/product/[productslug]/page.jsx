@@ -59,6 +59,25 @@ export async function generateMetadata({ params }) {
 }
 
 
+export async function getStaticPaths() {
+  try {
+    const data = await getProducts(1, 100); // Fetch all products
+    const paths = data.data.map((product) => ({
+      params: { productslug: product.slug },
+    }));
+
+    return {
+      paths,
+      fallback: false, // Return 404 for paths not returned by getStaticPaths
+    };
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    return {
+      paths: [],
+      fallback: false,
+    };
+  }
+}
 const page = () => {
   return (
     <>
