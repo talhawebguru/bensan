@@ -18,8 +18,8 @@ const syne = Syne({
 });
 
 export const metadata = {
-  title: "Bensan Home-Page",
-  description: "Safe Care Technology",
+  title: "Revolutionizing Infection Control for a Safer Tomorrow",
+  description: "Bensan provides trusted, high-performance products tailored to modern healthcare, ensuring effective infection control and a safer future.",
 };
 
 export default function RootLayout({ children }) {
