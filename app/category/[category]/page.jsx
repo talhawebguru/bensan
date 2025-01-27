@@ -5,23 +5,21 @@ import Link from "next/link";
 import Image from "next/image";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import {getProducts, getProductsByCategory } from "@/app/services/api";
+import { getProducts, getProductsByCategory } from "@/app/services/api.js";
 import CategoryList from "../../components/product/CategoryList";
 import { FaArrowDown, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const CategoryPage = ({ params }) => {
+const CategoryPage= ({params}) => {
   const router = useRouter();
   const { category } = params;
-
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [showCategories, setShowCategories] = useState(true);
-
-
+  
   useEffect(() => {
     const fetchProducts = async (page = 1) => {
       setLoading(true); // Only set loading for products
@@ -57,7 +55,6 @@ const CategoryPage = ({ params }) => {
   const handleSearchSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission
   };
-
   const truncateTitle = (title, maxLength) => {
     if (title?.length > maxLength) {
       return title.substring(0, maxLength) + "...";
@@ -92,11 +89,11 @@ const CategoryPage = ({ params }) => {
 
   return (
     <>
-    <hr className="border border-black/10 mt-1 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0" />
-      <h1 className="md:my-16 my-10 text-[#222823] text-4xl font-semibold font-primary capitalize xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
+      <hr className="border border-black/10 mt-1 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0" />
+      <h1 className="md:my-16 my-10 text-[#222823] text-4xl font-semibold font-primary capitalize  xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
         our Products
       </h1>
-      <div className="flex flex-wrap justify-center md:justify-normal  md:flex-nowrap  gap-10 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
+      <div className="flex flex-wrap justify-center md:justify-normal  md:flex-nowrap  gap-10 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 ">
         <div className="flex justify-center md:justify-normal gap-10 w-full md:w-auto">
           <div className="lg:w-[350px] md:w-[300px] pb-4 h-fit bg-white shadow w-full">
             <form className="flex mb-3" onSubmit={handleSearchSubmit}>
@@ -121,10 +118,10 @@ const CategoryPage = ({ params }) => {
             </div>
             <div className="w-full h-[0px] border border-[#eae9e8] mt-6"></div>
             <div className={`transition-all duration-300 ${showCategories ? 'block' : 'hidden'}`}>
-            <CategoryList
-              onCategorySelect={(categorySlug) => router.push(`/category/${categorySlug}`)}
-              selectedCategory={category}
-            />
+              <CategoryList
+                 onCategorySelect={(categorySlug) => router.push(`/category/${categorySlug}`)}
+                 selectedCategory={category}
+              />
             </div>
           </div>
         </div>
@@ -160,8 +157,6 @@ const CategoryPage = ({ params }) => {
                           className="w-full h-64 scale-1 hover:scale-110 object-contain"
                           src={`${process.env.NEXT_PUBLIC_API_URL}${product.Image[0].url}`}
                           alt={product.imageAltText || product.Name}
-                          aria-label={product.imageAltText || product.Name}
-                          title={product.imageAltText || product.Name}
                           width={256}
                           height={256}
                         />
@@ -169,8 +164,8 @@ const CategoryPage = ({ params }) => {
                           <h4 className="text-base font-semibold text-gray-500 text-center font-primary">
                             {product.Name}
                           </h4>
-                          <h4 className="text-xs font-normal text-gray-500 text-center font-primary">
-                            {truncateTitle(product?.title, 35)}
+                          <h4 className="text-center text-[#6c757d] text-sm font-normal font-primary capitalize mt-2.5">
+                            {truncateTitle(product?.title, 30)}
                           </h4>
                         </div>
                       </div>
