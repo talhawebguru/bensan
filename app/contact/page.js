@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { AiFillInstagram } from "react-icons/ai";
@@ -10,7 +10,6 @@ import SocialMedia from "../components/common/SocialMedia";
 import ContactInfo from "../components/common/ContactInfo";
 import { sendEmail } from "@/app/services/api";
 
-
 const page = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -21,6 +20,7 @@ const page = () => {
   });
 
   const [status, setStatus] = useState('');
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,11 +33,16 @@ const page = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('Sending...');
+    setSubmitStatus(null);
 
     try {
       const response = await sendEmail(formData);
       if (response.success) {
-        setStatus('Email sent successfully!');
+        setStatus("Thank you for Contacting Us! We'll get back to you soon.");
+        setSubmitStatus({
+          type: "success",
+          message: "Thank you for Contacting Us! We'll get back to you soon.",
+        });
         setFormData({
           name: '',
           email: '',
@@ -45,12 +50,23 @@ const page = () => {
           subject: '',
           message: ''
         });
+        setTimeout(() => {
+          setSubmitStatus(null);
+        }, 3000);
       } else {
         setStatus('Failed to send email. Please try again.');
+        setSubmitStatus({
+          type: "error",
+          message: "Failed to send email. Please try again.",
+        });
       }
     } catch (error) {
       console.error('Error sending email:', error);
       setStatus('Failed to send email. Please try again.');
+      setSubmitStatus({
+        type: "error",
+        message: "Failed to send email. Please try again.",
+      });
     }
   };
 
@@ -136,7 +152,8 @@ const page = () => {
               transition={{ delay: 0.6, duration: 0.5 }}
               className="lg:col-span-9 col-span-12 xl:ml-20"
             >
-              <motion.h2
+            <div>
+            <motion.h2
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
@@ -144,6 +161,19 @@ const page = () => {
               >
                 Send us your query anytime!
               </motion.h2>
+              {submitStatus && (
+                <div
+                  className={`mb-4 p-4 rounded-md text-center xl:mx-20 lg:mx-10 sm:mx-5 mt-4 ${
+                    submitStatus.type === "success"
+                      ? "bg-[#f0fdf4] text-[#15803d] font-primary font-semibold border border-[#bbf7d0]"
+                      : "bg-[#fef2f2] text-red-color border border-red-color"
+                  }`}
+                >
+                  {submitStatus.message}
+                </div>
+              )}
+            </div>
+             
               <motion.form
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -206,7 +236,6 @@ const page = () => {
                   </div>
                 </motion.button>
               </motion.form>
-              {status && <p className="mt-4 text-center text-[#222823]">{status}</p>}
             </motion.div>
           </motion.div>
         </div>

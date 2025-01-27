@@ -47,7 +47,7 @@ const Popup = ({ isOpen, onClose, productName }) => {
           productName: "",
         });
         setSubmitStatus(null);
-      }, 9000);
+      }, 4000);
     } catch (error) {
       setSubmitStatus({
         type: "error",
