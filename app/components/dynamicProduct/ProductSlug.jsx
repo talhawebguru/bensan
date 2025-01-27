@@ -124,9 +124,6 @@ const Page = () => {
     title,
     Descripition,
     Image: Images,
-    downloadCatalog,
-    downloadTDS,
-    downloadSDS,
   } = product;
 
   return (
@@ -142,7 +139,7 @@ const Page = () => {
       <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
         <motion.div
           variants={contentVariants}
-          className="grid grid-cols-1 h-auto lg:grid-cols-2 gap-10 md:px-[62px] px-5 py-10 bg-white rounded-xl shadow border border-[#e9ecef] mb-20"
+          className="grid grid-cols-1 h-auto lg:grid-cols-2 gap-10 md:px-[62px] px-5 py-10 rounded-xl  mb-20"
         >
           <motion.div variants={contentVariants} className="">
             <Swiper

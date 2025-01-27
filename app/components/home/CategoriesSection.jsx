@@ -12,7 +12,7 @@ const CategoriesSection = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ margin: "-100px" }}
+        viewport={{ margin: "0px 0px -5% 0px" }}
         transition={{ duration: 0.5 }}
         className="flex justify-between items-center"
       >
