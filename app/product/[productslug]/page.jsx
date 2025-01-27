@@ -1,6 +1,6 @@
 import React from "react";
 import ProductSlug from "@/app/components/dynamicProduct/ProductSlug";
-import { getProductBySlug } from "@/app/services/api";
+import {getProducts, getProductBySlug } from "@/app/services/api";
 
 
 export async function generateMetadata({ params }) {
