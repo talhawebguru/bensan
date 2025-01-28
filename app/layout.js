@@ -52,7 +52,6 @@ export default function RootLayout({ children }) {
         <CategoryProvider>{children}</CategoryProvider>
         <Footer />
       </body>
-      <script src="https://analytics.ahrefs.com/analytics.js" data-key="8qmz7wxCQsRNm7sjTRJlNQ" async></script>
     </html>
   );
 }
