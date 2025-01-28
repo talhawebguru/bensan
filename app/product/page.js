@@ -186,6 +186,7 @@ const ProductsPage = () => {
               currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
             }`}
             onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+            rel="prev"
           >
             <FaAngleLeft />
           </div>
@@ -211,6 +212,7 @@ const ProductsPage = () => {
             onClick={() =>
               currentPage < totalPages && handlePageChange(currentPage + 1)
             }
+             rel="next"
           >
             <FaAngleRight />
           </div>
