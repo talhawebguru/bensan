@@ -114,7 +114,7 @@ const Page = ({params}) => {
   }
 
   if (!product) {
-    return <div>Product not found</div>;
+    return <div>Product not found try another</div>;
   }
 
   const {
