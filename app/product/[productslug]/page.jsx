@@ -5,8 +5,8 @@ import {getProducts, getProductBySlug } from "@/app/services/api";
 
 export async function generateMetadata({ params }) {
   const { productslug } = params;
-  let metaTitle = "Default Title";
-  let metaDescription = "Default description";
+  let metaTitle;
+  let metaDescription;
   let metaRobots = "index, follow";
   let canonicalUrl = "https://bensano.com/product/" + productslug;
   let defaultOgImage;
@@ -17,8 +17,8 @@ export async function generateMetadata({ params }) {
     const data = await getProductBySlug(productslug);
     const product = data.data[0];
     if (product) {
-      metaTitle = product.metaTitle || metaTitle;
-      metaDescription = product.metaDescripition || metaDescription;
+      metaTitle = product.metaTitle;
+      metaDescription = product.metaDescripition;
       defaultOgImage = product.Image[0].url;
       imageAlt = product.Name;
     }
