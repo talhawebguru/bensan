@@ -18,7 +18,7 @@ const syne = Syne({
 });
 
 export const metadata = {
-  title: "Revolutionizing Infection Control for a Safer Tomorrow",
+  title: "Bensan | Revolutionizing Infection Control for Safer Tomorrow",
   description: "Bensan provides trusted, high-performance products tailored to modern healthcare, ensuring effective infection control and a safer future.",
 };
 

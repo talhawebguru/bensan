@@ -5,6 +5,15 @@ import About1Img from "@/public/images/about1.png";
 import About2Img from "@/public/images/about2.png";
 import * as motion from "framer-motion/client"
 
+export const metadata = {
+  title: "About Us | Safecare Medical Industries - Building Safer Healthcare",
+  description: "Learn about Safecare Medical Industries, established in 2016 by Bin Ali Group. We manufacture premium medical and dental infection control products under the Bensan and Denfiz brands, serving healthcare facilities globally.",
+  alternates: {
+    canonical: 'https://bensano.com/about',
+  },
+};
+
+
 const Page = () => {
   // Add animation variants
   const fadeInUp = {
@@ -30,13 +39,13 @@ const Page = () => {
           whileInView="animate"
           viewport={{ once: true }}
           className="relative flex justify-center mt-16 md:mt-32">
-          <h2 className="w-full max-w-[923px] text-center px-4  text-[#222823] text-2xl md:text-4xl font-semibold font-primary capitalize">
+          <h1 className="w-full max-w-[923px] text-center px-4  text-[#222823] text-2xl md:text-4xl font-semibold font-primary capitalize">
             about
             <span className="block md:inline mx-3 text-[#a8366f] text-2xl md:text-4xl font-semibold font-primary capitalize">
               Safecare
             </span>
             Medical Industries
-          </h2>
+          </h1>
           <Image
             src={doubleLine}
             alt="doubleLine"

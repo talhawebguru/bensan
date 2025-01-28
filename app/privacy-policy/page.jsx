@@ -1,6 +1,14 @@
 import React from "react";
 import * as motion from "framer-motion/client";
 
+export const metadata = {
+  title: "Privacy Policy | Bensan by Safecare Industry",
+  description: "Explore the Privacy Policy of Bensan by Safecare Industry. Learn how we collect, use, store, and share your information, ensuring transparency and protecting your rights.",
+  alternates: {
+    canonical: 'https://bensano.com/privacy-policy',
+  },
+};
+
 const page = () => {
   return (
     <motion.div

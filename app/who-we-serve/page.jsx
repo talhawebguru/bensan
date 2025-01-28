@@ -6,6 +6,14 @@ import CustomerSaySlider from '../components/home/CustomerSaySlider'
 import GPA from '../components/whoweserve/GPA'
 import Endoscopy from '../components/whoweserve/Endoscopy'
 
+export const metadata = {
+  title: "Who We Serve | Bensan Infection Control Solutions",
+  description: "Bensan serves hospitals, dental clinics, endoscopy units, operating rooms, CSSD, and patient areas with advanced infection control solutions for safety and hygiene.",
+  alternates: {
+    canonical: 'https://bensano.com/who-we-serve',
+  },
+};
+
 const page = () => {
   return (
     <>

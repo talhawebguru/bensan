@@ -1,6 +1,14 @@
 import React from 'react'
 import * as motion from "framer-motion/client"
 
+export const metadata = {
+  title: "Cookie Policy | Bensan by Safecare Industry",
+  description: "Discover how Bensan by Safecare Industry uses cookies on our website. Learn about your rights, cookie types, and how to manage preferences for a seamless experience.",
+  alternates: {
+    canonical: 'https://bensano.com/cookie-policy',
+  },
+};
+
 const page = () => {
   return (
     <motion.div 

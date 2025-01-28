@@ -13,10 +13,10 @@ Disallow: /login/
 Disallow: /register/
 Disallow: /wishlist/
 Disallow: /account/
-Disallow: /api/
 
 # Allow essential pages
 Allow: /product/
+Allow: /product/*
 Allow: /category/
 Allow: /
 
