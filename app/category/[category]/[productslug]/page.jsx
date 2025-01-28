@@ -3,11 +3,11 @@ import CategoryProductSlug from "@/app/components/dynamicProduct/CategoryProduct
 import { getProducts,getProductBySlug } from "@/app/services/api";
 
 export async function generateMetadata({ params }) {
-  const { category,productslug } = params;
+  const {category , productslug } = params;
   let metaTitle;
   let metaDescription;
   let metaRobots = "noindex, nofollow";
-  let canonicalUrl = `https://bensano.com/${category}/${productslug}`;
+  let canonicalUrl = `https://bensano.com/category/${category}/${productslug}`;
   let defaultOgImage;
   let imageAlt;
 
