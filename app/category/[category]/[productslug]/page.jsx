@@ -1,6 +1,6 @@
 import React from "react";
 import CategoryProductSlug from "@/app/components/dynamicProduct/CategoryProductSlug";
-import { getProducts,getProductBySlug } from "@/app/services/api";
+import { getProducts,getProductBySlug,getCategories,getProductsByCategory } from "@/app/services/api";
 
 export async function generateMetadata({ params }) {
   const {category , productslug } = params;
@@ -58,23 +58,36 @@ export async function generateMetadata({ params }) {
 
 export async function getStaticPaths() {
   try {
-    const data = await getProducts(1, 100); // Fetch all products
-    const paths = data.data.map((product) => ({
-      params: { productslug: product.slug },
-    }));
+    const categoriesData = await getCategories();
+    const categories = categoriesData.data;
+
+    const paths = [];
+
+    for (const category of categories) {
+      const productsData = await getProductsByCategory(category.slug, 1, 100); // Fetch all products for each category
+      const products = productsData.data;
+
+      products.forEach((product) => {
+        paths.push({
+          params: { category: category.slug, productslug: product.slug },
+        });
+      });
+    }
 
     return {
       paths,
       fallback: false, // Return 404 for paths not returned by getStaticPaths
     };
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error('Error fetching categories or products:', error);
     return {
       paths: [],
       fallback: false,
     };
   }
 }
+
+
 const page = ({params}) => {
   return (
     <>
