@@ -7,7 +7,7 @@ const api = axios.create({
   // }
 });
 
-export const getProducts = async (page = 1, pageSize = 25, searchQuery = '') => {
+export const getProducts = async (page = 1, pageSize, searchQuery = '') => {
   try {
     const searchFilter = searchQuery ? `&filters[Name][$containsi]=${searchQuery}` : '';
     const response = await api.get(`/api/products?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}${searchFilter}`);

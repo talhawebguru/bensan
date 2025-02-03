@@ -3,13 +3,17 @@ import { getCategories } from "@/app/services/api";
 
 
 export async function generateStaticParams() {
-
-  const data = await getCategories();
-  
-  return data.data.map((category) => ({
-    category: category.slug,
-  }));
+  try {
+    const data = await getCategories();
+    return data?.data?.map((category) => ({
+      category: category.slug,
+    })) || [];
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    return [];
+  }
 }
+
 
 export async function generateMetadata({ params }) {
   const { category } = params;

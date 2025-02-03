@@ -1,7 +1,6 @@
 import React from "react";
 import ProductSlug from "@/app/components/dynamicProduct/ProductSlug";
-import {getProducts, getProductBySlug } from "@/app/services/api";
-
+import { getProducts, getProductBySlug } from "@/app/services/api";
 
 export async function generateMetadata({ params }) {
   const { productslug } = params;
@@ -11,7 +10,6 @@ export async function generateMetadata({ params }) {
   let canonicalUrl = "https://bensano.com/product/" + productslug;
   let defaultOgImage;
   let imageAlt;
-
 
   try {
     const data = await getProductBySlug(productslug);
@@ -30,8 +28,7 @@ export async function generateMetadata({ params }) {
     title: metaTitle,
     description: metaDescription,
     robots: metaRobots,
-     // Canonical URL
-     alternates: {
+    alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
@@ -58,32 +55,24 @@ export async function generateMetadata({ params }) {
   };
 }
 
-
-export async function getStaticPaths() {
+export async function generateStaticParams() {
   try {
     const data = await getProducts(1, 100); // Fetch all products
-    const paths = data.data.map((product) => ({
-      params: { productslug: product.slug },
+    return data.data.map((product) => ({
+      productslug: product.slug,
     }));
-
-    return {
-      paths,
-      fallback: false, // Return 404 for paths not returned by getStaticPaths
-    };
   } catch (error) {
     console.error('Error fetching products:', error);
-    return {
-      paths: [],
-      fallback: false,
-    };
+    return [];
   }
 }
-const page = () => {
+
+const Page = ({ params }) => {
   return (
     <>
-      <ProductSlug />
+      <ProductSlug params={params} />
     </>
   );
 };
 
-export default page;
+export default Page;

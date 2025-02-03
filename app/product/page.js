@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import { getProducts } from "@/app/services/api.js";
-import ProductList from '@/app/components/product/ProductList'
+import ProductList from '@/app/components/product/ProductList';
 
 export const metadata = {
   robots: "index, follow",
@@ -11,11 +11,23 @@ export const metadata = {
   },
 };
 
-export const page = async () => {
-  const initialData = await getProducts(1, 71);
-  return (
-    <ProductList initialData={initialData} />
-  )
+export async function generateStaticParams() {
+  try {
+    const data = await getProducts(1, 100);
+    return data.data.map((product) => ({
+      productslug: product.slug,
+    }));
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    return [];
+  }
 }
 
-export default page;
+const Page = async () => {
+  const initialData = await getProducts(1, 100);
+  return (
+    <ProductList initialData={initialData} />
+  );
+};
+
+export default Page;

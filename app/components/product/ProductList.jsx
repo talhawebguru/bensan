@@ -11,15 +11,16 @@ import { motion } from "framer-motion";
 
 const ProductList = ({ initialData }) => {
   const [products, setProducts] = useState(initialData.data);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("all-products");
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [totalPages, setTotalPages] = useState(initialData.meta.pagination.pageCount);
   const [searchQuery, setSearchQuery] = useState("");
   const [showCategories, setShowCategories] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async (page = 1) => {
+      setLoading(true);
       try {
         let data;
         if (selectedCategory === "all-products") {
@@ -57,6 +58,7 @@ const ProductList = ({ initialData }) => {
   const handleSearchSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission
   };
+
   const truncateTitle = (title, maxLength) => {
     if (title?.length > maxLength) {
       return title.substring(0, maxLength) + "...";
@@ -221,4 +223,4 @@ const ProductList = ({ initialData }) => {
     </>
   );
 };
-export default ProductList
+export default ProductList;

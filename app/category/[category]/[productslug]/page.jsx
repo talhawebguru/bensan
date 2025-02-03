@@ -1,9 +1,9 @@
 import React from "react";
 import CategoryProductSlug from "@/app/components/dynamicProduct/CategoryProductSlug";
-import { getProducts,getProductBySlug,getCategories,getProductsByCategory } from "@/app/services/api";
+import { getProducts, getProductBySlug, getCategories, getProductsByCategory } from "@/app/services/api";
 
 export async function generateMetadata({ params }) {
-  const {category , productslug } = params;
+  const { category, productslug } = params;
   let metaTitle;
   let metaDescription;
   let metaRobots = "noindex, nofollow";
@@ -28,19 +28,18 @@ export async function generateMetadata({ params }) {
     title: metaTitle,
     description: metaDescription,
     robots: metaRobots,
-     // Canonical URL
-     alternates: {
+    alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
       title: metaTitle,
       description: metaDescription,
       url: canonicalUrl,
-      siteName: 'Bensan', // Replace with your site name
+      siteName: 'Bensan',
       type: 'website',
       images: [
         {
-          url: `https://admin.bensano.com${defaultOgImage}`, // Replace with your default OG image
+          url: `https://admin.bensano.com${defaultOgImage}`,
           width: 1200,
           height: 630,
           alt: imageAlt,
@@ -51,12 +50,12 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       title: metaTitle,
       description: metaDescription,
-      images: [`https://admin.bensano.com${defaultOgImage}`], // Replace with your default Twitter image
+      images: [`https://admin.bensano.com${defaultOgImage}`],
     },
   };
 }
 
-export async function getStaticPaths() {
+export async function generateStaticParams() {
   try {
     const categoriesData = await getCategories();
     const categories = categoriesData.data;
@@ -69,26 +68,20 @@ export async function getStaticPaths() {
 
       products.forEach((product) => {
         paths.push({
-          params: { category: category.slug, productslug: product.slug },
+          category: category.slug,
+          productslug: product.slug,
         });
       });
     }
 
-    return {
-      paths,
-      fallback: false, // Return 404 for paths not returned by getStaticPaths
-    };
+    return paths;
   } catch (error) {
     console.error('Error fetching categories or products:', error);
-    return {
-      paths: [],
-      fallback: false,
-    };
+    return [];
   }
 }
 
-
-const page = ({params}) => {
+const Page = ({ params }) => {
   return (
     <>
       <CategoryProductSlug params={params} />
@@ -96,4 +89,4 @@ const page = ({params}) => {
   );
 };
 
-export default page;
+export default Page;

@@ -3,34 +3,43 @@
 @tailwind utilities;
 
 @layer utilities {
-    @keyframes marquee {
-      0% {
-        transform: translateX(100%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
     }
-    .animate-marquee {
-      display: inline-flex;
-      animation: marquee 10s linear infinite;
+
+    100% {
+      transform: translateX(-100%);
     }
   }
 
+  .animate-marquee {
+    display: inline-flex;
+    animation: marquee 10s linear infinite;
+  }
+}
 
-.animationMove{
-    animation: moveIn 0.5s ease-in-out ;
-  }
-  @keyframes moveOut {
-    from{translate: 0px 0px;}
-    to{translate: 0px -1000px;}
-    
-  }
-  .animationMoveOut{
-    animation: moveOut 0.5s ease-in ;
+
+.animationMove {
+  animation: moveIn 0.5s ease-in-out;
+}
+
+@keyframes moveOut {
+  from {
+    translate: 0px 0px;
   }
 
-  
+  to {
+    translate: 0px -1000px;
+  }
+
+}
+
+.animationMoveOut {
+  animation: moveOut 0.5s ease-in;
+}
+
+
 .swiper {
   width: 100%;
   /* height: 100%; */
@@ -44,22 +53,24 @@
 
 
 .mySwiper {
- margin-top: 30px;
- display: flex;
- justify-content: center;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
   align-items: center;
   padding-bottom: 20px !important;
 }
-.iiz div{
+
+.iiz div {
   height: 500px !important;
   object-fit: contain !important;
 }
-div .iiz__img{
+
+div .iiz__img {
   height: 450px !important;
   object-fit: contain !important;
 }
 
-.iiz__hint{
+.iiz__hint {
   position: absolute !important;
   bottom: 80px !important;
   right: 0 !important;
