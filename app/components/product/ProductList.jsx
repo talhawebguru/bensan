@@ -158,7 +158,7 @@ const ProductList = ({ initialData }) => {
                       <div className="bg-white shadow border border-[#e9ecef] cursor-pointer w-full h-full">
                         <Image
                           className="w-full h-64 scale-1 hover:scale-110 object-contain"
-                          src={`${process.env.NEXT_PUBLIC_API_URL}${product.Image[0].url}`}
+                          src={`${process.env.NEXT_PUBLIC_API_URL}${product?.Image[0]?.url}`}
                           alt={product.imageAltText || product.Name}
                           width={256}
                           height={256}

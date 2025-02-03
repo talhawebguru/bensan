@@ -80,6 +80,19 @@ const Page = () => {
   };
 
   useEffect(() => {
+    const observer = new MutationObserver(() => {
+      const zoomImage = document.querySelector(".iiz__zoom-img");
+      if (zoomImage && !zoomImage.alt) {
+        zoomImage.alt =`Zoom Product image`;
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     const handleGlobalClick = (e) => {
       // Only close if clicking outside the download menu
       if (
