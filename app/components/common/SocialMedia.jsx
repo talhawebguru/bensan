@@ -16,8 +16,7 @@ const SocialMedia = ({ icon }) => {
         type: "spring",
         stiffness: 300
       }}
-      className="w-9 h-9 flex justify-center items-center bg-white rounded-[100px] border border-white text-secondary-primary cursor-pointer" 
-      aria-label="Social Icons"
+      className="w-9 h-9 flex justify-center items-center bg-white rounded-[100px] border border-white text-secondary-primary cursor-pointer"
     >
       {icon}
     </motion.div>

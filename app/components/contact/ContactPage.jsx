@@ -104,9 +104,9 @@ const ContactPage = () => {
               >
                 <div className="absolute inset-0 bg-secondary-primary bg-opacity-50"></div>
                 <div className="relative p-8 py-11">
-                  <h3 className="text-white text-lg font-semibold font-primary capitalize">
+                  <h2 className="text-white text-lg font-semibold font-primary capitalize">
                     Contact Information
-                  </h3>
+                  </h2>
                   <p className="text-white text-sm font-normal font-primary">
                     Your questions and feedback are important to us.
                   </p>
@@ -135,9 +135,9 @@ const ContactPage = () => {
                 transition={{ delay: 0.8, duration: 0.5 }}
                 className="mt-8"
               >
-                <h3 className="text-light-black text-lg font-semibold font-primary capitalize">
+                <h2 className="text-light-black text-lg font-semibold font-primary capitalize">
                   Follow us on social media
-                </h3>
+                </h2>
                 <div className="flex gap-4 mt-4">
                   <SocialMedia icon={<AiFillInstagram size={24} />} />
                   <SocialMedia icon={<IoLogoFacebook size={24} />} />
