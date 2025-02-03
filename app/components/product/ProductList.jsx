@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState , Suspense } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Skeleton from "react-loading-skeleton";
@@ -116,7 +116,6 @@ const ProductList = ({ initialData }) => {
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
     <>
       <hr className="border border-black/10 mt-1 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0" />
       <h1 className="md:my-16 my-10 text-[#222823] text-4xl font-semibold font-primary capitalize  xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
@@ -270,7 +269,6 @@ const ProductList = ({ initialData }) => {
         </nav>
       )}
     </>
-    </Suspense>
   );
 };
 export default ProductList;

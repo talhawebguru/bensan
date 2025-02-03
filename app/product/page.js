@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { getProducts } from "@/app/services/api.js";
 import ProductList from '@/app/components/product/ProductList';
 
@@ -26,7 +26,9 @@ export async function generateStaticParams() {
 const Page = async () => {
   const initialData = await getProducts(1, 100);
   return (
-    <ProductList initialData={initialData} />
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProductList initialData={initialData} />
+    </Suspense>
   );
 };
 
