@@ -12,6 +12,7 @@ export const metadata = {
   alternates: {
     canonical: 'https://bensano.com/who-we-serve',
   },
+  robots: "index, follow"
 };
 
 const page = () => {
@@ -24,8 +25,7 @@ const page = () => {
         <Dental />
         <div className='lg:my-40 sm:my-20 my-10'>
         <CustomerSaySlider/>
-        </div>
-       
+        </div> 
     </>
   )
 }

@@ -48,12 +48,12 @@ const Dental = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <motion.h1
+        <motion.h2
           variants={itemVariants}
           className="text-[#222823] text-[32px] font-semibold font-primary leading-[48px] border-l-8 border-secondary-primary pl-2"
         >
           Dental
-        </motion.h1>
+        </motion.h2>
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-10 "
           variants={containerVariants}
