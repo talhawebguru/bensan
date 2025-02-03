@@ -10,7 +10,7 @@ import CategoryList from "@/app/components/product/CategoryList";
 import { FaArrowDown, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const CategoryPage= ({params}) => {
+const CategoryPage = ({ params }) => {
   const router = useRouter();
   const { category } = params;
   const [products, setProducts] = useState([]);
@@ -19,7 +19,7 @@ const CategoryPage= ({params}) => {
   const [totalPages, setTotalPages] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [showCategories, setShowCategories] = useState(true);
-  
+
   useEffect(() => {
     const fetchProducts = async (page = 1) => {
       setLoading(true); // Only set loading for products
@@ -91,7 +91,7 @@ const CategoryPage= ({params}) => {
     <>
       <hr className="border border-black/10 mt-1 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0" />
       <h1 className="md:my-16 my-10 text-[#222823] text-4xl font-semibold font-primary capitalize  xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
-        our {category=="all-products" ? "All" : category} Products
+        our {category == "all-products" ? "All" : category} Products
       </h1>
       <div className="flex flex-wrap justify-center md:justify-normal  md:flex-nowrap  gap-10 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 ">
         <div className="flex justify-center md:justify-normal gap-10 w-full md:w-auto">
@@ -105,7 +105,7 @@ const CategoryPage= ({params}) => {
                 onChange={handleSearchChange}
               />
             </form>
-            <div 
+            <div
               className="flex items-center content-center justify-between pt-6 mx-4 cursor-pointer"
               onClick={toggleCategories}
             >
@@ -113,20 +113,30 @@ const CategoryPage= ({params}) => {
                 Categories
               </h2>
               <div className="transition-transform duration-300">
-                {showCategories ? <FaArrowDown  /> : <FaArrowDown className="rotate-180"/>}
+                {showCategories ? (
+                  <FaArrowDown />
+                ) : (
+                  <FaArrowDown className="rotate-180" />
+                )}
               </div>
             </div>
             <div className="w-full h-[0px] border border-[#eae9e8] mt-6"></div>
-            <div className={`transition-all duration-300 ${showCategories ? 'block' : 'hidden'}`}>
+            <div
+              className={`transition-all duration-300 ${
+                showCategories ? "block" : "hidden"
+              }`}
+            >
               <CategoryList
-                 onCategorySelect={(categorySlug) => router.push(`/category/${categorySlug}`)}
-                 selectedCategory={category}
+                onCategorySelect={(categorySlug) =>
+                  router.push(`/category/${categorySlug}`)
+                }
+                selectedCategory={category}
               />
             </div>
           </div>
         </div>
         <div className="w-full">
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6"
             variants={containerVariants}
             initial="hidden"
@@ -134,7 +144,10 @@ const CategoryPage= ({params}) => {
           >
             {loading
               ? [...Array(8)].map((_, index) => (
-                  <div key={index} className="bg-white w-[256px] shadow border border-[#e9ecef]">
+                  <div
+                    key={index}
+                    className="bg-white w-[256px] shadow border border-[#e9ecef]"
+                  >
                     <Skeleton height={256} width={256} />
                     <div className="pt-4 flex justify-center pb-5">
                       <Skeleton height={20} width={100} />
@@ -145,9 +158,9 @@ const CategoryPage= ({params}) => {
                   <motion.div
                     key={product.id}
                     variants={productVariants}
-                    whileHover={{ 
+                    whileHover={{
                       scale: 1.02,
-                      transition: { duration: 0.2 }
+                      transition: { duration: 0.2 },
                     }}
                     className=""
                   >
@@ -178,14 +191,17 @@ const CategoryPage= ({params}) => {
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex gap-2 justify-center lg:mt-16 mt-5 lg:mb-20 mb-5 ">
-          <div
+          <button
+            aria-label="Previous page"
+            role="button"
+            rel="prev"
             className={`w-10 h-10 bg-white shadow flex justify-center items-center ${
               currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
             }`}
             onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
           >
             <FaAngleLeft />
-          </div>
+          </button>
           {Array.from({ length: totalPages }, (_, index) => (
             <div
               key={index}
@@ -199,7 +215,10 @@ const CategoryPage= ({params}) => {
               {index + 1}
             </div>
           ))}
-          <div
+          <button
+            aria-label="next page"
+            rel="next"
+            role="button"
             className={`w-10 h-10 bg-white shadow flex justify-center items-center ${
               currentPage === totalPages
                 ? "cursor-not-allowed"
@@ -210,7 +229,7 @@ const CategoryPage= ({params}) => {
             }
           >
             <FaAngleRight />
-          </div>
+          </button>
         </div>
       )}
     </>

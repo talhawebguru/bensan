@@ -8,15 +8,28 @@ import { getProducts, getProductsByCategory } from "@/app/services/api.js";
 import CategoryList from "@/app/components/product/CategoryList";
 import { FaArrowDown, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+
 
 const ProductList = ({ initialData }) => {
   const [products, setProducts] = useState(initialData.data);
   const [loading, setLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("all-products");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(initialData.meta.pagination.pageCount);
+  // const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(
+    initialData.meta.pagination.pageCount
+  );
   const [searchQuery, setSearchQuery] = useState("");
   const [showCategories, setShowCategories] = useState(true);
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(searchParams.get("page") || "1")
+  );
+  
 
   useEffect(() => {
     const fetchProducts = async (page = 1) => {
@@ -45,8 +58,18 @@ const ProductList = ({ initialData }) => {
     setCurrentPage(1); // Reset to first page when category changes
   };
 
+  const createQueryString = (name, value) => {
+    const params = new URLSearchParams(searchParams);
+    params.set(name, value);
+    return params.toString();
+  };
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
+    // Update URL with page number
+    router.push(`${pathname}?${createQueryString("page", page)}`, {
+      scroll: false,
+    });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -110,7 +133,7 @@ const ProductList = ({ initialData }) => {
                 onChange={handleSearchChange}
               />
             </form>
-            <div 
+            <div
               className="flex items-center content-center justify-between pt-6 mx-4 cursor-pointer"
               onClick={toggleCategories}
             >
@@ -118,11 +141,19 @@ const ProductList = ({ initialData }) => {
                 Categories
               </h2>
               <div className="transition-transform duration-300">
-                {showCategories ? <FaArrowDown  /> : <FaArrowDown className="rotate-180"/>}
+                {showCategories ? (
+                  <FaArrowDown />
+                ) : (
+                  <FaArrowDown className="rotate-180" />
+                )}
               </div>
             </div>
             <div className="w-full h-[0px] border border-[#eae9e8] mt-6"></div>
-            <div className={`transition-all duration-300 ${showCategories ? 'block' : 'hidden'}`}>
+            <div
+              className={`transition-all duration-300 ${
+                showCategories ? "block" : "hidden"
+              }`}
+            >
               <CategoryList
                 onCategorySelect={handleCategorySelect}
                 selectedCategory={selectedCategory}
@@ -131,7 +162,7 @@ const ProductList = ({ initialData }) => {
           </div>
         </div>
         <div className="w-full">
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6"
             variants={containerVariants}
             initial="hidden"
@@ -139,7 +170,10 @@ const ProductList = ({ initialData }) => {
           >
             {loading
               ? [...Array(8)].map((_, index) => (
-                  <div key={index} className="bg-white w-[256px] shadow border border-[#e9ecef]">
+                  <div
+                    key={index}
+                    className="bg-white w-[256px] shadow border border-[#e9ecef]"
+                  >
                     <Skeleton height={256} width={256} />
                     <div className="pt-4 flex justify-center pb-5">
                       <Skeleton height={20} width={100} />
@@ -150,9 +184,9 @@ const ProductList = ({ initialData }) => {
                   <motion.div
                     key={product.id}
                     variants={productVariants}
-                    whileHover={{ 
+                    whileHover={{
                       scale: 1.02,
-                      transition: { duration: 0.2 }
+                      transition: { duration: 0.2 },
                     }}
                     className=""
                   >
@@ -182,43 +216,57 @@ const ProductList = ({ initialData }) => {
       </div>
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex gap-2 justify-center lg:mt-16 mt-5 lg:mb-20 mb-5 ">
-          <div
+        <nav aria-label="Product navigation" className="flex gap-2 justify-center lg:mt-16 mt-5 lg:mb-20 mb-5">
+          <Link
+            href={`${pathname}?${createQueryString("page", currentPage - 1)}`}
             className={`w-10 h-10 bg-white shadow flex justify-center items-center ${
-              currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
+              currentPage === 1 ? " cursor-not-allowed opacity-50" : "cursor-pointer"
             }`}
-            onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+            aria-label="Previous page"
             rel="prev"
+            onClick={(e) => {
+              e.preventDefault();
+              if (currentPage > 1) handlePageChange(currentPage - 1);
+            }}
           >
-            <FaAngleLeft />
-          </div>
+            <FaAngleLeft aria-hidden="true" />
+          </Link>
+
           {Array.from({ length: totalPages }, (_, index) => (
-            <div
+            <Link
               key={index}
+              href={`${pathname}?${createQueryString("page", index + 1)}`}
               className={`w-10 h-10 shadow flex justify-center items-center ${
                 currentPage === index + 1
                   ? "bg-secondary-primary text-white"
                   : "bg-white text-[#554e49]"
-              } cursor-pointer`}
-              onClick={() => handlePageChange(index + 1)}
+              }`}
+              aria-label={`Page ${index + 1}`}
+              aria-current={currentPage === index + 1 ? "page" : undefined}
+              onClick={(e) => {
+                e.preventDefault();
+                handlePageChange(index + 1);
+              }}
             >
               {index + 1}
-            </div>
+            </Link>
           ))}
-          <div
+
+          <Link
+            href={`${pathname}?${createQueryString("page", currentPage + 1)}`}
             className={`w-10 h-10 bg-white shadow flex justify-center items-center ${
-              currentPage === totalPages
-                ? "cursor-not-allowed"
-                : "cursor-pointer"
+              currentPage === totalPages ? " cursor-not-allowed  opacity-50" : "cursor-pointer"
             }`}
-            onClick={() =>
-              currentPage < totalPages && handlePageChange(currentPage + 1)
-            }
-             rel="next"
+            aria-label="Next page"
+            rel="next"
+            onClick={(e) => {
+              e.preventDefault();
+              if (currentPage < totalPages) handlePageChange(currentPage + 1);
+            }}
           >
-            <FaAngleRight />
-          </div>
-        </div>
+            <FaAngleRight aria-hidden="true" />
+          </Link>
+        </nav>
       )}
     </>
   );
