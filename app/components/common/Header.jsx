@@ -82,10 +82,19 @@ const Header = () => {
                 alt="Bensan Logo"
                 aria-label="Bensan Logo"
                 priority
-                className="lg:mr-16"
+                className=""
               />
             </Link>
             <ul className="items-center gap-11 hidden lg:flex">
+              <li>
+                <Link
+                  href="/blogs"
+                  aria-label="Blogs"
+                  className="text-nav-color text-[13px] font-semibold font-primary capitalize lg:flex items-center hidden"
+                >
+                  Blogs
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/resource-center"
