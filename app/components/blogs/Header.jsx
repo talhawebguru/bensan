@@ -1,5 +1,5 @@
 import React from 'react'
-import * as motion from "framer-motion/client"
+import * as motion from "framer-motion/client";
 import Image from 'next/image'
 import whoWeServeImg from "@/public/images/blogs.png"
 

@@ -55,7 +55,7 @@ const Footer = () => {
             <div className="flex flex-wrap items-center gap-2">
               <input
                 type="email"
-                className="w-[281px] h-12 px-4 py-3.5 rounded-xl border border-border-color/25 text-light-black text-sm font-normal font-primary leading-tight"
+                className="w-[281px] h-12 px-4 py-3.5 outline-none rounded-xl border border-border-color/25 text-light-black text-sm font-normal font-primary leading-tight"
                 placeholder="Enter Your Email"
                 aria-label="Enter Your Email"
               />

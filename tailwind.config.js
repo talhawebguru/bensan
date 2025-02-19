@@ -6,22 +6,6 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    colors: {
-      'primary': '#FDF9FB',
-      'secondary': '#F7F9FC',
-      'secondary-primary': '#A8366F',
-      'secondary-secondary': '#f6ebf1',
-      'grey': '#6C757D',
-      'border-color': '#040505',
-      'hr-line': '#E0E3E3',
-      'white-card-border':'#E9ECEF',
-      'white': '#FFFFFF',
-      'light-black': '#222823',
-      'nav-color':"#1f1f1f",
-      'black': '#000000',
-      'border-divi-gray-300':"#9D9996",
-      'red-color':"#A8366F",
-    },
     fontFamily: {
       primary: ['var(--font-open-sans)', 'sans-serif'],
       secondary: ['var(--font-syne)', 'sans-serif'],
@@ -45,6 +29,22 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     extend: {
+      colors: {
+        primary: '#FDF9FB',
+        secondary: '#F7F9FC',
+        'secondary-primary': '#A8366F',
+        'secondary-secondary': '#f6ebf1',
+        grey: '#6C757D',
+        'border-color': '#040505',
+        'hr-line': '#E0E3E3',
+        'white-card-border': '#E9ECEF',
+        white: '#FFFFFF',
+        'light-black': '#222823',
+        'nav-color': "#1f1f1f",
+        black: '#000000',
+        'border-divi-gray-300': "#9D9996",
+        'red-color': "#A8366F",
+      },
       backgroundImage: {
         'contact-card': "url('/images/contact-img.jpg')",
       },
@@ -52,11 +52,6 @@ module.exports = {
         'xs': {'min': '10px', 'max': '576px'},
         // Customize screen size for all mobile devices min-width: 10px and max-width:576px
         },
-
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
     },
   },
   plugins: [],

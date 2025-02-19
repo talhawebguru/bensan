@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Blog1 from "@/public/images/Blog1.png";
+import * as motion from "framer-motion/client";
+
 
 const blogData = [
   {
@@ -92,9 +94,30 @@ const blogData = [
 
 const Blogs = () => {
   return (
-    <div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 place-items-center">
+    <motion.div
+      className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 place-items-center"
+      initial="hidden"
+      whileInView="visible"
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            staggerChildren: 0.2,
+          },
+        },
+      }}
+    >
       {blogData.map((blog, index) => (
-        <div key={index} className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden">
+        <motion.div
+          key={index}
+          className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden"
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 },
+          }}
+        >
           <Image
             className="w-full h-56 object-cover"
             src={blog.image}
@@ -116,10 +139,14 @@ const Blogs = () => {
               Read More →
             </Link>
           </div>
-        </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 };
 
+
 export default Blogs;
+
+
+
