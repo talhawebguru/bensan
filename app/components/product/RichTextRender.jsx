@@ -4,7 +4,7 @@ const RichTextRender = ({ content }) => {
   const renderNode = (node, index) => {
     switch (node.type) {
       case "paragraph":
-        return <p key={index} className="my-1" >{node.children.map(renderNode)}</p>;
+        return <p key={index} className="my-1">{node.children.map(renderNode)}</p>;
       case "text":
         let text = node.text;
         if (node.bold) {
@@ -14,11 +14,19 @@ const RichTextRender = ({ content }) => {
           text = <u key={index}>{text}</u>;
         }
         return text;
+      case "link":
+        return (
+          <a key={index} href={node.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+            {node.children.map(renderNode)}
+          </a>
+        );
       case "list":
         return (
           <ul key={index}>
             {node.children.map((child, i) => (
-              <li className="list-disc mt-1.5 ml-8 text-black !text-base font-normal font-primary capitalize" key={i}>{child.children.map(renderNode)}</li>
+              <li className="list-disc mt-1.5 ml-8 text-black !text-base font-normal font-primary capitalize" key={i}>
+                {child.children.map(renderNode)}
+              </li>
             ))}
           </ul>
         );

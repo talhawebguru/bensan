@@ -136,7 +136,7 @@ const BlogContent = () => {
             <div className="relative mt-5">
               <input
                 type="text"
-                placeholder="Search Keywords"
+                placeholder="Search Posts"
                 className="w-full pl-4 pr-10 py-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-200"
               />
               <button className="absolute inset-y-0 right-0.5 flex items-center px-3 bg-gray-100  border-gray-300 rounded-r-md">

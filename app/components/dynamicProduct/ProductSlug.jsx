@@ -18,6 +18,7 @@ import Popup from "./Popup";
 import { BsDownload } from "react-icons/bs";
 import { LuDownload } from "react-icons/lu";
 import { FaFilePdf } from "react-icons/fa";
+import Link from "next/link";
 
 const Page = () => {
   const router = useRouter();
@@ -83,7 +84,7 @@ const Page = () => {
     const observer = new MutationObserver(() => {
       const zoomImage = document.querySelector(".iiz__zoom-img");
       if (zoomImage && !zoomImage.alt) {
-        zoomImage.alt =`Zoom Product image`;
+        zoomImage.alt = `Zoom Product image`;
       }
     });
 
@@ -132,12 +133,7 @@ const Page = () => {
     return <div>Product not found</div>;
   }
 
-  const {
-    Name,
-    title,
-    Descripition,
-    Image: Images,
-  } = product;
+  const { Name, title, Descripition, Image: Images,shopNow } = product;
 
   return (
     <motion.div variants={pageVariants} initial="hidden" animate="visible">
@@ -243,12 +239,21 @@ const Page = () => {
               variants={contentVariants}
               className="flex flex-wrap justify-center gap-7 mt-8"
             >
+              {shopNow && (<Link href={shopNow} target="_blank">
+              <button
+                className="w-[205px] h-[38px]  flex justify-center items-center bg-[#7D53A7] rounded text-white text-base font-semibold font-primary capitalize"
+              >
+               Shop {Name} on Jurhy
+              </button>
+              </Link>)}
               <button
                 onClick={() => setIsPopupOpen(true)}
                 className="w-[205px] h-[38px]  flex justify-center items-center bg-[#a8366f] rounded text-white text-base font-semibold font-primary capitalize"
               >
                 Request for quote
               </button>
+            </motion.div>
+            <div className="flex justify-center items-center gap-5 mt-8">
               <div className="relative">
                 <button
                   onClick={(e) => {
@@ -364,7 +369,7 @@ const Page = () => {
                   </motion.div>
                 )}
               </div>
-            </motion.div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
