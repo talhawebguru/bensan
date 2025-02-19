@@ -69,6 +69,16 @@ export const getNewArrivalsProduct = async () => {
   }
 };
 
+export const getBlogs = async () => {
+  try {
+    const response = await api.get('/api/blogs?populate=*');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching blogs:', error);
+    throw error;
+  }
+};
+
 export const sendEmail = async (formData) => {
   try {
     const response = await api.post('/api/contact/send-email', formData);

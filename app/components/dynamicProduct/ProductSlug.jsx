@@ -241,7 +241,7 @@ const Page = () => {
             >
               {shopNow && (<Link href={shopNow} target="_blank">
               <button
-                className="w-[205px] h-[38px]  flex justify-center items-center bg-[#7D53A7] rounded text-white text-base font-semibold font-primary capitalize"
+                className=" px-2 py-2 flex justify-center items-center bg-[#7D53A7] rounded text-white text-base font-semibold font-primary capitalize"
               >
                Shop {Name} on Jurhy
               </button>

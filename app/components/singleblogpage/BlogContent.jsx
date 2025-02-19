@@ -5,8 +5,10 @@ import ProfilePhoto from "@/public/images/profileComments.png";
 import PostComment from "./PostComment";
 import RelatedBlogs from "./RelatedBlogs";
 import { CiSearch } from "react-icons/ci";
+import { getBlogs } from "@/app/services/api";
 
 const BlogContent = () => {
+  
   return (
     <>
       <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 my-16">
