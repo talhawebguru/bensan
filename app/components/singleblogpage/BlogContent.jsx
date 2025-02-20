@@ -16,8 +16,7 @@ const BlogContent = ({params}) => {
   const { blogSlug } = params;
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
-
-
+  
   useEffect(() => {
     if (blogSlug) {
       const fetchBlog = async () => {
