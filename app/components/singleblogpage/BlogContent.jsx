@@ -1,132 +1,75 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import Blog1 from "@/public/images/Blog1.png";
 import Image from "next/image";
 import ProfilePhoto from "@/public/images/profileComments.png";
 import PostComment from "./PostComment";
 import RelatedBlogs from "./RelatedBlogs";
 import { CiSearch } from "react-icons/ci";
-import { getBlogs } from "@/app/services/api";
+import { getBlogBySlug } from "@/app/services/api";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import RichTextRender from "./RixhTextRender";
 
-const BlogContent = () => {
-  
+const BlogContent = ({params}) => {
+
+  const { blogSlug } = params;
+  const [blog, setBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    if (blogSlug) {
+      const fetchBlog = async () => {
+        try {
+          const data = await getBlogBySlug(blogSlug);
+          if (data.data && data.data.length > 0) {
+            setBlog(data.data[0]);
+          }
+        } catch (error) {
+          console.error("Error fetching blog:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchBlog();
+    }
+  }, [blogSlug]);
+
+
+  if (loading) {
+    return (
+      <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 my-16">
+        <Skeleton height={40} width="60%" />
+        <Skeleton height={530} className="mt-4" />
+        <Skeleton height={24} width="80%" className="mt-4" />
+        <Skeleton height={24} width="80%" className="mt-2" />
+        <Skeleton height={24} width="80%" className="mt-2" />
+      </div>
+    );
+  }
+
+  if (!blog) {
+    return <div>Blog not found</div>;
+  }
+
   return (
     <>
       <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 my-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="flex lg:col-span-2  flex-col gap-6">
             <h1 className="text-[#222823] text-2xl md:text-4xl font-semibold font-primary capitalize">
-              Central Sterile Supply Department (CSSD)
+              {blog.Title}
             </h1>
             <Image
-              src={Blog1}
-              alt="Central Sterile Supply Department (CSSD)"
+              src={`${process.env.NEXT_PUBLIC_API_URL}${blog.FeatureImage.url}`}
+              alt={blog.FeatureImage.alternativeText || blog.Title}
               className="w-full md:h-[530px]"
+              width={800}
+              height={530}
             />
-            <p className="text-[#222823] text-base font-normal font-primary leading-normal">
-              Traditionally, the BWE has been studied in serial supply chains.
-              That is also the setting of the famous beer game, where the
-              typical demand pattern across the supply chain looks like this:
-              for a relatively small change in demand seen by the retailer, the
-              demand variability progressively increases at the more upstream
-              wholesaler, distributor, and factory (see the figure below). This
-              leads to capacity shortages, stockouts, excess inventory, and
-              increased operational costs. No wonder BWE has received a lot of
-              attention among academics and practitioners alike.
-            </p>
-            <p className="text-[#222823] text-base font-normal font-primary leading-normal">
-              Traditionally, the BWE has been studied in serial supply chains.
-              That is also the setting of the famous beer game, where the
-              typical demand pattern across the supply chain looks like this:
-              for a relatively small change in demand seen by the retailer, the
-              demand variability progressively increases at the more upstream
-              wholesaler, distributor, and factory (see the figure below). This
-              leads to capacity shortages, stockouts, excess inventory, and
-              increased operational costs. No wonder BWE has received a lot of
-              attention among academics and practitioners alike.
-            </p>
-            <div className="flex flex-wrap lg:flex-nowrap gap-7">
-              <Image
-                src={Blog1}
-                alt="Central Sterile Supply Department (CSSD)"
-                className="w-full"
-              />
-              <Image
-                src={Blog1}
-                alt="Central Sterile Supply Department (CSSD)"
-                className="w-full"
-              />
-            </div>
-            <p className="text-[#222823] text-base font-normal font-primary leading-normal">
-              Traditionally, the BWE has been studied in serial supply chains.
-              That is also the setting of the famous beer game, where the
-              typical demand pattern across the supply chain looks like this:
-              for a relatively small change in demand seen by the retailer, the
-              demand variability progressively increases at the more upstream
-              wholesaler, distributor, and factory (see the figure below). This
-              leads to capacity shortages, stockouts, excess inventory, and
-              increased operational costs. No wonder BWE has received a lot of
-              attention among academics and practitioners alike.
-            </p>
-            <p className="text-[#222823] text-base font-normal font-primary leading-normal">
-              Traditionally, the BWE has been studied in serial supply chains.
-              That is also the setting of the famous beer game, where the
-              typical demand pattern across the supply chain looks like this:
-              for a relatively small change in demand seen by the retailer, the
-              demand variability progressively increases at the more upstream
-              wholesaler, distributor, and factory (see the figure below). This
-              leads to capacity shortages, stockouts, excess inventory, and
-              increased operational costs. No wonder BWE has received a lot of
-              attention among academics and practitioners alike.
-            </p>
-
-            <p className=" text-[#222823] text-xl font-semibold font-primary leading-[30px] ">
-              Tags:{" "}
-              <span className="text-[#0e0e0e] text-base font-normal font-primary leading-normal">
-                Suppliers, Welding Engineering
-              </span>
-            </p>
-
-            {/* Comment Section */}
-            <div>
-              <hr className="border-[#EAE9E8] my-8" />
-              <h2 className="text-[#2b221b] text-[32px] font-semibold font-primary leading-[38.40px]">
-                3 Comments
-              </h2>
-              {/* Comment View */}
-              <div className="my-5">
-                <div className="flex gap-4">
-                  <div className="w-20">
-                    <Image
-                      src={ProfilePhoto}
-                      alt="Profile Photo"
-                      className=" object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-[#1a191d] text-xl font-medium font-arial leading-[30px]">
-                      Robert Fox
-                    </h3>
-                    <p className="w-[80%] text-[#222823] text-base font-normal font-primary leading-normal">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Voluptatum accusantium aperiam maiores nam nobis
-                      blanditiis dolorem aut totam praesentium officiis
-                      sapiente, provident.
-                    </p>
-                  </div>
-                </div>
-                <hr className="border-[#EAE9E8] my-8" />
-              </div>
-              {/* Leave a Comment */}
-              <div className="mt-5">
-                <h2 className=" text-[#2b221b] text-[32px] font-medium font-primary leading-[38.40px]">
-                  Leave a Comment
-                </h2>
-
-                <div>
-                  <PostComment />
-                </div>
-              </div>
-            </div>
+            <RichTextRender content={blog.content2} /> 
           </div>
           <div className="">
             {/* Search Post */}

@@ -32,7 +32,7 @@ const Blogs = () => {
         {[...Array(8)].map((_, index) => (
           <div
             key={index}
-            className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden"
+            className="w-full bg-white shadow-lg rounded-lg overflow-hidden"
           >
             <Skeleton height={224} />
             <div className="p-4">
@@ -63,6 +63,7 @@ const Blogs = () => {
       }}
     >
       {blogs.map((blog, index) => (
+        <Link href={`/blogs/${blog.Slug}`} key={index}>
         <motion.div
           key={index}
           className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden"
@@ -85,14 +86,14 @@ const Blogs = () => {
             {/* <p className="mt-2 text-[#716b66] text-base font-normal font-primary leading-normal">
               {blog.description}
             </p> */}
-            <Link
-              href={`/blogs/${blog.Slug}`}
+            <p
               className="mt-3 inline-flex items-center text-[#232323] text-base font-medium font-primary leading-normal hover:underline"
             >
               Read More →
-            </Link>
+            </p>
           </div>
         </motion.div>
+        </Link>
       ))}
     </motion.div>
   );

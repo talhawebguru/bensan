@@ -79,6 +79,22 @@ export const getBlogs = async () => {
   }
 };
 
+export const getBlogBySlug = async (slug) => {
+  try {
+    const response = await api.get(`/api/blogs`, {
+      params: {
+        'populate': '*',
+        'filters[Slug][$eq]': slug
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching blog with slug ${slug}:`, error);
+    throw error;
+  }
+};
+
+
 export const sendEmail = async (formData) => {
   try {
     const response = await api.post('/api/contact/send-email', formData);

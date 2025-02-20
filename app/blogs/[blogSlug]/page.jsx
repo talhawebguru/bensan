@@ -2,11 +2,11 @@ import BlogContent from '@/app/components/singleblogpage/BlogContent'
 import Header from '@/app/components/singleblogpage/Header'
 import React from 'react'
 
-const page = () => {
+const page = ({params}) => {
   return (
     <>
         <Header />
-        <BlogContent />
+        <BlogContent params={params} />
         
     </>
   )
