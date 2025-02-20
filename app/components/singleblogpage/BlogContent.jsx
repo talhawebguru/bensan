@@ -112,32 +112,6 @@ const BlogContent = ({params}) => {
               </div>
             </div>
             {/* Recent Post End here */}
-            {/* Tags */}
-            <div className="mt-5 bg-white rounded border">
-              <div className="h-[60px] flex justify-start pl-4 items-center bg-[#a8366f] rounded">
-                <h2 className=" text-white text-xl font-semibold font-primary leading-[30px]">
-                  Tags
-                </h2>
-              </div>
-              <div className="my-6 pl-4 flex gap-3 flex-wrap">
-                <span className="px-4 py-2.5 bg-gray-200 rounded text-[#716b66] text-[13px] font-normal font-primary leading-tight">
-                  Bridge Construction
-                </span>
-                <span className="px-4 py-2.5 bg-gray-200 rounded text-[#716b66] text-[13px] font-normal font-primary leading-tight">
-                  Fuel & Gas
-                </span>
-                <span className="px-4 py-2.5 bg-gray-200 rounded text-[#716b66] text-[13px] font-normal font-primary leading-tight">
-                  Power & Energy Sector
-                </span>
-                <span className="px-4 py-2.5 bg-gray-200 rounded text-[#716b66] text-[13px] font-normal font-primary leading-tight">
-                  Suppliers
-                </span>
-                <span className="px-4 py-2.5 bg-gray-200 rounded text-[#716b66] text-[13px] font-normal font-primary leading-tight">
-                  Civil Engineering
-                </span>
-              </div>
-            </div>
-            {/* Tags End here */}
           </div>
         </div>
         <RelatedBlogs />
