@@ -9,7 +9,6 @@ export async function generateMetadata({ params }) {
 
   if (data.data && data.data.length > 0) {
     const blog = data.data[0];
-    console.log(blog.Keywords)
     return {
       title: blog.metaTitle || blog.Title,
       description: blog.metaDescripition,

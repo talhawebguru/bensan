@@ -19,16 +19,16 @@ const RichTextRender = ({ content }) => {
           <Image {...props} className="w-full h-[500px] my-4 object-contain" width="500" height="500" />
         ),
         h1: ({ node, ...props }) => (
-          <h1 {...props} className="text-3xl font-bold  font-primary " />
+          <h1 {...props} className="text-3xl font-bold my-1 font-primary " />
         ),
         h2: ({ node, ...props }) => (
-          <h2 {...props} className="text-2xl font-bold  font-primary " />
+          <h2 {...props} className="text-2xl font-bold my-1 font-primary " />
         ),
         h3: ({ node, ...props }) => (
-          <h3 {...props} className="text-xl font-bold  font-primary " />
+          <h3 {...props} className="text-xl font-bold my-1 font-primary " />
         ),
         p: ({ node, ...props }) => (
-          <p {...props} className=" text-[#222823] text-base font-normal font-primary leading-normal" />
+          <p {...props} className=" text-[#222823] my-1 text-base font-normal font-primary leading-normal" />
         ),
         ul: ({ node, ...props }) => (
           <ul {...props} className="list-disc ml-8 my-1 font-primary " />
