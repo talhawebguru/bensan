@@ -54,6 +54,19 @@ export async function generateMetadata({ params }) {
   };
 }
 
+export async function generateStaticParams() {
+  try {
+    const data = await getBlogs();
+    return data.data.map((blog) => ({
+      blogSlug: blog.Slug,
+    }));
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+    return [];
+  }
+}
+
+
 
 const page = ({params}) => {
   return (

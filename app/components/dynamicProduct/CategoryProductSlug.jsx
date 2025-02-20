@@ -17,6 +17,8 @@ import Popup from "./Popup";
 import { BsDownload } from "react-icons/bs";
 import { LuDownload } from "react-icons/lu";
 import { FaFilePdf } from "react-icons/fa";
+import Link from "next/link";
+
 
 const Page = ({params}) => {
   const router = useRouter();
@@ -135,6 +137,7 @@ const Page = ({params}) => {
     title,
     Descripition,
     Image: Images,
+    shopNow
   } = product;
 
   return (
@@ -241,12 +244,21 @@ const Page = ({params}) => {
               variants={contentVariants}
               className="flex flex-wrap justify-center gap-7 mt-8"
             >
+              {shopNow && (<Link href={shopNow} target="_blank">
+              <button
+                className=" px-2 py-2 flex justify-center items-center bg-[#7D53A7] rounded text-white text-base font-semibold font-primary capitalize"
+              >
+               Shop {Name} on Jurhy
+              </button>
+              </Link>)}
               <button
                 onClick={() => setIsPopupOpen(true)}
                 className="w-[205px] h-[38px]  flex justify-center items-center bg-[#a8366f] rounded text-white text-base font-semibold font-primary capitalize"
               >
                 Request for quote
               </button>
+            </motion.div>
+            <div className="flex justify-center items-center gap-5 mt-8">
               <div className="relative">
                 <button
                   onClick={(e) => {
@@ -362,7 +374,7 @@ const Page = ({params}) => {
                   </motion.div>
                 )}
               </div>
-            </motion.div>
+            </div>
           </motion.div>
         </motion.div>
       </div>

@@ -19,7 +19,7 @@ import { BsDownload } from "react-icons/bs";
 import { LuDownload } from "react-icons/lu";
 import { FaFilePdf } from "react-icons/fa";
 import Link from "next/link";
-
+ 
 const Page = () => {
   const router = useRouter();
   const pathname = usePathname();
