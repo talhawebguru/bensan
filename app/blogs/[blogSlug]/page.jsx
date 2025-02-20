@@ -1,7 +1,7 @@
 import BlogContent from '@/app/components/singleblogpage/BlogContent'
 import Header from '@/app/components/singleblogpage/Header'
 import React from 'react'
-import { getBlogBySlug } from '@/app/services/api'
+import { getBlogBySlug, getBlogs } from '@/app/services/api'
 
 export async function generateMetadata({ params }) {
   const { blogSlug } = params;
