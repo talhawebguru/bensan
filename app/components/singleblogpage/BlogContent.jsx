@@ -1,12 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Blog1 from "@/public/images/Blog1.png";
 import Image from "next/image";
 import ProfilePhoto from "@/public/images/profileComments.png";
 import PostComment from "./PostComment";
 import RelatedBlogs from "./RelatedBlogs";
 import { CiSearch } from "react-icons/ci";
-import { getBlogBySlug } from "@/app/services/api";
+import { getBlogBySlug, getLatestBlogs } from "@/app/services/api";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import RichTextRender from "./RixhTextRender";
@@ -16,6 +15,7 @@ const BlogContent = ({ params }) => {
   const { blogSlug } = params;
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [latestBlogs, setLatestBlogs] = useState([]);
 
   useEffect(() => {
     if (blogSlug) {
@@ -35,6 +35,19 @@ const BlogContent = ({ params }) => {
       fetchBlog();
     }
   }, [blogSlug]);
+
+  useEffect(() => {
+    const fetchLatestBlogs = async () => {
+      try {
+        const data = await getLatestBlogs();
+        setLatestBlogs(data.data);
+      } catch (error) {
+        console.error("Error fetching latest blogs:", error);
+      }
+    };
+
+    fetchLatestBlogs();
+  }, []);
 
   if (loading) {
     return (
@@ -121,22 +134,6 @@ const BlogContent = ({ params }) => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {/* Search Post */}
-            <div className="h-[60px] flex justify-start pl-4 items-center bg-[#a8366f] rounded">
-              <p className="text-white text-xl font-semibold font-primary leading-[30px]">
-                Search Posts
-              </p>
-            </div>
-            <div className="relative mt-5">
-              <input
-                type="text"
-                placeholder="Search Posts"
-                className="w-full pl-4 pr-10 py-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-200"
-              />
-              <button className="absolute inset-y-0 right-0.5 flex items-center px-3 bg-gray-100 border-gray-300 rounded-r-md">
-                <CiSearch size={24} />
-              </button>
-            </div>
             {/* Recent Post */}
             <div className="mt-5 bg-white rounded border">
               <div className="h-[60px] flex justify-start pl-4 items-center bg-[#a8366f] rounded">
@@ -144,21 +141,25 @@ const BlogContent = ({ params }) => {
                   Recent Posts
                 </h2>
               </div>
-              <div className="flex gap-4 items-center pl-4 my-6">
-                <Image
-                  src={Blog1}
-                  alt="Central Sterile Supply Department (CSSD)"
-                  className="w-[85px] h-[85px]"
-                />
-                <div>
-                  <h3 className="w-[257px] h-14 text-[#1f1813] text-base font-medium font-primary leading-normal">
-                    Central Sterile Supply Department (CSSD)
-                  </h3>
-                  <p className="w-[216px] h-4 text-[#9d9996] text-[13px] font-normal font-['Open Sans'] leading-tight">
-                    John Attack - December 10, 2020
-                  </p>
+              {latestBlogs.map((latestBlog) => (
+                <div key={latestBlog.id} className="flex gap-4 items-center pl-4 py-6 border-b">
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_API_URL}${latestBlog.FeatureImage.url}`}
+                    alt={latestBlog.FeatureImage.alternativeText || latestBlog.Title}
+                    className="w-[85px] h-[85px]"
+                    width={85}
+                    height={85}
+                  />
+                  <div>
+                    <h3 className="w-[257px] h-14 text-[#1f1813] text-base font-medium font-primary leading-normal">
+                      {latestBlog.Title}
+                    </h3>
+                    <p className="w-[216px] h-4 text-[#9d9996] text-[13px] font-normal font-primary leading-tight">
+                      {new Date(latestBlog.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
             {/* Recent Post End here */}
           </motion.div>

@@ -79,6 +79,15 @@ export const getBlogs = async (page = 1, pageSize = 25, searchQuery = '') => {
     throw error;
   }
 };
+export const getLatestBlogs = async (limit = 3) => {
+  try {
+    const response = await api.get(`/api/blogs?populate=*&sort=createdAt:desc&pagination[limit]=${limit}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching latest blogs:', error);
+    throw error;
+  }
+};
 
 export const getBlogBySlug = async (slug) => {
   try {
