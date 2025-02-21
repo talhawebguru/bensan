@@ -98,7 +98,7 @@ const BlogContent = ({ params }) => {
               <Image
                 src={`${process.env.NEXT_PUBLIC_API_URL}${blog.FeatureImage.url}`}
                 alt={blog.FeatureImage.alternativeText || blog.Title}
-                className="w-full md:h-[530px]"
+                className="w-full md:h-[530px] object-contain"
                 width={800}
                 height={530}
               />
