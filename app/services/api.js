@@ -69,9 +69,10 @@ export const getNewArrivalsProduct = async () => {
   }
 };
 
-export const getBlogs = async () => {
+export const getBlogs = async (searchQuery = '') => {
   try {
-    const response = await api.get('/api/blogs?populate=*');
+    const searchFilter = searchQuery ? `&filters[Title][$containsi]=${searchQuery}` : '';
+    const response = await api.get(`/api/blogs?populate=*${searchFilter}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching blogs:', error);
