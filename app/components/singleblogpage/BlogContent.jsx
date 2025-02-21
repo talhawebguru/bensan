@@ -5,7 +5,7 @@ import ProfilePhoto from "@/public/images/profileComments.png";
 import PostComment from "./PostComment";
 import RelatedBlogs from "./RelatedBlogs";
 import { CiSearch } from "react-icons/ci";
-import { getBlogBySlug, getLatestBlogs } from "@/app/services/api";
+import { getBlogBySlug, getLatestBlogs, getRelatedBlogs } from "@/app/services/api";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import RichTextRender from "./RixhTextRender";
@@ -16,15 +16,23 @@ const BlogContent = ({ params }) => {
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [latestBlogs, setLatestBlogs] = useState([]);
+  const [relatedBlogs, setRelatedBlogs] = useState([]);
 
   useEffect(() => {
     if (blogSlug) {
       const fetchBlog = async () => {
         try {
           const data = await getBlogBySlug(blogSlug);
-          if (data.data && data.data.length > 0) {
-            setBlog(data.data[0]);
-          }
+          if (data.data) {
+            const blogData = data.data[0];
+            setBlog(blogData);        
+            // Fetch related blogs based on the first category of the blog
+            if (blogData.categories && blogData.categories.length > 0) {
+              const categorySlug = blogData.categories[0].slug;
+              const relatedBlogsData = await getRelatedBlogs(categorySlug, blogData.slug);
+              setRelatedBlogs(relatedBlogsData.data);
+            }
+        }
         } catch (error) {
           console.error("Error fetching blog:", error);
         } finally {
@@ -48,6 +56,8 @@ const BlogContent = ({ params }) => {
 
     fetchLatestBlogs();
   }, []);
+
+  console.log(relatedBlogs)
 
   if (loading) {
     return (
@@ -151,7 +161,7 @@ const BlogContent = ({ params }) => {
                     height={85}
                   />
                   <div>
-                    <h3 className="w-[257px] h-14 text-[#1f1813] text-base font-medium font-primary leading-normal">
+                    <h3 className="w-[257px] h-12 text-[#1f1813] text-base font-medium font-primary leading-normal line-clamp-2 text-ellipsis overflow-hidden">
                       {latestBlog.Title}
                     </h3>
                     <p className="w-[216px] h-4 text-[#9d9996] text-[13px] font-normal font-primary leading-tight">
@@ -164,7 +174,7 @@ const BlogContent = ({ params }) => {
             {/* Recent Post End here */}
           </motion.div>
         </motion.div>
-        <RelatedBlogs />
+        <RelatedBlogs relatedBlogs={relatedBlogs} />
       </div>
     </>
   );

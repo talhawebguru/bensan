@@ -44,15 +44,15 @@ const Blogs = ({ blogs, loading }) => {
       }}
     >
       {blogs.map((blog, index) => (
-        <Link href={`/blogs/${blog.Slug}`} key={index}>
-          <motion.div
-            key={index}
-            className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden"
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
-            }}
-          >
+        <motion.div
+          key={index}
+          className="bg-white shadow-lg rounded-lg overflow-hidden w-full h-full"
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 },
+          }}
+        >
+          <Link href={`/blogs/${blog.Slug}`}>
             <Image
               className="w-full h-56 object-cover"
               src={`${process.env.NEXT_PUBLIC_API_URL}${blog.FeatureImage.url}`}
@@ -61,17 +61,15 @@ const Blogs = ({ blogs, loading }) => {
               height={200}
             />
             <div className="p-4">
-              <h2 className="text-[#000f25] text-2xl font-semibold font-primary leading-7">
+              <h2 className="text-[#000f25] text-2xl font-semibold font-primary leading-7 h-[88px] line-clamp-3 text-ellipsis overflow-hidden">
                 {blog.Title}
               </h2>
-              <p
-                className="mt-3 inline-flex items-center text-[#232323] text-base font-medium font-primary leading-normal hover:underline"
-              >
+              <p className="mt-3 inline-flex items-center text-[#232323] text-base font-medium font-primary leading-normal hover:underline">
                 Read More →
               </p>
             </div>
-          </motion.div>
-        </Link>
+          </Link>
+        </motion.div>
       ))}
     </motion.div>
   );

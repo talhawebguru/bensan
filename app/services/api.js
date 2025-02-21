@@ -89,6 +89,16 @@ export const getLatestBlogs = async (limit = 3) => {
   }
 };
 
+export const getRelatedBlogs = async (categorySlug, excludeBlogSlug, limit = 3) => {
+  try {
+    const response = await api.get(`/api/blogs?populate=*&filters[categories][slug][$eq]=${categorySlug}&filters[Slug][$ne]=${excludeBlogSlug}&pagination[limit]=${limit}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching related blogs:', error);
+    throw error;
+  }
+};
+
 export const getBlogBySlug = async (slug) => {
   try {
     const response = await api.get(`/api/blogs`, {
