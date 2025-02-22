@@ -18,6 +18,7 @@ import { BsDownload } from "react-icons/bs";
 import { LuDownload } from "react-icons/lu";
 import { FaFilePdf } from "react-icons/fa";
 import Link from "next/link";
+import RelatedProducts from "./RelatedProducts";
 
 
 const Page = ({params}) => {
@@ -137,8 +138,12 @@ const Page = ({params}) => {
     title,
     Descripition,
     Image: Images,
+    categories,
     shopNow
   } = product;
+
+  const categorySlug = categories && categories.length > 0 ? categories[1].slug : null;
+
 
   return (
     <motion.div variants={pageVariants} initial="hidden" animate="visible">
@@ -383,6 +388,8 @@ const Page = ({params}) => {
         onClose={() => setIsPopupOpen(false)}
         productName={Name}
       />
+      <RelatedProducts categorySlug={categorySlug}
+        excludeProductSlug={productslug}/>
     </motion.div>
   );
 };

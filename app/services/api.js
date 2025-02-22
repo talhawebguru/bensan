@@ -39,6 +39,23 @@ export const getProductsByCategory = async (categorySlug, page = 1, pageSize = 2
   }
 };
 
+export const getRelatedProductsByCategory = async (categorySlug, excludeProductSlug, limit = 5) => {
+  try {
+    const response = await api.get(`/api/products`, {
+      params: {
+        'populate': '*',
+        'filters[categories][slug][$eq]': categorySlug,
+        'filters[slug][$ne]': excludeProductSlug,
+        'pagination[limit]': limit,
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching products for category ${categorySlug}:`, error);
+    throw error;
+  }
+};
+
 export const getCategories = async () => {
   try {
     const response = await api.get('/api/categories?sort=name:asc');

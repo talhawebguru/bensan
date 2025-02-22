@@ -19,6 +19,7 @@ import { BsDownload } from "react-icons/bs";
 import { LuDownload } from "react-icons/lu";
 import { FaFilePdf } from "react-icons/fa";
 import Link from "next/link";
+import RelatedProducts from "./RelatedProducts";
  
 const Page = () => {
   const router = useRouter();
@@ -133,7 +134,9 @@ const Page = () => {
     return <div>Product not found</div>;
   }
 
-  const { Name, title, Descripition, Image: Images,shopNow } = product;
+  const { Name, title, Descripition, Image: Images, categories, shopNow } = product;
+
+  const categorySlug = categories && categories.length > 0 ? categories[1].slug : null;
 
   return (
     <motion.div variants={pageVariants} initial="hidden" animate="visible">
@@ -378,6 +381,8 @@ const Page = () => {
         onClose={() => setIsPopupOpen(false)}
         productName={Name}
       />
+      <RelatedProducts categorySlug={categorySlug}
+        excludeProductSlug={productslug}/>
     </motion.div>
   );
 };
