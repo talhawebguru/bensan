@@ -15,8 +15,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import RichTextRender from "./RixhTextRender";
 import { motion } from "framer-motion";
 import SocialShare from "./SocialShare";
-import { usePathname } from 'next/navigation'; // Add this import
-
+import { usePathname } from "next/navigation"; // Add this import
 
 const BlogContent = ({ params }) => {
   const { blogSlug } = params;
@@ -25,8 +24,8 @@ const BlogContent = ({ params }) => {
   const [latestBlogs, setLatestBlogs] = useState([]);
   const [relatedBlogs, setRelatedBlogs] = useState([]);
   const pathname = usePathname();
-  const blogUrl = typeof window !== 'undefined' ? `${window.location.origin}${pathname}` : '';
-  console.log("blogUrl", blogUrl)
+  const blogUrl =
+    typeof window !== "undefined" ? `${window.location.origin}${pathname}` : "";
 
   useEffect(() => {
     if (blogSlug) {
@@ -148,38 +147,38 @@ const BlogContent = ({ params }) => {
               <RichTextRender content={blog.content2} />
             </motion.div>
             <div className="flex items-center gap-4 flex-wrap mt-16">
-          <SocialShare
-            socialColor={"bg-[#3f5796]"}
-            socialName={"Facebook"}
-            url={blogUrl}
-            title={blog.Title}
-          />
-          <SocialShare
-            socialColor={"bg-[#12D26B]"}
-            socialName={"WhatsApp"}
-            url={blogUrl}
-            title={blog.Title}
-          />
-          <SocialShare
-            socialColor={"bg-[#2f9eee]"}
-            socialName={"Twitter"}
-            url={blogUrl}
-            title={blog.Title}
-          />
-          <SocialShare
-            socialColor={"bg-[#1775b2]"}
-            socialName={"Linkedin"}
-            url={blogUrl}
-            title={blog.Title}
-          />
-          <SocialShare
-            socialColor={"bg-[#be2329]"}
-            socialName={"Pinterest"}
-            url={blogUrl}
-            title={blog.Title}
-            image={`${process.env.NEXT_PUBLIC_API_URL}${blog.FeatureImage.url}`}
-          />
-        </div>
+              <SocialShare
+                socialColor={"bg-[#3f5796]"}
+                socialName={"Facebook"}
+                url={blogUrl}
+                title={blog.Title}
+              />
+              <SocialShare
+                socialColor={"bg-[#12D26B]"}
+                socialName={"WhatsApp"}
+                url={blogUrl}
+                title={blog.Title}
+              />
+              <SocialShare
+                socialColor={"bg-[#2f9eee]"}
+                socialName={"Twitter"}
+                url={blogUrl}
+                title={blog.Title}
+              />
+              <SocialShare
+                socialColor={"bg-[#1775b2]"}
+                socialName={"Linkedin"}
+                url={blogUrl}
+                title={blog.Title}
+              />
+              <SocialShare
+                socialColor={"bg-[#be2329]"}
+                socialName={"Pinterest"}
+                url={blogUrl}
+                title={blog.Title}
+                image={`${process.env.NEXT_PUBLIC_API_URL}${blog.FeatureImage.url}`}
+              />
+            </div>
           </motion.div>
           <motion.div
             className=""
@@ -191,16 +190,18 @@ const BlogContent = ({ params }) => {
             viewport={{ once: true }}
           >
             {/* Recent Post */}
-            <div className="mt-5 bg-white rounded border">
-              <div className="h-[60px] flex justify-start pl-4 items-center bg-[#a8366f] rounded">
-                <h2 className="text-white text-xl font-semibold font-primary leading-[30px]">
-                  Recent Posts
-                </h2>
+            <div className="mt-5 bg-[#F9F9F9] rounded ">
+              <div className="flex justify-center mb-5">
+                <div className="h-[37px] px-[21px] py-[13px] bg-white border border-black/5 justify-center items-center inline-flex mt-10 mx-auto">
+                  <h2 className="text-[#222823]/80 text-base font-semibold font-primary capitalize">
+                    Recent Posts
+                  </h2>
+                </div>
               </div>
               {latestBlogs.map((latestBlog) => (
                 <div
                   key={latestBlog.id}
-                  className="flex gap-4 items-center pl-4 py-6 border-b"
+                  className="flex flex-wrap gap-4 items-center pl-4 py-6 border-b"
                 >
                   <Image
                     src={`${process.env.NEXT_PUBLIC_API_URL}${latestBlog.FeatureImage.url}`}
@@ -208,15 +209,15 @@ const BlogContent = ({ params }) => {
                       latestBlog.FeatureImage.alternativeText ||
                       latestBlog.Title
                     }
-                    className="w-[85px] h-[85px]"
+                    className="w-full sm:w-[85px] h-[85px]"
                     width={85}
                     height={85}
                   />
                   <div>
-                    <h3 className="w-[257px] h-12 text-[#1f1813] text-base font-medium font-primary leading-normal line-clamp-2 text-ellipsis overflow-hidden">
+                    <h3 className="w-auto sm:w-[289px] text-[#222823] text-lg font-semibold font-primary capitalize line-clamp-2">
                       {latestBlog.Title}
                     </h3>
-                    <p className="w-[216px] h-4 text-[#9d9996] text-[13px] font-normal font-primary leading-tight">
+                    <p className="h-4 text-[#9d9996] text-[13px] font-normal font-primary leading-tight mt-4">
                       {new Date(latestBlog.createdAt).toLocaleDateString()}
                     </p>
                   </div>
@@ -226,6 +227,7 @@ const BlogContent = ({ params }) => {
             {/* Recent Post End here */}
           </motion.div>
         </motion.div>
+        <hr className="border border-[#EAE9E8] w-full mt-32" />
         <RelatedBlogs relatedBlogs={relatedBlogs} />
       </div>
     </>

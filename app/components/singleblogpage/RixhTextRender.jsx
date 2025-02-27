@@ -14,7 +14,7 @@ const RichTextRender = ({ content }) => {
         a: ({ node, ...props }) => (
           <a
             {...props}
-            className="text-[#222823] text-xl font-normal font-primary underline leading-[30px] hover:text-secondary-primary"
+            className="text-xl font-normal font-primary  leading-[30px] text-secondary-primary hover:bg-primary"
             target="_blank"
             rel="noopener noreferrer"
           />
@@ -22,9 +22,9 @@ const RichTextRender = ({ content }) => {
         img: ({ node, ...props }) => (
           <Image
             {...props}
-            className="w-full h-[500px] my-4 object-contain"
-            width="500"
-            height="500"
+            className="w-full h-[430px] my-4 object-cover"
+            width="430"
+            height="430"
           />
         ),
         h1: ({ node, ...props }) => (
