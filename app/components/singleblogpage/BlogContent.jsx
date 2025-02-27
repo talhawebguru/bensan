@@ -5,11 +5,18 @@ import ProfilePhoto from "@/public/images/profileComments.png";
 import PostComment from "./PostComment";
 import RelatedBlogs from "./RelatedBlogs";
 import { CiSearch } from "react-icons/ci";
-import { getBlogBySlug, getLatestBlogs, getRelatedBlogs } from "@/app/services/api";
+import {
+  getBlogBySlug,
+  getLatestBlogs,
+  getRelatedBlogs,
+} from "@/app/services/api";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import RichTextRender from "./RixhTextRender";
 import { motion } from "framer-motion";
+import SocialShare from "./SocialShare";
+import { usePathname } from 'next/navigation'; // Add this import
+
 
 const BlogContent = ({ params }) => {
   const { blogSlug } = params;
@@ -17,6 +24,9 @@ const BlogContent = ({ params }) => {
   const [loading, setLoading] = useState(true);
   const [latestBlogs, setLatestBlogs] = useState([]);
   const [relatedBlogs, setRelatedBlogs] = useState([]);
+  const pathname = usePathname();
+  const blogUrl = typeof window !== 'undefined' ? `${window.location.origin}${pathname}` : '';
+  console.log("blogUrl", blogUrl)
 
   useEffect(() => {
     if (blogSlug) {
@@ -25,14 +35,17 @@ const BlogContent = ({ params }) => {
           const data = await getBlogBySlug(blogSlug);
           if (data.data) {
             const blogData = data.data[0];
-            setBlog(blogData);        
+            setBlog(blogData);
             // Fetch related blogs based on the first category of the blog
             if (blogData.categories && blogData.categories.length > 0) {
               const categorySlug = blogData.categories[0].slug;
-              const relatedBlogsData = await getRelatedBlogs(categorySlug, blogData.slug);
+              const relatedBlogsData = await getRelatedBlogs(
+                categorySlug,
+                blogData.slug
+              );
               setRelatedBlogs(relatedBlogsData.data);
             }
-        }
+          }
         } catch (error) {
           console.error("Error fetching blog:", error);
         } finally {
@@ -57,7 +70,7 @@ const BlogContent = ({ params }) => {
     fetchLatestBlogs();
   }, []);
 
-  console.log(relatedBlogs)
+  console.log(relatedBlogs);
 
   if (loading) {
     return (
@@ -95,7 +108,7 @@ const BlogContent = ({ params }) => {
           }}
         >
           <motion.div
-            className="flex lg:col-span-2 flex-col gap-6"
+            className="flex lg:col-span-2 flex-col "
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 },
@@ -103,8 +116,22 @@ const BlogContent = ({ params }) => {
             whileInView="visible"
             viewport={{ once: true }}
           >
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <Image
+                src={`${process.env.NEXT_PUBLIC_API_URL}${blog.FeatureImage.url}`}
+                alt={blog.FeatureImage.alternativeText || blog.Title}
+                className="w-full md:h-[390px] object-cover"
+                width={800}
+                height={390}
+              />
+            </motion.div>
             <motion.h1
-              className="text-[#222823] text-2xl md:text-4xl font-semibold font-primary capitalize"
+              className="text-[#222823] text-4xl font-semibold font-primary capitalize mt-12"
               initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -116,24 +143,43 @@ const BlogContent = ({ params }) => {
               initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <Image
-                src={`${process.env.NEXT_PUBLIC_API_URL}${blog.FeatureImage.url}`}
-                alt={blog.FeatureImage.alternativeText || blog.Title}
-                className="w-full md:h-[530px] object-contain"
-                width={800}
-                height={530}
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
               <RichTextRender content={blog.content2} />
             </motion.div>
+            <div className="flex items-center gap-4 flex-wrap mt-16">
+          <SocialShare
+            socialColor={"bg-[#3f5796]"}
+            socialName={"Facebook"}
+            url={blogUrl}
+            title={blog.Title}
+          />
+          <SocialShare
+            socialColor={"bg-[#12D26B]"}
+            socialName={"WhatsApp"}
+            url={blogUrl}
+            title={blog.Title}
+          />
+          <SocialShare
+            socialColor={"bg-[#2f9eee]"}
+            socialName={"Twitter"}
+            url={blogUrl}
+            title={blog.Title}
+          />
+          <SocialShare
+            socialColor={"bg-[#1775b2]"}
+            socialName={"Linkedin"}
+            url={blogUrl}
+            title={blog.Title}
+          />
+          <SocialShare
+            socialColor={"bg-[#be2329]"}
+            socialName={"Pinterest"}
+            url={blogUrl}
+            title={blog.Title}
+            image={`${process.env.NEXT_PUBLIC_API_URL}${blog.FeatureImage.url}`}
+          />
+        </div>
           </motion.div>
           <motion.div
             className=""
@@ -152,10 +198,16 @@ const BlogContent = ({ params }) => {
                 </h2>
               </div>
               {latestBlogs.map((latestBlog) => (
-                <div key={latestBlog.id} className="flex gap-4 items-center pl-4 py-6 border-b">
+                <div
+                  key={latestBlog.id}
+                  className="flex gap-4 items-center pl-4 py-6 border-b"
+                >
                   <Image
                     src={`${process.env.NEXT_PUBLIC_API_URL}${latestBlog.FeatureImage.url}`}
-                    alt={latestBlog.FeatureImage.alternativeText || latestBlog.Title}
+                    alt={
+                      latestBlog.FeatureImage.alternativeText ||
+                      latestBlog.Title
+                    }
                     className="w-[85px] h-[85px]"
                     width={85}
                     height={85}
