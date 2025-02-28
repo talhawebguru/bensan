@@ -417,7 +417,9 @@ const Page = ({params}) => {
           <h2 className="text-black text-xl font-semibold font-primary capitalize">Where to Buy?</h2>
           <div className="mt-5">
           <RichTextRender content={whereBuy} />
+          {productInterLinking && (
           <RichTextRender content={productInterLinking} />
+          )}
           </div>
         </div>
           )}
