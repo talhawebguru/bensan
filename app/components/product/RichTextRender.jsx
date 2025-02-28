@@ -8,7 +8,7 @@ const RichTextRender = ({ content }) => {
       case "text":
         let text = node.text;
         if (node.bold) {
-          text = <strong key={index}>{text}</strong>;
+          text = <strong key={index} className="mt-5 block">{text}</strong>;
         }
         if (node.underline) {
           text = <u key={index}>{text}</u>;
@@ -16,7 +16,7 @@ const RichTextRender = ({ content }) => {
         return text;
       case "link":
         return (
-          <a key={index} href={node.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+          <a key={index} href={node.url} target="_blank" rel="noopener noreferrer" className=" text-secondary-primary hover:bg-primary">
             {node.children.map(renderNode)}
           </a>
         );

@@ -139,7 +139,11 @@ const Page = ({params}) => {
     Descripition,
     Image: Images,
     categories,
-    shopNow
+    shopNow,
+    contentNo,
+    reOrderNo,
+    whereBuy,
+    productInterLinking,
   } = product;
 
   const categorySlug = categories && categories.length > 0 ? categories[1].slug : null;
@@ -221,24 +225,166 @@ const Page = ({params}) => {
             variants={contentVariants}
             className="mt-32 lg:mt-0 min-h-[600px]"
           >
-            <motion.h3
-              variants={contentVariants}
-              className="text-[#a8366f] text-lg font-semibold font-primary capitalize mt-5"
-            >
-              Bensan
-            </motion.h3>
-            <motion.h1
-              variants={contentVariants}
-              className="text-black text-[32px] font-semibold font-primary capitalize "
-            >
-              {Name}
-            </motion.h1>
+           <div className="grid grid-cols-2">
+              <div>
+                <motion.h3
+                  variants={contentVariants}
+                  className="text-[#a8366f] text-lg font-semibold font-primary capitalize mt-5"
+                >
+                  Bensan
+                </motion.h3>
+                <motion.h1
+                  variants={contentVariants}
+                  className="text-black text-[32px] font-semibold font-primary capitalize "
+                >
+                  {Name}
+                </motion.h1>
+              </div>
+              <div className="self-end  place-content-end place-items-end">
+                <div className="relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleMenuToggle();
+                    }}
+                    className="download-button px-4 h-[38px] bg-[#e1e1e1] rounded justify-center items-center gap-3 inline-flex text-black text-base font-semibold font-primary capitalize"
+                  >
+                    <BsDownload /> Catalog PDF
+                  </button>
+                  {isMenuOpen && (
+                    <motion.div
+                      className="download-menu absolute z-50 left-0 top-9 translate-x-[-50%] translate-y-[-50%] mt-2 w-48 py-1 bg-white border border-black/10 shadow-[-26px_50px_14.100000381469727px_0px_rgba(0,0,0,0.06)] rounded-md"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ul>
+                        {product.downloadTDS ? (
+                          <a
+                            href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadTDS.url}`}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setIsMenuOpen(false); // Close menu after clicking download
+                            }}
+                          >
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between border-b border-[#dddddd]">
+                              <div className="flex items-center justify-center gap-2">
+                                <FaFilePdf />
+                                <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                  TDS
+                                </p>
+                              </div>
+                              <LuDownload />
+                            </li>
+                          </a>
+                        ) : (
+                          <li className="px-4 py-2 flex items-center justify-between border-b border-[#dddddd] opacity-50">
+                            <div className="flex items-center justify-center gap-2">
+                              <FaFilePdf />
+                              <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                TDS
+                              </p>
+                            </div>
+                            <p className="text-sm text-gray-500">
+                              Not available
+                            </p>
+                          </li>
+                        )}
+                        {product.downloadSDS ? (
+                          <a
+                            href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadSDS.url}`}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setIsMenuOpen(false); // Close menu after clicking download
+                            }}
+                          >
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between border-b border-[#dddddd]">
+                              <div className="flex items-center justify-center gap-2">
+                                <FaFilePdf />
+                                <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                  SDS
+                                </p>
+                              </div>
+                              <LuDownload />
+                            </li>
+                          </a>
+                        ) : (
+                          <li className="px-4 py-2 flex items-center justify-between border-b border-[#dddddd] opacity-50">
+                            <div className="flex items-center justify-center gap-2">
+                              <FaFilePdf />
+                              <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                SDS
+                              </p>
+                            </div>
+                            <p className="text-sm text-gray-500">
+                              Not available
+                            </p>
+                          </li>
+                        )}
+                        {product.downloadCatalog ? (
+                          <a
+                            href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadCatalog.url}`}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setIsMenuOpen(false); // Close menu after clicking download
+                            }}
+                          >
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between">
+                              <div className="flex items-center justify-center gap-2">
+                                <FaFilePdf />
+                                <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                  Catalog
+                                </p>
+                              </div>
+                              <LuDownload />
+                            </li>
+                          </a>
+                        ) : (
+                          <li className="px-4 py-2 flex items-center justify-between opacity-50">
+                            <div className="flex items-center justify-center gap-2">
+                              <FaFilePdf />
+                              <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                Catalog
+                              </p>
+                            </div>
+                            <p className="text-sm text-gray-500">
+                              Not available
+                            </p>
+                          </li>
+                        )}
+                      </ul>
+                    </motion.div>
+                  )}
+                </div>
+              </div>
+            </div>
             <motion.h2
               variants={contentVariants}
               className="text-black text-xl font-normal font-primary capitalize mt-5"
             >
               {title}
             </motion.h2>
+            {contentNo && (
+            <motion.h2
+              variants={contentVariants}
+              className="text-[#46aaf2] text-xl font-semibold font-primary capitalize mt-6"
+            >
+              Content <span className="text-[#1c1c1c] text-xl font-semibold font-primary capitalize ml-8">: {contentNo}</span>
+            </motion.h2>
+            )}
+            { reOrderNo && (
+              <motion.h2
+              variants={contentVariants}
+              className="text-[#46aaf2] text-xl font-semibold font-primary capitalize mt-5"
+            >
+              Reorder no <span className="text-[#1c1c1c] text-xl font-semibold font-primary capitalize">: {reOrderNo}</span>
+            </motion.h2>)}
             <motion.div
               variants={contentVariants}
               className="text-black text-base font-normal font-primary capitalize mt-6"
@@ -249,139 +395,32 @@ const Page = ({params}) => {
               variants={contentVariants}
               className="flex flex-wrap justify-center gap-7 mt-8"
             >
-              {shopNow && (<Link href={shopNow} target="_blank">
-              <button
-                className=" px-2 py-2 flex justify-center items-center bg-[#7D53A7] rounded text-white text-base font-semibold font-primary capitalize"
-              >
-               Shop {Name} on Jurhy
-              </button>
-              </Link>)}
+              {shopNow && (
+                <Link href={shopNow} target="_blank">
+                  <button className=" px-2 py-2 flex justify-center items-center bg-[#A8366F] rounded text-white text-base font-semibold font-primary capitalize">
+                    Shop {Name} on Jurhy
+                  </button>
+                </Link>
+              )}
               <button
                 onClick={() => setIsPopupOpen(true)}
-                className="w-[205px] h-[38px]  flex justify-center items-center bg-[#a8366f] rounded text-white text-base font-semibold font-primary capitalize"
+                className="w-[205px] h-[38px]  flex justify-center items-center bg-[#F4F4F4] rounded text-[#1C1C1C] text-base font-semibold font-primary capitalize"
               >
                 Request for quote
               </button>
             </motion.div>
-            <div className="flex justify-center items-center gap-5 mt-8">
-              <div className="relative">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleMenuToggle();
-                  }}
-                  className="download-button w-[129px] h-[38px] bg-[#e1e1e1] rounded justify-center items-center gap-3 inline-flex text-black text-base font-semibold font-primary capitalize"
-                >
-                  <BsDownload /> Resource
-                </button>
-                {isMenuOpen && (
-                  <motion.div
-                    className="download-menu absolute z-50 left-0 top-9 translate-x-[-50%] translate-y-[-50%] mt-2 w-48 py-1 bg-white border border-black/10 shadow-[-26px_50px_14.100000381469727px_0px_rgba(0,0,0,0.06)] rounded-md"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <ul>
-                      {product.downloadTDS ? (
-                        <a
-                          href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadTDS.url}`}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setIsMenuOpen(false); // Close menu after clicking download
-                          }}
-                        >
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between border-b border-[#dddddd]">
-                            <div className="flex items-center justify-center gap-2">
-                              <FaFilePdf />
-                              <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
-                                TDS
-                              </p>
-                            </div>
-                            <LuDownload />
-                          </li>
-                        </a>
-                      ) : (
-                        <li className="px-4 py-2 flex items-center justify-between border-b border-[#dddddd] opacity-50">
-                          <div className="flex items-center justify-center gap-2">
-                            <FaFilePdf />
-                            <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
-                              TDS
-                            </p>
-                          </div>
-                          <p className="text-sm text-gray-500">Not available</p>
-                        </li>
-                      )}
-                      {product.downloadSDS ? (
-                        <a
-                          href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadSDS.url}`}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setIsMenuOpen(false); // Close menu after clicking download
-                          }}
-                        >
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between border-b border-[#dddddd]">
-                            <div className="flex items-center justify-center gap-2">
-                              <FaFilePdf />
-                              <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
-                                SDS
-                              </p>
-                            </div>
-                            <LuDownload />
-                          </li>
-                        </a>
-                      ) : (
-                        <li className="px-4 py-2 flex items-center justify-between border-b border-[#dddddd] opacity-50">
-                          <div className="flex items-center justify-center gap-2">
-                            <FaFilePdf />
-                            <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
-                              SDS
-                            </p>
-                          </div>
-                          <p className="text-sm text-gray-500">Not available</p>
-                        </li>
-                      )}
-                      {product.downloadCatalog ? (
-                        <a
-                          href={`${process.env.NEXT_PUBLIC_API_URL}${product.downloadCatalog.url}`}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setIsMenuOpen(false); // Close menu after clicking download
-                          }}
-                        >
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between">
-                            <div className="flex items-center justify-center gap-2">
-                              <FaFilePdf />
-                              <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
-                                Catalog
-                              </p>
-                            </div>
-                            <LuDownload />
-                          </li>
-                        </a>
-                      ) : (
-                        <li className="px-4 py-2 flex items-center justify-between opacity-50">
-                          <div className="flex items-center justify-center gap-2">
-                            <FaFilePdf />
-                            <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
-                              Catalog
-                            </p>
-                          </div>
-                          <p className="text-sm text-gray-500">Not available</p>
-                        </li>
-                      )}
-                    </ul>
-                  </motion.div>
-                )}
-              </div>
-            </div>
           </motion.div>
         </motion.div>
+        <hr className="border border-black/20 my-14"/>
+        {whereBuy && ( 
+        <div className="my-14">
+          <h2 className="text-black text-xl font-semibold font-primary capitalize">Where to Buy?</h2>
+          <div className="mt-5">
+          <RichTextRender content={whereBuy} />
+          <RichTextRender content={productInterLinking} />
+          </div>
+        </div>
+          )}
       </div>
       <Popup
         isOpen={isPopupOpen}
