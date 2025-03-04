@@ -250,7 +250,7 @@ const Page = () => {
                     }}
                     className="download-button px-4 h-[38px] bg-[#e1e1e1] rounded justify-center items-center gap-3 inline-flex text-black text-base font-semibold font-primary capitalize"
                   >
-                    <BsDownload /> Catalog PDF
+                    <BsDownload /> Download Resource
                   </button>
                   {isMenuOpen && (
                     <motion.div
@@ -372,20 +372,27 @@ const Page = () => {
               {title}
             </motion.h2>
             {contentNo && (
-            <motion.h2
-              variants={contentVariants}
-              className="text-[#46aaf2] text-xl font-semibold font-primary capitalize mt-6"
-            >
-              Content <span className="text-[#1c1c1c] text-xl font-semibold font-primary capitalize ml-8">: {contentNo}</span>
-            </motion.h2>
-            )}
-            { reOrderNo && (
               <motion.h2
-              variants={contentVariants}
-              className="text-[#46aaf2] text-xl font-semibold font-primary capitalize mt-5"
-            >
-              Reorder no <span className="text-[#1c1c1c] text-xl font-semibold font-primary capitalize">: {reOrderNo}</span>
-            </motion.h2>)}
+                variants={contentVariants}
+                className="text-[#46aaf2] text-xl font-semibold font-primary capitalize mt-6"
+              >
+                Content{" "}
+                <span className="text-[#1c1c1c] text-xl font-semibold font-primary capitalize ml-8">
+                  : {contentNo}
+                </span>
+              </motion.h2>
+            )}
+            {reOrderNo && (
+              <motion.h2
+                variants={contentVariants}
+                className="text-[#46aaf2] text-xl font-semibold font-primary capitalize mt-5"
+              >
+                Reorder no{" "}
+                <span className="text-[#1c1c1c] text-xl font-semibold font-primary capitalize">
+                  : {reOrderNo}
+                </span>
+              </motion.h2>
+            )}
             <motion.div
               variants={contentVariants}
               className="text-black text-base font-normal font-primary capitalize mt-6"
@@ -412,18 +419,20 @@ const Page = () => {
             </motion.div>
           </motion.div>
         </motion.div>
-        <hr className="border border-black/20 my-14"/>
-        {whereBuy || productInterLinking && ( 
+        <hr className="border border-black/20 my-14" />
         <div className="my-14">
-          <h2 className="text-black text-xl font-semibold font-primary capitalize">Where to Buy?</h2>
-          <div className="mt-5">
-          {whereBuy && (<RichTextRender content={whereBuy} />)} 
-          {productInterLinking && (
-          <RichTextRender content={productInterLinking} />
+          {whereBuy && (
+            <h2 className="text-black text-xl font-semibold font-primary capitalize">
+              Where to Buy?
+            </h2>
           )}
+          <div className="mt-5">
+            {whereBuy && <RichTextRender content={whereBuy} />}
+            {productInterLinking && (
+              <RichTextRender content={productInterLinking} />
+            )}
           </div>
         </div>
-          )}
       </div>
       <Popup
         isOpen={isPopupOpen}

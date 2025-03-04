@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
-import { useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Thumbs } from "swiper/modules";
 import Image from "next/image";
@@ -20,8 +20,7 @@ import { FaFilePdf } from "react-icons/fa";
 import Link from "next/link";
 import RelatedProducts from "./RelatedProducts";
 
-
-const Page = ({params}) => {
+const Page = ({ params }) => {
   const router = useRouter();
   const { category, productslug } = params;
   const [product, setProduct] = useState(null);
@@ -80,18 +79,18 @@ const Page = ({params}) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-    useEffect(() => {
-      const observer = new MutationObserver(() => {
-        const zoomImage = document.querySelector(".iiz__zoom-img");
-        if (zoomImage && !zoomImage.alt) {
-          zoomImage.alt =`Zoom Product image`;
-        }
-      });
-  
-      observer.observe(document.body, { childList: true, subtree: true });
-  
-      return () => observer.disconnect();
-    }, []);
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      const zoomImage = document.querySelector(".iiz__zoom-img");
+      if (zoomImage && !zoomImage.alt) {
+        zoomImage.alt = `Zoom Product image`;
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleGlobalClick = (e) => {
@@ -146,8 +145,8 @@ const Page = ({params}) => {
     productInterLinking,
   } = product;
 
-  const categorySlug = categories && categories.length > 0 ? categories[1].slug : null;
-
+  const categorySlug =
+    categories && categories.length > 0 ? categories[1].slug : null;
 
   return (
     <motion.div variants={pageVariants} initial="hidden" animate="visible">
@@ -225,7 +224,7 @@ const Page = ({params}) => {
             variants={contentVariants}
             className="mt-32 lg:mt-0 min-h-[600px]"
           >
-           <div className="grid grid-cols-2">
+            <div className="grid grid-cols-2">
               <div>
                 <motion.h3
                   variants={contentVariants}
@@ -249,7 +248,7 @@ const Page = ({params}) => {
                     }}
                     className="download-button px-4 h-[38px] bg-[#e1e1e1] rounded justify-center items-center gap-3 inline-flex text-black text-base font-semibold font-primary capitalize"
                   >
-                    <BsDownload /> Catalog PDF
+                    <BsDownload /> Download Resource
                   </button>
                   {isMenuOpen && (
                     <motion.div
@@ -371,20 +370,27 @@ const Page = ({params}) => {
               {title}
             </motion.h2>
             {contentNo && (
-            <motion.h2
-              variants={contentVariants}
-              className="text-[#46aaf2] text-xl font-semibold font-primary capitalize mt-6"
-            >
-              Content <span className="text-[#1c1c1c] text-xl font-semibold font-primary capitalize ml-8">: {contentNo}</span>
-            </motion.h2>
-            )}
-            { reOrderNo && (
               <motion.h2
-              variants={contentVariants}
-              className="text-[#46aaf2] text-xl font-semibold font-primary capitalize mt-5"
-            >
-              Reorder no <span className="text-[#1c1c1c] text-xl font-semibold font-primary capitalize">: {reOrderNo}</span>
-            </motion.h2>)}
+                variants={contentVariants}
+                className="text-[#46aaf2] text-xl font-semibold font-primary capitalize mt-6"
+              >
+                Content{" "}
+                <span className="text-[#1c1c1c] text-xl font-semibold font-primary capitalize ml-8">
+                  : {contentNo}
+                </span>
+              </motion.h2>
+            )}
+            {reOrderNo && (
+              <motion.h2
+                variants={contentVariants}
+                className="text-[#46aaf2] text-xl font-semibold font-primary capitalize mt-5"
+              >
+                Reorder no{" "}
+                <span className="text-[#1c1c1c] text-xl font-semibold font-primary capitalize">
+                  : {reOrderNo}
+                </span>
+              </motion.h2>
+            )}
             <motion.div
               variants={contentVariants}
               className="text-black text-base font-normal font-primary capitalize mt-6"
@@ -411,26 +417,30 @@ const Page = ({params}) => {
             </motion.div>
           </motion.div>
         </motion.div>
-        <hr className="border border-black/20 my-14"/>
-        {whereBuy && ( 
+        <hr className="border border-black/20 my-14" />
         <div className="my-14">
-          <h2 className="text-black text-xl font-semibold font-primary capitalize">Where to Buy?</h2>
-          <div className="mt-5">
-          <RichTextRender content={whereBuy} />
-          {productInterLinking && (
-          <RichTextRender content={productInterLinking} />
+          {whereBuy && (
+            <h2 className="text-black text-xl font-semibold font-primary capitalize">
+              Where to Buy?
+            </h2>
           )}
+          <div className="mt-5">
+            {whereBuy && <RichTextRender content={whereBuy} />}
+            {productInterLinking && (
+              <RichTextRender content={productInterLinking} />
+            )}
           </div>
         </div>
-          )}
       </div>
       <Popup
         isOpen={isPopupOpen}
         onClose={() => setIsPopupOpen(false)}
         productName={Name}
       />
-      <RelatedProducts categorySlug={categorySlug}
-        excludeProductSlug={productslug}/>
+      <RelatedProducts
+        categorySlug={categorySlug}
+        excludeProductSlug={productslug}
+      />
     </motion.div>
   );
 };
