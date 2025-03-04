@@ -413,11 +413,11 @@ const Page = () => {
           </motion.div>
         </motion.div>
         <hr className="border border-black/20 my-14"/>
-        {whereBuy && ( 
+        {whereBuy || productInterLinking && ( 
         <div className="my-14">
           <h2 className="text-black text-xl font-semibold font-primary capitalize">Where to Buy?</h2>
           <div className="mt-5">
-          <RichTextRender content={whereBuy} />
+          {whereBuy && (<RichTextRender content={whereBuy} />)} 
           {productInterLinking && (
           <RichTextRender content={productInterLinking} />
           )}
