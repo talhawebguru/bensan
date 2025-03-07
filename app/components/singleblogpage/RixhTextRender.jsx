@@ -16,7 +16,6 @@ const RichTextRender = ({ content }) => {
             {...props}
             className="text-xl font-normal font-primary  leading-[30px] text-secondary-primary hover:bg-primary"
             target="_blank"
-            rel="noopener noreferrer"
           />
         ),
         img: ({ node, ...props }) => (

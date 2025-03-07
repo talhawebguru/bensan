@@ -16,7 +16,7 @@ const RichTextRender = ({ content }) => {
         return text;
       case "link":
         return (
-          <a key={index} href={node.url} target="_blank" rel="noopener noreferrer" className=" text-secondary-primary hover:bg-primary">
+          <a key={index} href={node.url} target="_blank"  className=" text-secondary-primary hover:bg-primary">
             {node.children.map(renderNode)}
           </a>
         );
