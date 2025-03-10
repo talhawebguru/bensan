@@ -18,7 +18,7 @@ const Hero = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
-        Discover Nice Articles Here
+        Insights & Innovations in Infection Control
       </motion.h1>
       <motion.p
         className="text-[#111111] text-base font-normal font-primary leading-normal mt-4"
@@ -26,7 +26,7 @@ const Hero = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
       >
-        Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings and even apply custom CSS to this text in the module.
+        Stay informed with the latest trends, research, and advancements in infection control. Explore expert insights, industry updates, and innovative solutions designed to create a safer, healthier future for modern healthcare.
       </motion.p>
     </div>
   );

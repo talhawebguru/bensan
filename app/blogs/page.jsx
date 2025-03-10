@@ -2,8 +2,6 @@ import React from "react";
 import Header from "../components/blogs/Header";
 import Hero from "../components/blogs/Hero";
 import BlogsComponent from "../components/blogs/BlogsComponent";
-import Link from "next/link";
-import { FaArrowDown, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { getBlogs } from "@/app/services/api";
 
 export async function generateStaticParams() {
@@ -17,6 +15,15 @@ export async function generateStaticParams() {
     return [];
   }
 }
+
+export const metadata = {
+  title: "Latest Insights & Innovations in Infection Control | Bensan Blog",
+  description: "Explore expert insights, industry trends, and cutting-edge solutions in infection control. Stay ahead with Bensan’s latest updates for a safer, healthier future.",
+  alternates: {
+    canonical: 'https://bensano.com/blogs',
+  },
+  robots: "index, follow",
+};
 
 const page = () => {
   return (

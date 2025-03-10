@@ -11,6 +11,7 @@ export const metadata = {
   alternates: {
     canonical: 'https://bensano.com/about',
   },
+  robots: "index, follow",
 };
 
 
