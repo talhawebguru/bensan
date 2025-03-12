@@ -16,6 +16,7 @@ import RichTextRender from "./RixhTextRender";
 import { motion } from "framer-motion";
 import SocialShare from "./SocialShare";
 import { usePathname } from "next/navigation"; // Add this import
+import Link from "next/link";
 
 const BlogContent = ({ params }) => {
   const { blogSlug } = params;
@@ -124,7 +125,7 @@ const BlogContent = ({ params }) => {
               <Image
                 src={`${process.env.NEXT_PUBLIC_API_URL}${blog.FeatureImage.url}`}
                 alt={blog.FeatureImage.alternativeText || blog.Title}
-                className="w-full md:h-[390px] object-cover"
+                className="w-full md:h-[390px] object-contain"
                 width={800}
                 height={390}
               />
@@ -199,29 +200,32 @@ const BlogContent = ({ params }) => {
                 </div>
               </div>
               {latestBlogs.map((latestBlog) => (
-                <div
+                <Link
                   key={latestBlog.id}
-                  className="flex flex-wrap gap-4 items-center pl-4 py-6 border-b"
+                  href={`/blogs/${latestBlog.Slug}`}
+                  className=""
                 >
-                  <Image
-                    src={`${process.env.NEXT_PUBLIC_API_URL}${latestBlog.FeatureImage.url}`}
-                    alt={
-                      latestBlog.FeatureImage.alternativeText ||
-                      latestBlog.Title
-                    }
-                    className="w-full sm:w-[85px] h-[85px]"
-                    width={85}
-                    height={85}
-                  />
-                  <div>
-                    <h3 className="w-auto sm:w-[289px] text-[#222823] text-lg font-semibold font-primary capitalize line-clamp-2">
-                      {latestBlog.Title}
-                    </h3>
-                    <p className="h-4 text-[#9d9996] text-[13px] font-normal font-primary leading-tight mt-4">
-                      {new Date(latestBlog.createdAt).toLocaleDateString()}
-                    </p>
+                  <div className="flex flex-wrap md:flex-nowrap justify-center lg:justify-normal gap-4 items-center pl-4 py-6 border-b cursor-pointer">
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_API_URL}${latestBlog.FeatureImage.url}`}
+                      alt={
+                        latestBlog.FeatureImage.alternativeText ||
+                        latestBlog.Title
+                      }
+                      className="w-full sm:w-[85px] h-[85px] object-contain"
+                      width={85}
+                      height={85}
+                    />
+                    <div>
+                      <h3 className="max-w-[289px] text-[#222823] text-lg font-semibold font-primary capitalize line-clamp-2">
+                        {latestBlog.Title}
+                      </h3>
+                      <p className="h-4 text-[#9d9996] text-[13px] font-normal font-primary leading-tight mt-4">
+                        {new Date(latestBlog.createdAt).toLocaleDateString()}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
             {/* Recent Post End here */}

@@ -21,13 +21,13 @@ const RichTextRender = ({ content }) => {
         img: ({ node, ...props }) => (
           <Image
             {...props}
-            className="w-full h-[430px] my-4 object-cover"
+            className="w-full h-[430px] my-4 object-contain"
             width="430"
             height="430"
           />
         ),
         h1: ({ node, ...props }) => (
-          <h1 {...props} className="text-3xl font-bold my-1 font-primary" />
+          <h1 {...props} className="text-4xl font-bold my-1 font-primary" />
         ),
         h2: ({ node, ...props }) => (
           <h2
@@ -36,7 +36,7 @@ const RichTextRender = ({ content }) => {
           />
         ),
         h3: ({ node, ...props }) => (
-          <h3 {...props} className="text-xl font-bold my-1 font-primary" />
+          <h3 {...props} className="text-2xl mt-10  my-1 font-semibold font-primary text-[#222823]" />
         ),
         p: ({ node, ...props }) => (
           <p

@@ -54,7 +54,7 @@ const Blogs = ({ blogs, loading }) => {
         >
           <Link href={`/blogs/${blog.Slug}`}>
             <Image
-              className="w-full h-56 object-cover"
+              className="w-full h-56 object-contain"
               src={`${process.env.NEXT_PUBLIC_API_URL}${blog.FeatureImage.url}`}
               alt={blog.FeatureImage.alternativeText}
               width={300}
