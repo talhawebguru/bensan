@@ -28,34 +28,47 @@ const BlogContent = ({ params }) => {
   const blogUrl =
     typeof window !== "undefined" ? `${window.location.origin}${pathname}` : "";
 
-  useEffect(() => {
-    if (blogSlug) {
-      const fetchBlog = async () => {
-        try {
-          const data = await getBlogBySlug(blogSlug);
-          if (data.data) {
-            const blogData = data.data[0];
-            setBlog(blogData);
-            // Fetch related blogs based on the first category of the blog
-            if (blogData.categories && blogData.categories.length > 0) {
-              const categorySlug = blogData.categories[0].slug;
-              const relatedBlogsData = await getRelatedBlogs(
-                categorySlug,
-                blogData.slug
-              );
-              setRelatedBlogs(relatedBlogsData.data);
+    useEffect(() => {
+      if (blogSlug) {
+        const fetchBlog = async () => {
+          try {
+            const data = await getBlogBySlug(blogSlug);
+            if (data.data && data.data.length > 0) {
+              const blogData = data.data[0];
+              setBlog(blogData);
+              
+              // Fetch related blogs based on the first category of the blog
+              let categorySlug = null;
+              
+              // Debug the categories structure
+              // console.log('Blog categories:', blogData.category);
+              
+              if (blogData.category) {
+                categorySlug = blogData.category.slug;
+                // console.log('Using category slug for related blogs:', categorySlug);
+                
+                if (categorySlug) {
+                  const relatedBlogsData = await getRelatedBlogs(
+                    categorySlug,
+                    blogData.slug
+                  );
+                  setRelatedBlogs(relatedBlogsData.data || []);
+                }
+              } else {
+                // console.log('No categories found for this blog');
+                setRelatedBlogs([]);
+              }
             }
+          } catch (error) {
+            console.error("Error fetching blog:", error);
+          } finally {
+            setLoading(false);
           }
-        } catch (error) {
-          console.error("Error fetching blog:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      fetchBlog();
-    }
-  }, [blogSlug]);
+        };
+    
+        fetchBlog();
+      }
+    }, [blogSlug]);
 
   useEffect(() => {
     const fetchLatestBlogs = async () => {
@@ -70,7 +83,7 @@ const BlogContent = ({ params }) => {
     fetchLatestBlogs();
   }, []);
 
-  console.log(relatedBlogs);
+  // console.log(relatedBlogs);
 
   if (loading) {
     return (

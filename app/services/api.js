@@ -108,11 +108,26 @@ export const getLatestBlogs = async (limit = 3) => {
 
 export const getRelatedBlogs = async (categorySlug, excludeBlogSlug, limit = 3) => {
   try {
-    const response = await api.get(`/api/blogs?populate=*&filters[categories][slug][$eq]=${categorySlug}&filters[Slug][$ne]=${excludeBlogSlug}&pagination[limit]=${limit}`);
+    // Check if categorySlug exists
+    if (!categorySlug) {
+      console.warn('No category slug provided for related blogs');
+      return { data: [] };
+    }
+    
+    const response = await api.get(`/api/blogs`, {
+      params: {
+        'populate': '*',
+        'filters[category][slug][$eq]': categorySlug,
+        'filters[Slug][$ne]': excludeBlogSlug,
+        'pagination[limit]': limit,
+        'sort': 'createdAt:desc'
+      }
+    });
     return response.data;
   } catch (error) {
     console.error('Error fetching related blogs:', error);
-    throw error;
+    console.error('Error details:', error.response?.data || error.message);
+    return { data: [] }; // Return empty data instead of throwing
   }
 };
 
