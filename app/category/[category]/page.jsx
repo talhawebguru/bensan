@@ -21,6 +21,7 @@ export async function generateMetadata({ params }) {
   let metaDescription;
   let metaRobots = "index, follow";
   let canonicalUrl = "https://bensano.com/category/" + category;
+  let metaKeywords;
 
   try {
     const data = await getCategories();
@@ -30,6 +31,7 @@ export async function generateMetadata({ params }) {
     if (categoryData) {
       metaTitle = categoryData.metaTitle;
       metaDescription = categoryData.metaDescripition;
+      metaKeywords = categoryData.metaKeyword;
     }
   } catch (error) {
     console.error(`Error fetching category metadata:`, error);
@@ -39,6 +41,7 @@ export async function generateMetadata({ params }) {
     title: metaTitle,
     description: metaDescription,
     robots: metaRobots,
+    keywords: metaKeywords,
     alternates: {
       canonical: canonicalUrl,
     },
@@ -57,10 +60,20 @@ export async function generateMetadata({ params }) {
   };
 }
 
-const Page= ({params}) => {
+async function Page({params}){
+    // Fetch category data
+    let categoryData = null;
+  
+    try {
+      const data = await getCategories();
+      // Find the matching category by slug
+      categoryData = data.data.find(cat => cat.slug === params.category);
+    } catch (error) {
+      console.error(`Error fetching category data:`, error);
+    }
   return (
     <>
-    <CategoryPage params={params}/>
+    <CategoryPage params={params} categoryData={categoryData} />
     </>
   );
 };

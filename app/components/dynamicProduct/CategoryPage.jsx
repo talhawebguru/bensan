@@ -9,8 +9,9 @@ import { getProducts, getProductsByCategory } from "@/app/services/api.js";
 import CategoryList from "@/app/components/product/CategoryList";
 import { FaArrowDown, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { motion } from "framer-motion";
+import RichTextRender from "../singleblogpage/RixhTextRender";
 
-const CategoryPage = ({ params }) => {
+const CategoryPage = ({ params, categoryData }) => {
   const router = useRouter();
   const { category } = params;
   const [products, setProducts] = useState([]);
@@ -232,6 +233,10 @@ const CategoryPage = ({ params }) => {
           </button>
         </div>
       )}
+      {/* End Pagination */}
+      <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 my-14">
+      <RichTextRender content={categoryData?.categoryDescripition}/>
+      </div>
     </>
   );
 };
