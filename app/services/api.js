@@ -150,3 +150,13 @@ export const inquirySendEmail = async (formData) => {
     throw error;
   }
 };
+
+export const marqueetext = async () =>{
+  try{
+    const response = await api.get('/api/marquee-text');
+    return response.data;
+  }catch(error){
+    console.error('Error fetching marquee text:', error);
+    throw error;
+  }
+}
