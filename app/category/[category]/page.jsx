@@ -67,7 +67,7 @@ async function Page({params}){
     try {
       const data = await getCategories();
       // Find the matching category by slug
-      categoryData = data.data.find(cat => cat.slug === params.category);
+      categoryData = data.data.find(cat => cat.slug == params.category);
     } catch (error) {
       console.error(`Error fetching category data:`, error);
     }
