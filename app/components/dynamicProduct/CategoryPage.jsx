@@ -235,7 +235,12 @@ const CategoryPage = ({ params, categoryData }) => {
       )}
       {/* End Pagination */}
       <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0 my-14">
-      <RichTextRender content={categoryData?.categoryDescripition}/>
+      <div className="flex flex-wrap justify-center md:justify-normal  md:flex-nowrap  gap-10">
+            <div className="lg:w-[350px] md:w-[300px]"></div>
+            <div className="w-full md:ml-20">
+            <RichTextRender content={categoryData?.categoryDescripition}/>
+            </div>
+      </div>
       </div>
     </>
   );
