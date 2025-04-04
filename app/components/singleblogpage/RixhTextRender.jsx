@@ -32,28 +32,28 @@ const RichTextRender = ({ content }) => {
         h2: ({ node, ...props }) => (
           <h2
             {...props}
-            className="mt-10 text-[#222823] text-[28px] font-semibold font-primary capitalize"
+            className="mt-10 text-[#222823] text-2xl font-semibold font-primary capitalize"
           />
         ),
         h3: ({ node, ...props }) => (
-          <h3 {...props} className="text-2xl mt-10  my-1 font-semibold font-primary text-[#222823]" />
+          <h3 {...props} className="text-xl mt-10  my-1 font-semibold font-primary text-[#222823]" />
         ),
         p: ({ node, ...props }) => (
           <p
             {...props}
-            className=" text-[#222823] text-lg mt-4 font-normal font-primary leading-[30px]"
+            className=" text-[#222823] text-base mt-4 font-normal font-primary leading-[30px]"
           />
         ),
         ul: ({ node, ...props }) => (
           <ul
             {...props}
-            className=" text-[#222823] text-lg font-normal font-primary leading-[30px] list-disc ml-8 mt-6"
+            className=" text-[#222823] text-base font-normal font-primary leading-[30px] list-disc ml-8 mt-6"
           />
         ),
         li: ({ node, ...props }) => (
           <li
             {...props}
-            className=" text-[#222823] text-lg font-normal font-primary leading-[30px]"
+            className=" text-[#222823] text-base font-normal font-primary leading-[30px]"
           />
         ),
       }}
