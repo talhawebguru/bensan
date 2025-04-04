@@ -1,10 +1,13 @@
 import CategoryPage from "@/app/components/dynamicProduct/CategoryPage";
 import { getCategories } from "@/app/services/api";
 
-
 export async function generateStaticParams() {
   try {
-    const data = await getCategories();
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/categories?sort=name:asc`, {
+      next: { revalidate: 86400 }, // Revalidate every 1 day (86400 seconds)
+    });
+    const data = await res.json();
+
     return data?.data?.map((category) => ({
       category: category.slug,
     })) || [];
@@ -13,7 +16,6 @@ export async function generateStaticParams() {
     return [];
   }
 }
-
 
 export async function generateMetadata({ params }) {
   const { category } = params;
@@ -24,10 +26,14 @@ export async function generateMetadata({ params }) {
   let metaKeywords;
 
   try {
-    const data = await getCategories();
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/categories?sort=name:asc`, {
+      next: { revalidate: 86400 }, // Revalidate every 1 day
+    });
+    const data = await res.json();
+
     // Find the matching category by slug
-    const categoryData = data.data.find(cat => cat.slug === category);
-    
+    const categoryData = data.data.find((cat) => cat.slug === category);
+
     if (categoryData) {
       metaTitle = categoryData.metaTitle;
       metaDescription = categoryData.metaDescripition;
@@ -49,33 +55,38 @@ export async function generateMetadata({ params }) {
       title: metaTitle,
       description: metaDescription,
       url: canonicalUrl,
-      siteName: 'Bensan',
-      type: 'website',
+      siteName: "Bensan",
+      type: "website",
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: metaTitle,
       description: metaDescription,
     },
   };
 }
 
-async function Page({params}){
-    // Fetch category data
-    let categoryData = null;
-  
-    try {
-      const data = await getCategories();
-      // Find the matching category by slug
-      categoryData = data.data.find(cat => cat.slug == params.category);
-    } catch (error) {
-      console.error(`Error fetching category data:`, error);
-    }
+async function Page({ params }) {
+  // Fetch category data
+  let categoryData = null;
+
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/categories?sort=name:asc`, {
+      next: { revalidate: 86400 }, // Revalidate every 1 day
+    });
+    const data = await res.json();
+
+    // Find the matching category by slug
+    categoryData = data.data.find((cat) => cat.slug == params.category);
+  } catch (error) {
+    console.error(`Error fetching category data:`, error);
+  }
+
   return (
     <>
-    <CategoryPage params={params} categoryData={categoryData} />
+      <CategoryPage params={params} categoryData={categoryData} />
     </>
   );
-};
+}
 
 export default Page;
