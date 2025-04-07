@@ -236,7 +236,7 @@ const Page = () => {
                 </motion.h3>
                 <motion.h1
                   variants={contentVariants}
-                  className="text-black text-[32px] font-semibold font-primary capitalize "
+                  className="text-black text-3xl font-semibold font-primary capitalize "
                 >
                   {Name}
                 </motion.h1>
@@ -374,10 +374,10 @@ const Page = () => {
             {contentNo && (
               <motion.h2
                 variants={contentVariants}
-                className="text-[#46aaf2] text-xl font-semibold font-primary capitalize mt-6"
+                className="text-[#46aaf2] text-base font-semibold font-primary capitalize mt-6"
               >
                 Content{" "}
-                <span className="text-[#1c1c1c] text-xl font-semibold font-primary capitalize ml-8">
+                <span className="text-[#1c1c1c] text-base font-semibold font-primary capitalize ml-8">
                   : {contentNo}
                 </span>
               </motion.h2>
@@ -385,10 +385,10 @@ const Page = () => {
             {reOrderNo && (
               <motion.h2
                 variants={contentVariants}
-                className="text-[#46aaf2] text-xl font-semibold font-primary capitalize mt-5"
+                className="text-[#46aaf2] text-base font-semibold font-primary capitalize mt-5"
               >
                 Reorder no{" "}
-                <span className="text-[#1c1c1c] text-xl font-semibold font-primary capitalize">
+                <span className="text-[#1c1c1c] text-base font-semibold font-primary capitalize">
                   : {reOrderNo}
                 </span>
               </motion.h2>
