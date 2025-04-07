@@ -20,7 +20,18 @@ export const getProducts = async (page = 1, pageSize, searchQuery = '') => {
 
 export const getProductBySlug = async (slug) => {
   try {
-    const response = await api.get(`/api/products?filters[slug][$eq]=${slug}&populate=*`);
+    const response = await api.get(`/api/products`, {
+      params: {
+        'filters[slug][$eq]': slug,
+        'populate[0]': 'Image',
+        'populate[1]': 'categories',
+        'populate[2]': 'downloadCatalog',
+        'populate[3]': 'downloadTDS',
+        'populate[4]': 'downloadSDS',
+        'populate[5]': 'variations',
+        'populate[6]': 'variations.productImg'
+      }
+    });
     return response.data;
   } catch (error) {
     console.error(`Error fetching product with slug ${slug}:`, error);
