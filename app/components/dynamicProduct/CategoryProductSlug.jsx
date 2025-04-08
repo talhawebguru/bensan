@@ -19,6 +19,7 @@ import { LuDownload } from "react-icons/lu";
 import { FaFilePdf } from "react-icons/fa";
 import Link from "next/link";
 import RelatedProducts from "./RelatedProducts";
+import VariationProducts from "./VariationProducts";
 
 const Page = ({ params }) => {
   const router = useRouter();
@@ -143,6 +144,7 @@ const Page = ({ params }) => {
     reOrderNo,
     whereBuy,
     productInterLinking,
+    variations,
   } = product;
 
   const categorySlug =
@@ -432,6 +434,7 @@ const Page = ({ params }) => {
           </div>
         </div>
       </div>
+      <VariationProducts variations={variations}/>
       <Popup
         isOpen={isPopupOpen}
         onClose={() => setIsPopupOpen(false)}

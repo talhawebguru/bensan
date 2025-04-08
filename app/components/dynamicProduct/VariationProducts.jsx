@@ -24,7 +24,7 @@ const VariationProducts = ({ variations }) => {
     >
       <div className="py-14 xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
         <motion.div 
-          className="flex flex-col lg:flex-row gap-10 justify-center place-items-center"
+          className="flex flex-col md:flex-row gap-10 justify-center place-items-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -52,7 +52,7 @@ const VariationProducts = ({ variations }) => {
                 <motion.div
                   key={variation.id}
                   onClick={() => handleVariationClick(index)}
-                  className={`cursor-pointer max-w-[505px] h-[78px] flex flex-col justify-center px-4 border ${
+                  className={`cursor-pointer w-full max-w-[505px] h-[78px] flex flex-col justify-center px-4 border ${
                     selectedVariation === index
                       ? "bg-[#A8366F] text-white border-[#A8366F]"
                       : "bg-neutral-50 text-black border-[#b4b4b4]"
