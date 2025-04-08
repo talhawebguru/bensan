@@ -165,7 +165,7 @@ const Page = () => {
       <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
         <motion.div
           variants={contentVariants}
-          className="grid grid-cols-1 h-auto lg:grid-cols-2 gap-10 md:px-[62px] px-5 py-10 rounded-xl  mb-20"
+          className="grid grid-cols-1 h-auto lg:grid-cols-2 sm:gap-10 md:px-[62px] sm:px-5 sm:py-10 rounded-xl  mb-20"
         >
           <motion.div variants={contentVariants} className="">
             <Swiper
@@ -226,9 +226,9 @@ const Page = () => {
           </motion.div>
           <motion.div
             variants={contentVariants}
-            className="mt-32 lg:mt-0 min-h-[600px]"
+            className="mt-14 lg:mt-0 min-h-[600px]"
           >
-            <div className="grid grid-cols-2">
+            <div className="flex justify-between items-center flex-wrap">
               <div>
                 <motion.h3
                   variants={contentVariants}
@@ -420,8 +420,21 @@ const Page = () => {
               </button>
             </motion.div>
           </motion.div>
-        </motion.div>
-        <hr className="border border-black/20 my-14" />
+        </motion.div>     
+      </div>
+      <VariationProducts variations={variations}/>
+      <Popup
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        productName={Name}
+      />
+      <RelatedProducts
+        categorySlug={categorySlug}
+        excludeProductSlug={productslug}
+      />
+      <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
+
+       <hr className="border border-black/20 my-14" />
         <div className="my-14">
           {whereBuy && (
             <h2 className="text-black text-xl font-semibold font-primary capitalize">
@@ -436,16 +449,6 @@ const Page = () => {
           </div>
         </div>
       </div>
-      <VariationProducts variations={variations}/>
-      <Popup
-        isOpen={isPopupOpen}
-        onClose={() => setIsPopupOpen(false)}
-        productName={Name}
-      />
-      <RelatedProducts
-        categorySlug={categorySlug}
-        excludeProductSlug={productslug}
-      />
     </motion.div>
   );
 };

@@ -32,7 +32,7 @@ const VariationProducts = ({ variations }) => {
         >
           {/* Variations List */}
           <motion.div 
-            className="flex-1"
+            className="flex-1 w-full"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
@@ -47,7 +47,7 @@ const VariationProducts = ({ variations }) => {
             >
               Ordering Information
             </motion.h2>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 w-full">
               {variations.map((variation, index) => (
                 <motion.div
                   key={variation.id}
