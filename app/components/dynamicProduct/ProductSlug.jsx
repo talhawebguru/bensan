@@ -373,28 +373,6 @@ const Page = () => {
             >
               {title}
             </motion.h2>
-            {contentNo && (
-              <motion.h2
-                variants={contentVariants}
-                className="text-[#46aaf2] text-base font-semibold font-primary capitalize mt-6"
-              >
-                Content{" "}
-                <span className="text-[#1c1c1c] text-base font-semibold font-primary capitalize ml-8">
-                  : {contentNo}
-                </span>
-              </motion.h2>
-            )}
-            {reOrderNo && (
-              <motion.h2
-                variants={contentVariants}
-                className="text-[#46aaf2] text-base font-semibold font-primary capitalize mt-5"
-              >
-                Reorder no{" "}
-                <span className="text-[#1c1c1c] text-base font-semibold font-primary capitalize">
-                  : {reOrderNo}
-                </span>
-              </motion.h2>
-            )}
             <motion.div
               variants={contentVariants}
               className="text-black text-base font-normal font-primary capitalize mt-6"
