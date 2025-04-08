@@ -224,9 +224,9 @@ const Page = ({ params }) => {
           </motion.div>
           <motion.div
             variants={contentVariants}
-            className="mt-32 lg:mt-0 min-h-[600px]"
+            className="mt-14 lg:mt-0 min-h-[600px]"
           >
-            <div className="grid grid-cols-2">
+            <div className="flex justify-between items-center flex-wrap">
               <div>
                 <motion.h3
                   variants={contentVariants}
@@ -236,7 +236,7 @@ const Page = ({ params }) => {
                 </motion.h3>
                 <motion.h1
                   variants={contentVariants}
-                  className="text-black text-[32px] font-semibold font-primary capitalize "
+                  className="text-black text-3xl font-semibold font-primary capitalize "
                 >
                   {Name}
                 </motion.h1>
@@ -371,28 +371,6 @@ const Page = ({ params }) => {
             >
               {title}
             </motion.h2>
-            {contentNo && (
-              <motion.h2
-                variants={contentVariants}
-                className="text-[#46aaf2] text-xl font-semibold font-primary capitalize mt-6"
-              >
-                Content{" "}
-                <span className="text-[#1c1c1c] text-xl font-semibold font-primary capitalize ml-8">
-                  : {contentNo}
-                </span>
-              </motion.h2>
-            )}
-            {reOrderNo && (
-              <motion.h2
-                variants={contentVariants}
-                className="text-[#46aaf2] text-xl font-semibold font-primary capitalize mt-5"
-              >
-                Reorder no{" "}
-                <span className="text-[#1c1c1c] text-xl font-semibold font-primary capitalize">
-                  : {reOrderNo}
-                </span>
-              </motion.h2>
-            )}
             <motion.div
               variants={contentVariants}
               className="text-black text-base font-normal font-primary capitalize mt-6"
@@ -419,7 +397,20 @@ const Page = ({ params }) => {
             </motion.div>
           </motion.div>
         </motion.div>
-        <hr className="border border-black/20 my-14" />
+      </div>
+      <VariationProducts variations={variations}/>
+      <Popup
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        productName={Name}
+      />
+      <RelatedProducts
+        categorySlug={categorySlug}
+        excludeProductSlug={productslug}
+      />
+      <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
+
+       <hr className="border border-black/20 my-14" />
         <div className="my-14">
           {whereBuy && (
             <h2 className="text-black text-xl font-semibold font-primary capitalize">
@@ -434,16 +425,6 @@ const Page = ({ params }) => {
           </div>
         </div>
       </div>
-      <VariationProducts variations={variations}/>
-      <Popup
-        isOpen={isPopupOpen}
-        onClose={() => setIsPopupOpen(false)}
-        productName={Name}
-      />
-      <RelatedProducts
-        categorySlug={categorySlug}
-        excludeProductSlug={productslug}
-      />
     </motion.div>
   );
 };

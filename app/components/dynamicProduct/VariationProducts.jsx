@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import Placeholder from "@/public/placeholder.png"; // Adjust the path as necessary
 
 const VariationProducts = ({ variations }) => {
   const [selectedVariation, setSelectedVariation] = useState(0);
@@ -94,27 +95,40 @@ const VariationProducts = ({ variations }) => {
             viewport={{ once: true }}
           >
             <AnimatePresence mode="wait">
-              {variations[selectedVariation]?.productImg?.url && (
-           <motion.div
-           key={selectedVariation}
-           initial={{ opacity: 0, scale: 0.95 }}
-           animate={{ opacity: 1, scale: 1 }}
-           exit={{ opacity: 0, scale: 0.95 }}
-           transition={{ duration: 0.4, ease: "easeInOut" }}
-           className="flex justify-center items-center"
-         >
-           <Image
-             src={`${process.env.NEXT_PUBLIC_API_URL}${variations[selectedVariation]?.productImg?.url}`}
-             alt={variations[selectedVariation]?.productImg?.alternativeText || "Product Image"}
-             width={500}
-             height={500}
-             className="object-contain max-w-full max-h-[450px]  transition-transform duration-300 ease-in-out hover:scale-105"
-             priority
-             placeholder="blur"
-             blurDataURL="/placeholder.png" // Optional: Replace with actual placeholder
-           />
-         </motion.div>
-              )}
+              <motion.div
+                key={selectedVariation}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="flex justify-center items-center"
+              >
+                <Image
+                  src={
+                    variations[selectedVariation]?.productImg?.url
+                      ? `${process.env.NEXT_PUBLIC_API_URL}${variations[selectedVariation]?.productImg?.url}`
+                      : Placeholder
+                  }
+                  alt={
+                    variations[selectedVariation]?.productImg
+                      ?.alternativeText || "Product Image"
+                  }
+                  width={500}
+                  height={500}
+                  className="object-contain max-w-full h-[450px] transition-transform duration-300 ease-in-out hover:scale-105"
+                  priority
+                  placeholder={
+                    variations[selectedVariation]?.productImg?.url
+                      ? undefined
+                      : "blur"
+                  }
+                  blurDataURL={
+                    variations[selectedVariation]?.productImg?.url
+                      ? undefined
+                      : Placeholder.src
+                  }
+                />
+              </motion.div>
             </AnimatePresence>
           </motion.div>
         </motion.div>

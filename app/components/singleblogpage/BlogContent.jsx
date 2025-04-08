@@ -40,12 +40,8 @@ const BlogContent = ({ params }) => {
               // Fetch related blogs based on the first category of the blog
               let categorySlug = null;
               
-              // Debug the categories structure
-              // console.log('Blog categories:', blogData.category);
-              
               if (blogData.category) {
                 categorySlug = blogData.category.slug;
-                // console.log('Using category slug for related blogs:', categorySlug);
                 
                 if (categorySlug) {
                   const relatedBlogsData = await getRelatedBlogs(
@@ -55,7 +51,6 @@ const BlogContent = ({ params }) => {
                   setRelatedBlogs(relatedBlogsData.data || []);
                 }
               } else {
-                // console.log('No categories found for this blog');
                 setRelatedBlogs([]);
               }
             }
@@ -82,8 +77,6 @@ const BlogContent = ({ params }) => {
 
     fetchLatestBlogs();
   }, []);
-
-  // console.log(relatedBlogs);
 
   if (loading) {
     return (
