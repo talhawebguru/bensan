@@ -71,7 +71,7 @@ const BlogContent = ({ params }) => {
         const data = await getLatestBlogs();
         setLatestBlogs(data.data);
       } catch (error) {
-        console.error("Error fetching latest blogs:", error);
+        console.error("Error fetching latests blogs:", error);
       }
     };
 
