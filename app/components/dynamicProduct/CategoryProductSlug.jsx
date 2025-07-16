@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Thumbs } from "swiper/modules";
 import Image from "next/image";
@@ -22,7 +21,6 @@ import RelatedProducts from "./RelatedProducts";
 import VariationProducts from "./VariationProducts";
 
 const Page = ({ params }) => {
-  const router = useRouter();
   const { category, productslug } = params;
   const [product, setProduct] = useState(null);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -359,6 +357,39 @@ const Page = ({ params }) => {
                             </p>
                           </li>
                         )}
+                        {product.materialCompatibility ? (
+                          <a
+                            href={`${process.env.NEXT_PUBLIC_API_URL}${product.materialCompatibility.url}`}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setIsMenuOpen(false); // Close menu after clicking download
+                            }}
+                          >
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between">
+                              <div className="flex items-center justify-center gap-2">
+                                <FaFilePdf />
+                                <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                  Material Compatibility
+                                </p>
+                              </div>
+                              <LuDownload />
+                            </li>
+                          </a>
+                        ) : (
+                          <li className="px-4 py-2 flex items-center justify-between opacity-50">
+                            <div className="flex items-center justify-center gap-2">
+                              <FaFilePdf />
+                              <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                Material Compatibility
+                              </p>
+                            </div>
+                            <p className="text-sm text-gray-500">
+                              Not available
+                            </p>
+                          </li>
+                        )}
                       </ul>
                     </motion.div>
                   )}
@@ -398,7 +429,7 @@ const Page = ({ params }) => {
           </motion.div>
         </motion.div>
       </div>
-      <VariationProducts variations={variations}/>
+      <VariationProducts variations={variations} />
       <Popup
         isOpen={isPopupOpen}
         onClose={() => setIsPopupOpen(false)}
@@ -409,8 +440,7 @@ const Page = ({ params }) => {
         excludeProductSlug={productslug}
       />
       <div className="xl:px-[90px] sm:px-10 xs:px-5 2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
-
-       <hr className="border border-black/20 my-14" />
+        <hr className="border border-black/20 my-14" />
         <div className="my-14">
           {whereBuy && (
             <h2 className="text-black text-xl font-semibold font-primary capitalize">

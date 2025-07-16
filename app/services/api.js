@@ -28,8 +28,9 @@ export const getProductBySlug = async (slug) => {
         'populate[2]': 'downloadCatalog',
         'populate[3]': 'downloadTDS',
         'populate[4]': 'downloadSDS',
-        'populate[5]': 'variations',
-        'populate[6]': 'variations.productImg'
+        'populate[5]': 'materialCompatibility',
+        'populate[6]': 'variations',
+        'populate[7]': 'variations.productImg'
       }
     });
     return response.data;

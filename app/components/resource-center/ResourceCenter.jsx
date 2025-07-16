@@ -29,7 +29,12 @@ const ResourceCenter = () => {
         if (selectedCategory === "all-products") {
           data = await getProducts(page, 25, searchQuery);
         } else {
-          data = await getProductsByCategory(selectedCategory, page , 25, searchQuery);
+          data = await getProductsByCategory(
+            selectedCategory,
+            page,
+            25,
+            searchQuery
+          );
         }
         setProducts(data.data);
         setTotalPages(data.meta.pagination.pageCount);
@@ -61,7 +66,6 @@ const ResourceCenter = () => {
   const handleSearchSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission
   };
-
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -290,6 +294,39 @@ const ResourceCenter = () => {
                                       <FaFilePdf />
                                       <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
                                         Catalog
+                                      </p>
+                                    </div>
+                                    <p className="text-sm text-gray-500">
+                                      Not available
+                                    </p>
+                                  </li>
+                                )}
+                                {product.materialCompatibility ? (
+                                  <a
+                                    href={`${process.env.NEXT_PUBLIC_API_URL}${product.materialCompatibility.url}`}
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setIsMenuOpen(false); // Close menu after clicking download
+                                    }}
+                                  >
+                                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between">
+                                      <div className="flex items-center justify-center gap-2">
+                                        <FaFilePdf />
+                                        <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                          Material Compatibility
+                                        </p>
+                                      </div>
+                                      <LuDownload />
+                                    </li>
+                                  </a>
+                                ) : (
+                                  <li className="px-4 py-2 flex items-center justify-between opacity-50">
+                                    <div className="flex items-center justify-center gap-2">
+                                      <FaFilePdf />
+                                      <p className="text-light-black text-sm font-normal font-primary leading-[21px]">
+                                        Material Compatibility
                                       </p>
                                     </div>
                                     <p className="text-sm text-gray-500">
