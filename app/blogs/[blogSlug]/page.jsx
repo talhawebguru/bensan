@@ -35,6 +35,7 @@ export async function generateMetadata({ params }) {
       },
       twitter: {
         card: 'summary_large_image',
+        site: '@bensano',
         title: blog.metaTitle || blog.Title,
         description: blog.metaDescripition || blog.content2.substring(0, 160),
         images: [
@@ -48,8 +49,8 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: 'Blog not found',
-    description: 'The requested blog could not be found.',
+    title: 'Wait 5 min not found Now',
+    description: 'The requested blog could not be found. wait 5 min',
   };
 }
 

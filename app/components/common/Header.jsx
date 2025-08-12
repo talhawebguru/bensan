@@ -21,13 +21,47 @@ const Header = () => {
     toggleMenu();
   };
 
+  // Animation variants
+  const headerVariants = {
+    hidden: { y: -80, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeOut", delay: 0.2 },
+    },
+  };
+
+  const mobileMenuVariants = {
+    hidden: { x: "-100%", opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.4, ease: "easeOut" },
+    },
+    exit: {
+      x: "-100%",
+      opacity: 0,
+      transition: { duration: 0.3, ease: "easeIn" },
+    },
+  };
+
+  const mobileLinkVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0 },
+  };
+
   return (
     <>
       {/* Marquee */}
       <MarqueeSlider />
       {/* Navbar start Here */}
 
-      <header className="xl:px-[90px] sm:px-10 xs:px-5 xl:pt-[19px] lg:pt-2.5 bg-white">
+      <motion.header 
+        className="xl:px-[90px] sm:px-10 xs:px-5 xl:pt-[19px] lg:pt-2.5 bg-white relative z-40"
+        initial="hidden"
+        animate="visible"
+        variants={headerVariants}
+      >
         <div className="2xl:max-w-[1440px] 2xl:mx-auto 2xl:px-0">
           <div className="lg:flex hidden items-center justify-start">
             <div className="flex items-center gap-5">
@@ -52,7 +86,7 @@ const Header = () => {
                 <Link
                   href="/about"
                   aria-label="About"
-                  className="text-nav-color text-[13px] font-semibold font-primary capitalize"
+                  className="text-nav-color text-[13px] font-semibold font-primary capitalize hover:text-secondary-primary transition-colors duration-200"
                 >
                   About
                 </Link>
@@ -61,7 +95,7 @@ const Header = () => {
                 <Link
                   href="/product"
                   aria-label="Product"
-                  className="text-nav-color text-[13px] font-semibold font-primary capitalize"
+                  className="text-nav-color text-[13px] font-semibold font-primary capitalize hover:text-secondary-primary transition-colors duration-200"
                 >
                   Products
                 </Link>
@@ -70,7 +104,7 @@ const Header = () => {
                 <Link
                   href="/who-we-serve"
                   aria-label="who we serve"
-                  className="text-nav-color text-[13px] font-semibold font-primary capitalize"
+                  className="text-nav-color text-[13px] font-semibold font-primary capitalize hover:text-secondary-primary transition-colors duration-200"
                 >
                   Who We Serve
                 </Link>
@@ -90,7 +124,7 @@ const Header = () => {
                 <Link
                   href="/blogs"
                   aria-label="Blogs"
-                  className="text-nav-color text-[13px] font-semibold font-primary capitalize lg:flex items-center hidden"
+                  className="text-nav-color text-[13px] font-semibold font-primary capitalize lg:flex items-center hidden hover:text-secondary-primary transition-colors duration-200"
                 >
                   Blogs
                 </Link>
@@ -99,7 +133,7 @@ const Header = () => {
                 <Link
                   href="/resource-center"
                   aria-label="Resource Center"
-                  className="text-nav-color text-[13px] font-semibold font-primary capitalize lg:flex items-center hidden"
+                  className="text-nav-color text-[13px] font-semibold font-primary capitalize lg:flex items-center hidden hover:text-secondary-primary transition-colors duration-200"
                 >
                   Resource Center
                 </Link>
@@ -108,7 +142,7 @@ const Header = () => {
                 <Link
                   href="/contact"
                   aria-label="Contact"
-                  className="text-nav-color text-[13px] font-semibold font-primary capitalize"
+                  className="text-nav-color text-[13px] font-semibold font-primary capitalize hover:text-secondary-primary transition-colors duration-200"
                 >
                   Contact
                 </Link>
@@ -116,7 +150,7 @@ const Header = () => {
             </ul>
 
             <div className="lg:hidden">
-              <button onClick={toggleMenu} className="">
+              <button onClick={toggleMenu} aria-label="Toggle mobile menu">
                 {isOpen ? (
                   <IoMdClose
                     size={28}
@@ -134,58 +168,164 @@ const Header = () => {
             </div>
           </nav>
         </div>
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ y: "-100%", opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: "-100%", opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="lg:hidden absolute z-30 w-full h-[100vh] left-0 bg-white flex items-center flex-col"
+      </motion.header>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="fixed inset-0 bg-black/20 z-40 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={toggleMenu} // Close on overlay click
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Menu Panel */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="fixed top-0 left-0 h-full w-80 bg-white shadow-xl z-50 p-6 lg:hidden overflow-y-auto"
+            variants={mobileMenuVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <div className="flex justify-between items-center mb-8">
+              <Link
+                href="/"
+                className="flex items-center"
+                onClick={handleLinkClick}
+              >
+                <Image
+                  src={Logo}
+                  alt="Bensan Logo"
+                  width={120}
+                  height={40}
+                  className="h-8 w-32 object-contain"
+                />
+              </Link>
+              <button onClick={toggleMenu} aria-label="Close mobile menu">
+                <IoMdClose size={24} />
+              </button>
+            </div>
+            
+            {/* Contact Info in Mobile */}
+            <motion.div 
+              className="mb-6 pb-6 border-b border-gray-200"
+              variants={mobileLinkVariants}
             >
-              <ul className="flex items-center w-full flex-col gap-8 pt-4 text-black text-base font-normal font-primary leading-tight">
-                <li>
-                  <Link href="/" onClick={handleLinkClick}>
+              <div className="flex flex-col gap-3">
+                <InfoAction
+                  icon={<IoCallOutline />}
+                  trigger="tel:+97125067333"
+                  action="Call : "
+                  message=" +97125067333"
+                />
+                <InfoAction
+                  icon={<MdOutlineEmail />}
+                  trigger="mailto:info@bensano.com"
+                  action=""
+                  message="info@bensano.com"
+                />
+              </div>
+            </motion.div>
+
+            <motion.nav
+              variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+            >
+              <ul className="flex flex-col gap-2 text-base font-normal font-primary text-black">
+                <motion.li
+                  variants={mobileLinkVariants}
+                  className="py-3 border-b border-gray-200"
+                >
+                  <Link
+                    href="/"
+                    className="hover:text-secondary-primary cursor-pointer block transition-colors duration-200"
+                    onClick={handleLinkClick}
+                  >
                     Home
                   </Link>
-                </li>
-                <div className="w-full h-[0px] opacity-40 border border-[#0000004D]"></div>
-                <li>
-                  <Link href="/about" onClick={handleLinkClick}>
+                </motion.li>
+                <motion.li
+                  variants={mobileLinkVariants}
+                  className="py-3 border-b border-gray-200"
+                >
+                  <Link
+                    href="/about"
+                    className="hover:text-secondary-primary cursor-pointer block transition-colors duration-200"
+                    onClick={handleLinkClick}
+                  >
                     About Us
                   </Link>
-                </li>
-                <div className="w-full h-[0px] opacity-40 border border-[#0000004D]"></div>
-                <li>
-                  <Link href="/who-we-serve" onClick={handleLinkClick}>
+                </motion.li>
+                <motion.li
+                  variants={mobileLinkVariants}
+                  className="py-3 border-b border-gray-200"
+                >
+                  <Link
+                    href="/who-we-serve"
+                    className="hover:text-secondary-primary cursor-pointer block transition-colors duration-200"
+                    onClick={handleLinkClick}
+                  >
                     Who We Serve
                   </Link>
-                </li>
-                <div className="w-full h-[0px] opacity-40 border border-[#0000004D]"></div>
-                <li>
-                  <Link href="/product" onClick={handleLinkClick}>
-                    Product
+                </motion.li>
+                <motion.li
+                  variants={mobileLinkVariants}
+                  className="py-3 border-b border-gray-200"
+                >
+                  <Link
+                    href="/product"
+                    className="hover:text-secondary-primary cursor-pointer block transition-colors duration-200"
+                    onClick={handleLinkClick}
+                  >
+                    Products
                   </Link>
-                </li>
-                <div className="w-full h-[0px] opacity-40 border border-[#0000004D]"></div>
-                <li>
-                  <Link href="/resource-center" onClick={handleLinkClick}>
+                </motion.li>
+                <motion.li
+                  variants={mobileLinkVariants}
+                  className="py-3 border-b border-gray-200"
+                >
+                  <Link
+                    href="/blogs"
+                    className="hover:text-secondary-primary cursor-pointer block transition-colors duration-200"
+                    onClick={handleLinkClick}
+                  >
+                    Blogs
+                  </Link>
+                </motion.li>
+                <motion.li
+                  variants={mobileLinkVariants}
+                  className="py-3 border-b border-gray-200"
+                >
+                  <Link
+                    href="/resource-center"
+                    className="hover:text-secondary-primary cursor-pointer block transition-colors duration-200"
+                    onClick={handleLinkClick}
+                  >
                     Resource Center
                   </Link>
-                </li>
-                <div className="w-full h-[0px] opacity-40 border border-[#0000004D]"></div>
-                <li>
-                  <Link href="/contact" onClick={handleLinkClick}>
+                </motion.li>
+                <motion.li
+                  variants={mobileLinkVariants}
+                  className="py-3"
+                >
+                  <Link
+                    href="/contact"
+                    className="hover:text-secondary-primary cursor-pointer block transition-colors duration-200"
+                    onClick={handleLinkClick}
+                  >
                     Contact Us
                   </Link>
-                </li>
-                <div className="w-full h-[0px] opacity-40 border border-[#0000004D]"></div>
+                </motion.li>
               </ul>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

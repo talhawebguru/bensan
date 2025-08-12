@@ -35,11 +35,11 @@ export async function generateMetadata({ params }) {
       title: metaTitle,
       description: metaDescription,
       url: canonicalUrl,
-      siteName: 'Bensan', // Replace with your site name
+      siteName: 'Bensan',
       type: 'website',
       images: [
         {
-          url: `https://admin.bensano.com${defaultOgImage}`, // Replace with your default OG image
+          url: `https://admin.bensano.com${defaultOgImage}`,
           width: 1200,
           height: 630,
           alt: imageAlt,
@@ -48,9 +48,10 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: 'summary_large_image',
+      site: '@bensano',
       title: metaTitle,
       description: metaDescription,
-      images: [`https://admin.bensano.com${defaultOgImage}`], // Replace with your default Twitter image
+      images: [`https://admin.bensano.com${defaultOgImage}`],
     },
   };
 }

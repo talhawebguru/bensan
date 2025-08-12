@@ -54,6 +54,7 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: 'summary_large_image',
+      site: '@bensano',
       title: metaTitle,
       description: metaDescription,
     },

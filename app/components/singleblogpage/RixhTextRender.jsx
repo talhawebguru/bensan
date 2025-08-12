@@ -21,7 +21,7 @@ const RichTextRender = ({ content }) => {
         img: ({ node, ...props }) => (
           <Image
             {...props}
-            className="w-full h-[430px] my-4 object-contain"
+            className="h-[430px] my-4 object-contain inline-block"
             width="430"
             height="430"
           />
