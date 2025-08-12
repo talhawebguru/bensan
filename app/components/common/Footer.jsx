@@ -140,16 +140,20 @@ const Footer = () => {
                 info="Safecare Medical Industries KHIA-8-18 Abu Dhabi UAE"
                 className={"text-grey"}
               />
-              <ContactInfo
-                icon={<IoCall />}
-                info="+97125067333 "
-                className={"text-grey"}
-              />
-              <ContactInfo
-                icon={<IoMailSharp />}
-                info="info@bensano.com "
-                className={"text-grey"}
-              />
+              <Link href="tel:+97125067333" className="hover:text-secondary-primary transition-colors duration-200">
+                <ContactInfo
+                  icon={<IoCall />}
+                  info="+97125067333 "
+                  className={"text-grey hover:text-secondary-primary transition-colors duration-200"}
+                />
+              </Link>
+              <Link href="mailto:info@bensano.com" className="hover:text-secondary-primary transition-colors duration-200">
+                <ContactInfo
+                  icon={<IoMailSharp />}
+                  info="info@bensano.com "
+                  className={"text-grey hover:text-secondary-primary transition-colors duration-200"}
+                />
+              </Link>
             </div>
           </motion.div>
         </motion.div>
