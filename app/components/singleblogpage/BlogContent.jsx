@@ -131,9 +131,10 @@ const BlogContent = ({ params }) => {
               <Image
                 src={`${process.env.NEXT_PUBLIC_API_URL}${blog.FeatureImage.url}`}
                 alt={blog.FeatureImage.alternativeText || blog.Title}
-                className="w-full md:h-[390px] object-contain"
+                className="w-full md:h-[390px] object-cover"
                 width={800}
                 height={390}
+                quality={100}
               />
             </motion.div>
             <motion.h1

@@ -34,7 +34,7 @@ const RelatedBlogs = ({ relatedBlogs }) => {
               />
             )}
             <div className="p-4">
-              <h2 className="text-[#000f25] text-2xl font-semibold font-primary leading-7">
+              <h2 className="text-[#000f25] text-xl font-semibold font-primary leading-7">
                 {blog.Title?blog.Title.substring(0,61) + '...' : ''}
               </h2>
               <p className="mt-2 text-[#716b66] text-base font-normal font-primary leading-normal">

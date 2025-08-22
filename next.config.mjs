@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+import data from "./r1.js"
 const nextConfig = {
   images: {
     loader: 'default',
@@ -12,6 +13,9 @@ const nextConfig = {
     ],
   },
   reactStrictMode: true,
+   async redirects() {
+    return data;
+  },
 };
 
 export default nextConfig;
