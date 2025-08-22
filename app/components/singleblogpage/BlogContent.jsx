@@ -28,42 +28,42 @@ const BlogContent = ({ params }) => {
   const blogUrl =
     typeof window !== "undefined" ? `${window.location.origin}${pathname}` : "";
 
-    useEffect(() => {
-      if (blogSlug) {
-        const fetchBlog = async () => {
-          try {
-            const data = await getBlogBySlug(blogSlug);
-            if (data.data && data.data.length > 0) {
-              const blogData = data.data[0];
-              setBlog(blogData);
-              
-              // Fetch related blogs based on the first category of the blog
-              let categorySlug = null;
-              
-              if (blogData.category) {
-                categorySlug = blogData.category.slug;
-                
-                if (categorySlug) {
-                  const relatedBlogsData = await getRelatedBlogs(
-                    categorySlug,
-                    blogData.slug
-                  );
-                  setRelatedBlogs(relatedBlogsData.data || []);
-                }
-              } else {
-                setRelatedBlogs([]);
+  useEffect(() => {
+    if (blogSlug) {
+      const fetchBlog = async () => {
+        try {
+          const data = await getBlogBySlug(blogSlug);
+          if (data.data && data.data.length > 0) {
+            const blogData = data.data[0];
+            setBlog(blogData);
+
+            // Fetch related blogs based on the first category of the blog
+            let categorySlug = null;
+
+            if (blogData.category) {
+              categorySlug = blogData.category.slug;
+
+              if (categorySlug) {
+                const relatedBlogsData = await getRelatedBlogs(
+                  categorySlug,
+                  blogData.slug
+                );
+                setRelatedBlogs(relatedBlogsData.data || []);
               }
+            } else {
+              setRelatedBlogs([]);
             }
-          } catch (error) {
-            console.error("Error fetching blog:", error);
-          } finally {
-            setLoading(false);
           }
-        };
-    
-        fetchBlog();
-      }
-    }, [blogSlug]);
+        } catch (error) {
+          console.error("Error fetching blog:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchBlog();
+    }
+  }, [blogSlug]);
 
   useEffect(() => {
     const fetchLatestBlogs = async () => {
@@ -206,34 +206,57 @@ const BlogContent = ({ params }) => {
                   </h2>
                 </div>
               </div>
-              {latestBlogs.map((latestBlog) => (
-                <Link
-                  key={latestBlog.id}
-                  href={`/blogs/${latestBlog.Slug}`}
-                  className=""
-                >
-                  <div className="flex flex-wrap md:flex-nowrap justify-center lg:justify-normal gap-4 items-center pl-4 py-6 border-b cursor-pointer">
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_API_URL}${latestBlog.FeatureImage.url}`}
-                      alt={
-                        latestBlog.FeatureImage.alternativeText ||
-                        latestBlog.Title
-                      }
-                      className="w-full sm:w-[85px] h-[85px] object-contain"
-                      width={85}
-                      height={85}
-                    />
-                    <div>
-                      <h3 className="max-w-[289px] text-[#222823] text-lg font-semibold font-primary capitalize line-clamp-2">
-                        {latestBlog.Title}
-                      </h3>
-                      <p className="h-4 text-[#9d9996] text-[13px] font-normal font-primary leading-tight mt-4">
-                        {new Date(latestBlog.createdAt).toLocaleDateString()}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+                variants={{
+                  hidden: {},
+                  visible: { transition: { staggerChildren: 0.08 } },
+                }}
+              >
+                {latestBlogs.map((latestBlog, idx) => (
+                  <Link
+                    key={latestBlog.id}
+                    href={`/blogs/${latestBlog.Slug}`}
+                    className="block"
+                  >
+                    <motion.div
+                      variants={{
+                        hidden: { opacity: 0, y: 8 },
+                        visible: { opacity: 1, y: 0 },
+                      }}
+                      whileHover={{ x: 2 }}
+                      className="group flex items-center gap-4 px-4 py-4 border-b last:border-b-0 cursor-pointer rounded-md transition-colors duration-200 hover:bg-white"
+                    >
+                      <div className="relative w-[132px] h-[84px] sm:w-[150px] sm:h-[96px] shrink-0 rounded-lg overflow-hidden bg-white ring-1 ring-black/5">
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_API_URL}${latestBlog.FeatureImage.url}`}
+                          alt={
+                            latestBlog.FeatureImage.alternativeText ||
+                            latestBlog.Title
+                          }
+                          fill
+                          sizes="(min-width: 640px) 150px, 132px"
+                          className="object-fill transition-transform duration-300 ease-out group-hover:scale-105"
+                          quality={100}
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-[#222823] text-base sm:text-lg font-semibold font-primary line-clamp-2 group-hover:text-secondary-primary transition-colors">
+                          {latestBlog.Title}
+                        </h3>
+                        <p className="text-[#9d9996] text-[12px] sm:text-[13px] font-normal font-primary leading-tight mt-2 flex items-center gap-2">
+                          {new Date(latestBlog.createdAt).toLocaleDateString()}
+                          <span className="ml-auto text-secondary-primary opacity-0 group-hover:opacity-100 transform transition-all duration-300 group-hover:translate-x-1">
+                            →
+                          </span>
+                        </p>
+                      </div>
+                    </motion.div>
+                  </Link>
+                ))}
+              </motion.div>
             </div>
             {/* Recent Post End here */}
           </motion.div>

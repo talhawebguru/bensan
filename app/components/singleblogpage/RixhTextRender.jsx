@@ -121,6 +121,7 @@ const RichTextRender = ({ content }) => {
                       fill
                       sizes="100vw"
                       className="object-contain"
+                      quality={100}
                       priority={false}
                     />
                   </div>
@@ -143,6 +144,7 @@ const RichTextRender = ({ content }) => {
                           fill
                           sizes="(min-width: 640px) 50vw, 100vw"
                           className="object-cover"
+                          quality={100}
                           priority={false}
                         />
                       </div>
@@ -166,6 +168,7 @@ const RichTextRender = ({ content }) => {
                         fill
                         sizes="(min-width: 768px) 33vw, 50vw"
                         className="object-cover"
+                        quality={100}
                         priority={false}
                       />
                     </div>
