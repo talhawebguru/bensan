@@ -187,3 +187,36 @@ export const marqueetext = async () =>{
     throw error;
   }
 }
+
+// Newsletter subscription (check for duplicates first)
+export const subscribeNewsletter = async (email) => {
+  try {
+    // First, check if email already exists
+    const checkResponse = await api.get('/api/newsletters', {
+      params: {
+        'filters[email][$eq]': email,
+        'pagination[limit]': 1
+      }
+    });
+    
+    // If email already exists, return already subscribed
+    if (checkResponse.data?.data && checkResponse.data.data.length > 0) {
+      return { ok: false, code: 'already', message: 'Already subscribed' };
+    }
+    
+    // Email doesn't exist, create new subscription
+    const response = await api.post('/api/newsletters', {
+      data: { email }
+    });
+    return { ok: true, data: response.data };
+  } catch (error) {
+    // Handle any other errors
+    const status = error?.response?.status;
+    const payload = error?.response?.data;
+    const message = payload?.error?.message || payload?.message || '';
+    
+    console.error('Newsletter subscription error:', error);
+    const generic = message || 'Subscription failed';
+    return { ok: false, code: 'error', message: generic };
+  }
+}

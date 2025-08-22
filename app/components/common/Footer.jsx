@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import Logo from "@/public/images/Logo.svg";
 import { AiFillInstagram } from "react-icons/ai";
@@ -10,8 +11,42 @@ import SocialMedia from "./SocialMedia";
 import ContactInfo from "./ContactInfo";
 import Link from "next/link";
 import * as motion from "framer-motion/client"
+import { subscribeNewsletter } from "@/app/services/api";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState({ state: "idle", message: "" });
+  const [loading, setLoading] = useState(false);
+
+  const validEmail = (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!validEmail(email)) {
+      setStatus({ state: "error", message: "Enter a valid email" });
+      return;
+    }
+    setLoading(true);
+    setStatus({ state: "idle", message: "" });
+    try {
+      const result = await subscribeNewsletter(email);
+      if (result.ok) {
+        setStatus({ state: "success", message: "Subscribed!" });
+        setEmail("");
+      } else {
+        // Handle specific cases gracefully
+        if (result.code === 'already') {
+          setStatus({ state: "success", message: "Already subscribed" });
+        } else {
+          setStatus({ state: "error", message: result.message || "Subscription failed" });
+        }
+      }
+    } catch (err) {
+      setStatus({ state: "error", message: "Network error" });
+    } finally {
+      setLoading(false);
+    }
+  };
   const currentYear = new Date().getFullYear();
 
   // Add animation variants
@@ -22,7 +57,7 @@ const Footer = () => {
   };
 
   const staggerChildren = {
-    animate: {
+    animate: {     
       transition: {
         staggerChildren: 0.1
       }
@@ -52,20 +87,30 @@ const Footer = () => {
             <p className="text-light-black text-lg font-semibold font-primary w-auto">
               Get all the latest information on your email
             </p>
-            <div className="flex flex-wrap items-center gap-2">
+            <form onSubmit={handleSubscribe} className="flex flex-wrap items-center gap-2">
               <input
                 type="email"
-                className="w-[281px] h-12 px-4 py-3.5 outline-none rounded-xl border border-border-color/25 text-light-black text-sm font-normal font-primary leading-tight"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className={`w-[281px] h-12 px-4 py-3.5 outline-none rounded-xl border ${status.state === 'error' ? 'border-red-400' : 'border-border-color/25'} text-light-black text-sm font-normal font-primary leading-tight`}
                 placeholder="Enter Your Email"
                 aria-label="Enter Your Email"
               />
               <button
-                className="w-[106px] h-12 bg-secondary-primary rounded-xl inline-flex items-center justify-center text-white text-base font-semibold font-primary leading-tight"
+                type="submit"
+                disabled={loading}
+                className="w-[106px] h-12 bg-secondary-primary rounded-xl inline-flex items-center justify-center text-white text-base font-semibold font-primary leading-tight disabled:opacity-60"
                 aria-label="Subscribe"
               >
-                Subscribe
+                {loading ? 'Please wait…' : 'Subscribe'}
               </button>
-            </div>
+            </form>
+            {status.message && (
+              <p className={`text-sm mt-1 ${status.state === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+                {status.message}
+              </p>
+            )}
             <div className="flex gap-2.5">
               <SocialMedia icon={<AiFillInstagram size={24} />} />
               <SocialMedia icon={<IoLogoFacebook size={24} />} />
