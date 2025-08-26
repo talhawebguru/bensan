@@ -9,7 +9,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 const Blogs = ({ blogs, loading }) => {
   if (loading) {
     return (
-      <div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 place-items-center">
+      <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 place-items-center">
         {[...Array(8)].map((_, index) => (
           <div
             key={index}
@@ -19,7 +19,7 @@ const Blogs = ({ blogs, loading }) => {
             <div className="p-4">
               <Skeleton height={32} width="80%" />
               <Skeleton height={24} width="60%" className="mt-2" />
-              <Skeleton height={24} width="40%" className="mt-2" />
+              <Skeleton height={24} width="30%" className="mt-2" />
             </div>
           </div>
         ))}

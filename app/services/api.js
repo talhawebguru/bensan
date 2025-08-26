@@ -2,9 +2,6 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-  // headers: {
-  //   'ngrok-skip-browser-warning': 'true'
-  // }
 });
 
 export const getProducts = async (page = 1, pageSize, searchQuery = '') => {
@@ -101,7 +98,7 @@ export const getNewArrivalsProduct = async () => {
 export const getBlogs = async (page = 1, pageSize = 25, searchQuery = '') => {
   try {
     const searchFilter = searchQuery ? `&filters[Title][$containsi]=${searchQuery}` : '';
-    const response = await api.get(`/api/blogs?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}${searchFilter}`);
+    const response = await api.get(`/api/blogs?populate=*&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}${searchFilter}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching blogs:', error);
