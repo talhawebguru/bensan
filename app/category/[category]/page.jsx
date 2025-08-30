@@ -79,10 +79,8 @@ async function Page({params}){
       const data = await getCategories();
       // Find the matching category by slug
       categoryData = data.data.find(cat => cat.slug == params.category);
-      
-      // Fetch products for schema markup
       if (params.category === "all-products") {
-        const productsResponse = await getProducts(1, 10);
+        const productsResponse = await getProducts(1, 30);
         productsData = productsResponse.data;
       } else {
         const productsResponse = await getProductsByCategory(params.category, 1, 10);

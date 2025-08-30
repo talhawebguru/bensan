@@ -68,9 +68,106 @@ export async function generateStaticParams() {
 
 
 
-const page = ({params}) => {
+const page = async ({params}) => {
+  const { blogSlug } = params;
+  let blogData = null;
+
+  try {
+    const data = await getBlogBySlug(blogSlug);
+    if (data.data && data.data.length > 0) {
+      blogData = data.data[0];
+    }
+  } catch (error) {
+    console.error('Error fetching blog data:', error);
+  }
+
+  // Generate Article Schema
+  const generateArticleSchema = () => {
+    if (!blogData) return null;
+
+    const baseUrl = "https://bensano.com";
+    const blogUrl = `${baseUrl}/blogs/${blogSlug}`;
+    
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": blogData.Title,
+      "description": blogData.metaDescripition || blogData.content2?.substring(0, 160) || `Read about ${blogData.Title} on Bensan's blog.`,
+      "url": blogUrl,
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": blogUrl
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Bensan",
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${baseUrl}/_next/static/media/Logo.ddeb78f7.svg`
+        }
+      },
+      "author": {
+        "@type": "Person",
+        "name": blogData.author || "Saqib Naveed Mirza",
+        "sameAs": blogData.authorLink || "https://www.linkedin.com/in/saqib-naveed-mirza/"
+      },
+      "datePublished": blogData.publishedAt || blogData.createdAt,
+      "dateModified": blogData.updatedAt || blogData.publishedAt || blogData.createdAt,
+      "image": blogData.FeatureImage ? `${process.env.NEXT_PUBLIC_API_URL}${blogData.FeatureImage.url}` : `${baseUrl}/_next/static/media/Logo.ddeb78f7.svg`
+    };
+
+    return (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema, null, 2) }}
+      />
+    );
+  };
+
+  // Generate BreadcrumbList Schema
+  const generateBreadcrumbSchema = () => {
+    if (!blogData) return null;
+
+    const baseUrl = "https://bensano.com";
+    const blogUrl = `${baseUrl}/blogs/${blogSlug}`;
+    
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": baseUrl
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blogs",
+          "item": `${baseUrl}/blogs`
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": blogData.Title,
+          "item": blogUrl
+        }
+      ]
+    };
+
+    return (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema, null, 2) }}
+      />
+    );
+  };
+
   return (
     <>
+        {generateArticleSchema()}
+        {generateBreadcrumbSchema()}
         <Header />
         <BlogContent params={params} />
         
