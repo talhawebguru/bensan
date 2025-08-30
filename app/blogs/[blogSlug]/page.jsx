@@ -164,10 +164,42 @@ const page = async ({params}) => {
     );
   };
 
+  // Generate FAQ Schema
+  const generateFAQSchema = () => {
+    if (!blogData || !blogData.faqs || blogData.faqs.length === 0) return null;
+
+    const baseUrl = "https://bensano.com";
+    const blogUrl = `${baseUrl}/blogs/${blogSlug}`;
+    
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": `${blogUrl}#faq`,
+      "url": blogUrl,
+      "name": `${blogData.Title} FAQ`,
+      "mainEntity": blogData.faqs.map((faq) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    };
+
+    return (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema, null, 2) }}
+      />
+    );
+  };
+
   return (
     <>
         {generateArticleSchema()}
         {generateBreadcrumbSchema()}
+        {generateFAQSchema()}
         <Header />
         <BlogContent params={params} />
         
